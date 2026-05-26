@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Shop online Global-Contract. Acquista forni professionali, cucine industriali e frigoriferi commerciali. Spedizione in tutta Italia.">
+  <title>Shop Online | Global-Contract</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Open+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="navbar scrolled" id="navbar">
+    <div class="container nav-container">
+      <a href="index.html" class="logo">
+        <span class="logo-icon">GC</span>
+        <span class="logo-text">Global<span class="accent">Contract</span></span>
+      </a>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="products.html">Prodotti</a></li>
+        <li><a href="shop.html" class="active">Shop</a></li>
+        <li><a href="index.html#about">Chi Siamo</a></li>
+        <li><a href="contact.html">Contatti</a></li>
+      </ul>
+      <div style="display:flex;gap:12px;align-items:center;">
+        <button class="btn btn-outline" onclick="openCart()" style="position:relative;padding:10px 20px;" id="navCartBtn">
+          🛒 Carrello
+          <span id="navCartCount" style="display:none;position:absolute;top:-6px;right:-6px;background:var(--danger);color:white;width:20px;height:20px;border-radius:50%;font-size:0.7rem;font-weight:700;align-items:center;justify-content:center;"></span>
+        </button>
+        <a href="contact.html#booking" class="btn btn-accent">Prenota Consulenza</a>
+      </div>
+      <button class="hamburger" id="hamburger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- PAGE HEADER -->
+  <header class="page-header">
+    <div class="container">
+      <nav class="breadcrumb">
+        <a href="index.html">Home</a>
+        <span>/</span>
+        <span style="color:var(--accent);">Shop Online</span>
+      </nav>
+      <h1>Shop <span class="accent">Online</span></h1>
+      <p>Acquista direttamente oppure prenota una consulenza gratuita con i nostri esperti</p>
+    </div>
+  </header>
+
+  <!-- SHOP -->
+  <section class="shop-section">
+    <div class="container">
+
+      <!-- Info banner -->
+      <div style="background:rgba(232,160,32,0.08);border:1px solid rgba(232,160,32,0.25);border-radius:var(--radius);padding:16px 24px;margin-bottom:36px;display:flex;gap:32px;flex-wrap:wrap;align-items:center;">
+        <div style="display:flex;gap:8px;align-items:center;font-size:0.85rem;color:var(--text);">
+          <span>🚚</span> <strong>Spedizione gratuita</strong>&nbsp;sopra €2.000
+        </div>
+        <div style="display:flex;gap:8px;align-items:center;font-size:0.85rem;color:var(--text);">
+          <span>🔒</span> <strong>Pagamento sicuro</strong>&nbsp;e garantito
+        </div>
+        <div style="display:flex;gap:8px;align-items:center;font-size:0.85rem;color:var(--text);">
+          <span>📞</span> <strong>Consulenza gratuita</strong>&nbsp;—&nbsp;<a href="contact.html#booking" style="color:var(--accent);font-weight:600;">Prenota ora</a>
+        </div>
+        <div style="display:flex;gap:8px;align-items:center;font-size:0.85rem;color:var(--text);">
+          <span>✅</span> <strong>Garanzia 2 anni</strong>&nbsp;su tutti i prodotti
+        </div>
+      </div>
+
+      <!-- Category tabs -->
+      <div class="category-tabs">
+        <button class="tab-btn active" data-filter="all">🏪 Tutti i Prodotti</button>
+        <button class="tab-btn" data-filter="forni">🔥 Forni</button>
+        <button class="tab-btn" data-filter="cucine">👨‍🍳 Cucine</button>
+        <button class="tab-btn" data-filter="frigoriferi">❄️ Frigoriferi</button>
+      </div>
+
+      <!-- Toolbar -->
+      <div class="shop-toolbar">
+        <span class="results-count" id="resultsCount">9 prodotti trovati</span>
+        <select class="sort-select" id="sortSelect">
+          <option value="default">Ordina per: Rilevanza</option>
+          <option value="price-asc">Prezzo: dal più basso</option>
+          <option value="price-desc">Prezzo: dal più alto</option>
+          <option value="rating">Valutazione</option>
+        </select>
+      </div>
+
+      <!-- Products grid -->
+      <div class="products-grid" id="productsGrid"></div>
+
+      <!-- Consultation CTA -->
+      <div style="margin-top:64px;background:var(--primary);border-radius:var(--radius-lg);padding:48px;text-align:center;">
+        <div style="font-size:2.5rem;margin-bottom:16px;">📞</div>
+        <h3 style="font-family:var(--font-main);font-size:1.6rem;font-weight:800;color:var(--white);margin-bottom:12px;">Preferisci parlare con un esperto?</h3>
+        <p style="color:rgba(255,255,255,0.7);max-width:520px;margin:0 auto 28px;line-height:1.7;">Hai dubbi sulla scelta o vuoi acquistare a distanza con supporto dedicato? Prenota una consulenza gratuita di 30 minuti con uno dei nostri specialisti.</p>
+        <a href="contact.html#booking" class="btn btn-accent btn-lg">Prenota Consulenza Gratuita</a>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- CART TOGGLE BUTTON -->
+  <button class="cart-toggle-btn" id="cartToggle" aria-label="Apri carrello">
+    🛒
+    <span class="cart-count" id="cartCount"></span>
+  </button>
+
+  <!-- CART OVERLAY -->
+  <div class="cart-overlay" id="cartOverlay"></div>
+
+  <!-- CART SIDEBAR -->
+  <div class="cart-sidebar" id="cartSidebar">
+    <div class="cart-header">
+      <h3>🛒 Il tuo Carrello</h3>
+      <button class="cart-close" id="cartClose" aria-label="Chiudi carrello">✕</button>
+    </div>
+    <div class="cart-items" id="cartItems">
+      <div class="cart-empty">
+        <div class="cart-empty-icon">🛒</div>
+        <p>Il carrello è vuoto.<br>Aggiungi i tuoi macchinari!</p>
+      </div>
+    </div>
+    <div class="cart-footer">
+      <div class="cart-total">
+        <span>Totale (IVA esclusa)</span>
+        <span class="total-price" id="cartTotal">€ 0</span>
+      </div>
+      <div class="cart-actions">
+        <button class="btn btn-accent" id="checkoutBtn" style="width:100%;" disabled>
+          Procedi all'Acquisto →
+        </button>
+        <a href="contact.html#booking" class="btn btn-outline-dark" style="width:100%;text-align:center;">
+          Oppure prenota una consulenza
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="index.html" class="logo">
+            <span class="logo-icon">GC</span>
+            <span class="logo-text">Global<span class="accent">Contract</span></span>
+          </a>
+          <p>Il tuo partner di fiducia per macchinari professionali. Qualità, affidabilità e assistenza dedicata dal 2010.</p>
+          <div class="social-links">
+            <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+            <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+            <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+          </div>
+        </div>
+        <div class="footer-links">
+          <h4>Navigazione</h4>
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="products.html">Catalogo Prodotti</a></li>
+            <li><a href="shop.html">Shop Online</a></li>
+            <li><a href="index.html#about">Chi Siamo</a></li>
+            <li><a href="contact.html">Contatti</a></li>
+          </ul>
+        </div>
+        <div class="footer-links">
+          <h4>Categorie</h4>
+          <ul>
+            <li><a href="shop.html?cat=forni">Forni Professionali</a></li>
+            <li><a href="shop.html?cat=cucine">Cucine Industriali</a></li>
+            <li><a href="shop.html?cat=frigoriferi">Frigoriferi Commerciali</a></li>
+          </ul>
+        </div>
+        <div class="footer-contact">
+          <h4>Contatti</h4>
+          <ul>
+            <li><i class="fas fa-phone"></i> +39 02 1234 5678</li>
+            <li><i class="fas fa-envelope"></i> info@globalcontract.it</li>
+            <li><i class="fas fa-map-marker-alt"></i> Via Roma 1, 20121 Milano</li>
+            <li><i class="fas fa-clock"></i> Lun–Ven 9:00–18:00</li>
+          </ul>
+          <a href="contact.html#booking" class="btn btn-accent btn-sm" style="margin-top:1.2rem;display:inline-flex;">Prenota Chiamata</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 Global-Contract S.r.l. &nbsp;|&nbsp; P.IVA 12345678901 &nbsp;|&nbsp; <a href="#">Privacy Policy</a> &nbsp;|&nbsp; <a href="#">Termini di Servizio</a></p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/shop.js"></script>
+  <script>
+    // Sync nav cart count
+    function syncNavCart() {
+      const n = JSON.parse(localStorage.getItem('gc_cart') || '[]').reduce((s,i) => s + i.qty, 0);
+      const el = document.getElementById('navCartCount');
+      if (el) { el.textContent = n; el.style.display = n > 0 ? 'flex' : 'none'; }
+    }
+    const origSave = saveCart;
+    setInterval(syncNavCart, 500);
+    syncNavCart();
+  </script>
+</body>
+</html>

@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Catalogo completo di macchinari professionali Global-Contract. Forni, cucine industriali e frigoriferi commerciali.">
+  <title>Catalogo Prodotti | Global-Contract</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Open+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="navbar scrolled" id="navbar">
+    <div class="container nav-container">
+      <a href="index.html" class="logo">
+        <span class="logo-icon">GC</span>
+        <span class="logo-text">Global<span class="accent">Contract</span></span>
+      </a>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="products.html" class="active">Prodotti</a></li>
+        <li><a href="shop.html">Shop</a></li>
+        <li><a href="index.html#about">Chi Siamo</a></li>
+        <li><a href="contact.html">Contatti</a></li>
+      </ul>
+      <a href="contact.html#booking" class="btn btn-accent">Prenota Consulenza</a>
+      <button class="hamburger" id="hamburger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- PAGE HEADER -->
+  <header class="page-header">
+    <div class="container">
+      <nav class="breadcrumb">
+        <a href="index.html">Home</a>
+        <span>/</span>
+        <span style="color:var(--accent);">Prodotti</span>
+      </nav>
+      <h1>Il Nostro <span class="accent">Catalogo</span></h1>
+      <p>Macchinari professionali selezionati per ristoranti, hotel e industrie alimentari</p>
+    </div>
+  </header>
+
+  <!-- CATEGORIES OVERVIEW -->
+  <section class="categories section" style="padding-top:64px;">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-badge">Tre categorie principali</span>
+        <h2>Trova il macchinario <span class="accent">giusto per te</span></h2>
+        <p>Naviga per categoria e scopri la soluzione perfetta per la tua attività. Per ogni prodotto puoi acquistare direttamente online oppure prenotare una consulenza gratuita.</p>
+      </div>
+      <div class="categories-grid">
+        <a href="shop.html?cat=forni" class="category-card fade-in fade-in-d1">
+          <div class="category-icon">🔥</div>
+          <h3>Forni Professionali</h3>
+          <p>Forni a convezione con vapore, combinati touch-screen e rotativi per panifici. Dalle piccole pasticcerie alle grandi industrie alimentari.</p>
+          <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px;">
+            <span style="font-size:0.72rem;background:var(--light);padding:3px 10px;border-radius:50px;color:var(--dark-gray);">A convezione</span>
+            <span style="font-size:0.72rem;background:var(--light);padding:3px 10px;border-radius:50px;color:var(--dark-gray);">Combinati</span>
+            <span style="font-size:0.72rem;background:var(--light);padding:3px 10px;border-radius:50px;color:var(--dark-gray);">Rotativi</span>
+          </div>
+          <span class="category-link">Acquista online →</span>
+        </a>
+        <a href="shop.html?cat=cucine" class="category-card featured fade-in fade-in-d2">
+          <div class="category-badge-top">Più Venduti</div>
+          <div class="category-icon">👨‍🍳</div>
+          <h3>Cucine Industriali</h3>
+          <p>Piani cottura 6 fuochi, linee modulari configurabili e friggitrici professionali. La soluzione completa per grandi cucine ad alto traffico.</p>
+          <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px;">
+            <span style="font-size:0.72rem;background:rgba(255,255,255,0.15);padding:3px 10px;border-radius:50px;color:rgba(255,255,255,0.85);">Piani cottura</span>
+            <span style="font-size:0.72rem;background:rgba(255,255,255,0.15);padding:3px 10px;border-radius:50px;color:rgba(255,255,255,0.85);">Modulari</span>
+            <span style="font-size:0.72rem;background:rgba(255,255,255,0.15);padding:3px 10px;border-radius:50px;color:rgba(255,255,255,0.85);">Friggitrici</span>
+          </div>
+          <span class="category-link">Acquista online →</span>
+        </a>
+        <a href="shop.html?cat=frigoriferi" class="category-card fade-in fade-in-d3">
+          <div class="category-icon">❄️</div>
+          <h3>Frigoriferi Commerciali</h3>
+          <p>Banchi refrigerati a vetrina, abbattitori rapidi HACCP e celle frigorifere walk-in personalizzabili da 8 a 40 m³.</p>
+          <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px;">
+            <span style="font-size:0.72rem;background:var(--light);padding:3px 10px;border-radius:50px;color:var(--dark-gray);">Banchi</span>
+            <span style="font-size:0.72rem;background:var(--light);padding:3px 10px;border-radius:50px;color:var(--dark-gray);">Abbattitori</span>
+            <span style="font-size:0.72rem;background:var(--light);padding:3px 10px;border-radius:50px;color:var(--dark-gray);">Celle frigorifere</span>
+          </div>
+          <span class="category-link">Acquista online →</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHY CHOOSE US -->
+  <section class="mission section" style="padding-top:0;">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-badge">Perché sceglierci</span>
+        <h2>I vantaggi di <span class="accent">acquistare da noi</span></h2>
+      </div>
+      <div class="mission-grid">
+        <div class="mission-card fade-in fade-in-d1">
+          <div class="mission-icon">🛒</div>
+          <h3>Acquisto Online</h3>
+          <p>Compra direttamente dal nostro shop. Pagamento sicuro, fattura elettronica e spedizione tracciata in tutta Italia.</p>
+        </div>
+        <div class="mission-card fade-in fade-in-d2">
+          <div class="mission-icon">📞</div>
+          <h3>Consulenza Remota</h3>
+          <p>Prenota una chiamata con un nostro esperto. Ti aiutiamo a scegliere il macchinario giusto e gestiamo l'acquisto a distanza.</p>
+        </div>
+        <div class="mission-card fade-in fade-in-d3">
+          <div class="mission-icon">🔧</div>
+          <h3>Installazione e Collaudo</h3>
+          <p>Disponibile a richiesta per i macchinari più complessi. Il nostro team tecnico garantisce una messa in opera perfetta.</p>
+        </div>
+        <div class="mission-card fade-in fade-in-d4">
+          <div class="mission-icon">📋</div>
+          <h3>Garanzia e Assistenza</h3>
+          <p>2 anni di garanzia su tutto il catalogo. Assistenza tecnica certificata con intervento entro 24 ore in tutta Italia.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-section">
+    <div class="container">
+      <div class="cta-content">
+        <h2>Pronto a equipaggiare la tua cucina professionale?</h2>
+        <p>Acquista subito online oppure prenota una consulenza gratuita con i nostri esperti. Siamo qui per aiutarti.</p>
+        <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap;">
+          <a href="shop.html" class="btn btn-accent btn-lg">Vai allo Shop Online</a>
+          <a href="contact.html#booking" class="btn btn-outline btn-lg">Prenota Consulenza Gratuita</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="index.html" class="logo">
+            <span class="logo-icon">GC</span>
+            <span class="logo-text">Global<span class="accent">Contract</span></span>
+          </a>
+          <p>Il tuo partner di fiducia per macchinari professionali. Qualità, affidabilità e assistenza dedicata dal 2010.</p>
+          <div class="social-links">
+            <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+            <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+            <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+          </div>
+        </div>
+        <div class="footer-links">
+          <h4>Navigazione</h4>
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="products.html">Catalogo Prodotti</a></li>
+            <li><a href="shop.html">Shop Online</a></li>
+            <li><a href="index.html#about">Chi Siamo</a></li>
+            <li><a href="contact.html">Contatti</a></li>
+          </ul>
+        </div>
+        <div class="footer-links">
+          <h4>Categorie</h4>
+          <ul>
+            <li><a href="shop.html?cat=forni">Forni Professionali</a></li>
+            <li><a href="shop.html?cat=cucine">Cucine Industriali</a></li>
+            <li><a href="shop.html?cat=frigoriferi">Frigoriferi Commerciali</a></li>
+          </ul>
+        </div>
+        <div class="footer-contact">
+          <h4>Contatti</h4>
+          <ul>
+            <li><i class="fas fa-phone"></i> +39 02 1234 5678</li>
+            <li><i class="fas fa-envelope"></i> info@globalcontract.it</li>
+            <li><i class="fas fa-map-marker-alt"></i> Via Roma 1, 20121 Milano</li>
+            <li><i class="fas fa-clock"></i> Lun–Ven 9:00–18:00</li>
+          </ul>
+          <a href="contact.html#booking" class="btn btn-accent btn-sm" style="margin-top:1.2rem;display:inline-flex;">Prenota Chiamata</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 Global-Contract S.r.l. &nbsp;|&nbsp; P.IVA 12345678901 &nbsp;|&nbsp; <a href="#">Privacy Policy</a> &nbsp;|&nbsp; <a href="#">Termini di Servizio</a></p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+  <script>
+    const navbar2 = document.getElementById('navbar');
+    window.addEventListener('scroll', () => navbar2?.classList.toggle('scrolled', window.scrollY > 60));
+    const hamburger2 = document.getElementById('hamburger');
+    const navLinks2 = document.getElementById('navLinks');
+    hamburger2?.addEventListener('click', () => { navLinks2.classList.toggle('open'); hamburger2.classList.toggle('active'); });
+    navLinks2?.querySelectorAll('a').forEach(a => a.addEventListener('click', () => { navLinks2.classList.remove('open'); hamburger2.classList.remove('active'); }));
+    const observer2 = new IntersectionObserver(entries => entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); }), { threshold: 0.1 });
+    document.querySelectorAll('.fade-in, .category-card, .mission-card').forEach(el => { el.classList.add('fade-in'); observer2.observe(el); });
+  </script>
+</body>
+</html>
