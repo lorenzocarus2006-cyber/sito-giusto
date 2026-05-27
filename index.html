@@ -86,7 +86,7 @@
         <li role="none"><a href="#contatti" role="menuitem">Contattaci</a></li>
       </ul>
 
-      <button type="button" class="nav-cta" aria-label="Prenota consulenza" onclick="event.preventDefault();event.stopPropagation();document.getElementById('consultModal').style.display='block';document.body.style.overflow='hidden';for(var i=1;i<=5;i++){var s=document.getElementById('ks'+i);if(s)s.style.display=i===1?'block':'none';}return false;">Prenota consulenza</button>
+      <button type="button" class="nav-cta" aria-label="Prenota consulenza" onclick="event.preventDefault();event.stopPropagation();document.getElementById('consultModal').classList.add('open');document.body.style.overflow='hidden';for(var i=1;i<=5;i++){var s=document.getElementById('ks'+i);if(s)s.style.display=i===1?'block':'none';}return false;">Prenota consulenza</button>
 
       <button class="hamburger" id="hamburger" aria-label="Apri Menu Mobile" aria-expanded="false" aria-controls="mobileDrawer">
         <span></span><span></span><span></span>
@@ -181,7 +181,7 @@
         <div class="hero-beat__inner hero-beat__inner--center">
           <h2 class="hero-beat__title hero-beat__title--xl"><em>Parliamoci.</em></h2>
           <p class="hero-beat__sub">Prenota una consulenza gratuita. Senza impegno.</p>
-          <a href="#" class="hero-beat__cta" id="heroCta" onclick="event.preventDefault();event.stopPropagation();document.getElementById('consultModal').style.display='block';document.body.style.overflow='hidden';for(var i=1;i<=5;i++){var s=document.getElementById('ks'+i);if(s)s.style.display=i===1?'block':'none';}return false;" aria-label="Prenota consulenza gratuita">
+          <a href="#" class="hero-beat__cta" id="heroCta" onclick="event.preventDefault();event.stopPropagation();document.getElementById('consultModal').classList.add('open');document.body.style.overflow='hidden';for(var i=1;i<=5;i++){var s=document.getElementById('ks'+i);if(s)s.style.display=i===1?'block':'none';}return false;" aria-label="Prenota consulenza gratuita">
             Prenota consulenza gratuita
             <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8H13M13 8L9 4M13 8L9 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
           </a>
@@ -523,7 +523,7 @@
         Vincenzo ti risponde personalmente entro 24 ore.
       </p>
 
-      <button type="button" class="btn-prenota" id="openConsultForm" aria-label="Prenota una consulenza gratuita" onclick="event.preventDefault();event.stopPropagation();document.getElementById('consultModal').style.display='block';document.body.style.overflow='hidden';for(var i=1;i<=5;i++){var s=document.getElementById('ks'+i);if(s)s.style.display=i===1?'block':'none';}return false;">
+      <button type="button" class="btn-prenota" id="openConsultForm" aria-label="Prenota una consulenza gratuita" onclick="event.preventDefault();event.stopPropagation();document.getElementById('consultModal').classList.add('open');document.body.style.overflow='hidden';for(var i=1;i<=5;i++){var s=document.getElementById('ks'+i);if(s)s.style.display=i===1?'block':'none';}return false;">
         Prenota una consulenza gratuita
         <span class="btn-arrow">→</span>
       </button>
@@ -821,7 +821,7 @@
     document.querySelectorAll('#openConsultForm, .btn-prenota, [data-open-modal], .navbar .cta, nav .btn-primary').forEach(function(btn) {
       btn.addEventListener('click', function(e) {
         e.preventDefault();
-        document.getElementById('consultModal').style.display = 'block';
+        document.getElementById('consultModal').classList.add('open');
         document.body.style.overflow = 'hidden';
         kreaGo(1);
       });
@@ -831,7 +831,7 @@
     document.querySelectorAll('.nav-cta, .drawer-cta').forEach(function(btn) {
       btn.addEventListener('click', function(e) {
         e.preventDefault();
-        document.getElementById('consultModal').style.display = 'block';
+        document.getElementById('consultModal').classList.add('open');
         document.body.style.overflow = 'hidden';
         kreaGo(1);
       });
