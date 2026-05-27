@@ -614,152 +614,284 @@
 
 
   <!-- =====================================================
-       FORM MULTI-STEP — MODALE OVERLAY
+       FORM MULTI-STEP — MODALE OVERLAY COMPLETO AUTOSUFFICIENTE
   ===================================================== -->
-  <div id="consultModal" style="display:none; position:fixed; inset:0; background:rgba(20,10,40,0.75); z-index:9999; align-items:center; justify-content:center; padding:20px;">
-    <div style="background:#fff; border-radius:20px; width:100%; max-width:560px; max-height:90vh; overflow-y:auto; padding:32px;">
+  <!-- MODALE CONSULENZA — invisibile di default -->
+  <div id="consultModal" style="display:none; position:fixed; inset:0; background:rgba(20,10,40,0.78); z-index:9999; align-items:center; justify-content:center; padding:20px; backdrop-filter:blur(6px);">
+    <div style="background:#fff; border-radius:20px; width:100%; max-width:540px; max-height:90vh; overflow-y:auto; padding:0; position:relative;">
 
-      <!-- Header modale -->
-      <div class="modal-header">
-        <div class="modal-progress">
-          <div class="progress-bar" id="progressBar"></div>
-        </div>
-        <span class="modal-step-label" id="stepLabel">Passo 1 di 4</span>
-        <button class="modal-close" id="closeModal" aria-label="Chiudi">✕</button>
+      <!-- Progress bar -->
+      <div style="height:3px; background:#ede8f5; border-radius:20px 20px 0 0; overflow:hidden;">
+        <div id="krea-progress" style="height:100%; background:#4A2B7F; width:25%; transition:width 0.4s ease;"></div>
       </div>
 
-      <!-- Form wrapper -->
-      <form class="modal-form" id="consultForm" novalidate>
+      <!-- Header -->
+      <div style="padding:24px 28px 0; display:flex; align-items:center; justify-content:space-between;">
+        <span id="krea-step-label" style="font-size:12px; font-weight:500; letter-spacing:0.12em; text-transform:uppercase; color:#999;">Passo 1 di 4</span>
+        <button id="closeModal" onclick="closeConsultModal()" style="background:none; border:none; font-size:20px; color:#999; cursor:pointer; line-height:1;">✕</button>
+      </div>
 
-        <!-- STEP 1: Chi sei -->
-        <div class="form-step active" data-step="1">
-          <h3 class="step-title">Chi sei?</h3>
-          <p class="step-sub">Iniziamo con i tuoi dati di contatto.</p>
+      <!-- Form -->
+      <div style="padding:16px 28px 32px;">
 
-          <div class="field-group">
-            <label for="f-nome">Nome e cognome *</label>
-            <input type="text" id="f-nome" name="nome" placeholder="Es. Mario Rossi" required>
+        <!-- STEP 1 -->
+        <div id="krea-step-1" class="krea-step">
+          <h3 style="font-family:'Cormorant Garamond',serif; font-size:34px; font-weight:400; font-style:italic; color:#4A2B7F; margin:12px 0 6px;">Chi sei?</h3>
+          <p style="font-size:15px; color:#888; margin-bottom:24px;">Iniziamo con i tuoi dati di contatto.</p>
+
+          <div style="margin-bottom:16px;">
+            <label style="display:block; font-size:11px; font-weight:600; letter-spacing:0.1em; text-transform:uppercase; color:#555; margin-bottom:6px;">Nome e cognome *</label>
+            <input id="k-nome" type="text" placeholder="Es. Mario Rossi" style="width:100%; padding:12px 16px; border:1.5px solid #e0d9f0; border-radius:10px; font-size:15px; box-sizing:border-box; outline:none; font-family:inherit;">
           </div>
-          <div class="field-group">
-            <label for="f-email">Email *</label>
-            <input type="email" id="f-email" name="email" placeholder="mario@iltuoristorante.it" required>
+          <div style="margin-bottom:16px;">
+            <label style="display:block; font-size:11px; font-weight:600; letter-spacing:0.1em; text-transform:uppercase; color:#555; margin-bottom:6px;">Email *</label>
+            <input id="k-email" type="email" placeholder="mario@iltuoristorante.it" style="width:100%; padding:12px 16px; border:1.5px solid #e0d9f0; border-radius:10px; font-size:15px; box-sizing:border-box; outline:none; font-family:inherit;">
           </div>
-          <div class="field-group">
-            <label for="f-tel">Telefono *</label>
-            <input type="tel" id="f-tel" name="telefono" placeholder="+39 320 000 0000" required>
-          </div>
-        </div>
-
-        <!-- STEP 2: Il tuo progetto -->
-        <div class="form-step" data-step="2">
-          <h3 class="step-title">Il tuo progetto</h3>
-          <p class="step-sub">Raccontaci cosa stai aprendo o ristrutturando.</p>
-
-          <div class="field-group">
-            <label>Tipo di attività *</label>
-            <div class="option-pills" data-field="tipo_attivita">
-              <button type="button" class="pill" data-value="ristorante">Ristorante</button>
-              <button type="button" class="pill" data-value="bar_caffetteria">Bar / Caffetteria</button>
-              <button type="button" class="pill" data-value="hotel">Hotel</button>
-              <button type="button" class="pill" data-value="catering">Catering</button>
-              <button type="button" class="pill" data-value="pizzeria">Pizzeria</button>
-              <button type="button" class="pill" data-value="altro">Altro</button>
-            </div>
-          </div>
-
-          <div class="field-group">
-            <label>Fase del progetto *</label>
-            <div class="option-pills" data-field="fase">
-              <button type="button" class="pill" data-value="nuova_apertura">Nuova apertura</button>
-              <button type="button" class="pill" data-value="ristrutturazione">Ristrutturazione</button>
-              <button type="button" class="pill" data-value="sostituzione">Sostituzione attrezzature</button>
-              <button type="button" class="pill" data-value="espansione">Espansione locale</button>
-            </div>
+          <div style="margin-bottom:16px;">
+            <label style="display:block; font-size:11px; font-weight:600; letter-spacing:0.1em; text-transform:uppercase; color:#555; margin-bottom:6px;">Telefono *</label>
+            <input id="k-tel" type="tel" placeholder="+39 320 000 0000" style="width:100%; padding:12px 16px; border:1.5px solid #e0d9f0; border-radius:10px; font-size:15px; box-sizing:border-box; outline:none; font-family:inherit;">
           </div>
         </div>
 
-        <!-- STEP 3: Le esigenze -->
-        <div class="form-step" data-step="3">
-          <h3 class="step-title">Cosa ti serve?</h3>
-          <p class="step-sub">Seleziona le categorie di attrezzatura (anche più di una).</p>
+        <!-- STEP 2 -->
+        <div id="krea-step-2" class="krea-step" style="display:none;">
+          <h3 style="font-family:'Cormorant Garamond',serif; font-size:34px; font-weight:400; font-style:italic; color:#4A2B7F; margin:12px 0 6px;">Il tuo progetto</h3>
+          <p style="font-size:15px; color:#888; margin-bottom:24px;">Raccontaci cosa stai aprendo o ristrutturando.</p>
 
-          <div class="field-group">
-            <label>Categorie di interesse *</label>
-            <div class="option-pills multi" data-field="categorie">
-              <button type="button" class="pill" data-value="cottura">Cottura</button>
-              <button type="button" class="pill" data-value="refrigerazione">Refrigerazione</button>
-              <button type="button" class="pill" data-value="preparazione">Preparazione</button>
-              <button type="button" class="pill" data-value="lavaggio">Lavaggio</button>
-              <button type="button" class="pill" data-value="servizio">Servizio</button>
-              <button type="button" class="pill" data-value="non_so">Non so ancora — ho bisogno di guida</button>
+          <div style="margin-bottom:20px;">
+            <label style="display:block; font-size:11px; font-weight:600; letter-spacing:0.1em; text-transform:uppercase; color:#555; margin-bottom:10px;">Tipo di attività *</label>
+            <div style="display:flex; flex-wrap:wrap; gap:8px;" data-field="tipo_attivita">
+              <button type="button" class="krea-pill" data-value="ristorante">Ristorante</button>
+              <button type="button" class="krea-pill" data-value="bar">Bar / Caffetteria</button>
+              <button type="button" class="krea-pill" data-value="hotel">Hotel</button>
+              <button type="button" class="krea-pill" data-value="catering">Catering</button>
+              <button type="button" class="krea-pill" data-value="pizzeria">Pizzeria</button>
+              <button type="button" class="krea-pill" data-value="altro">Altro</button>
             </div>
           </div>
-
-          <div class="field-group">
-            <label>Budget indicativo</label>
-            <div class="option-pills" data-field="budget">
-              <button type="button" class="pill" data-value="sotto_5k">Sotto €5.000</button>
-              <button type="button" class="pill" data-value="5_15k">€5.000 – €15.000</button>
-              <button type="button" class="pill" data-value="15_50k">€15.000 – €50.000</button>
-              <button type="button" class="pill" data-value="oltre_50k">Oltre €50.000</button>
+          <div style="margin-bottom:20px;">
+            <label style="display:block; font-size:11px; font-weight:600; letter-spacing:0.1em; text-transform:uppercase; color:#555; margin-bottom:10px;">Fase del progetto *</label>
+            <div style="display:flex; flex-wrap:wrap; gap:8px;" data-field="fase">
+              <button type="button" class="krea-pill" data-value="nuova_apertura">Nuova apertura</button>
+              <button type="button" class="krea-pill" data-value="ristrutturazione">Ristrutturazione</button>
+              <button type="button" class="krea-pill" data-value="sostituzione">Sostituzione attrezzature</button>
+              <button type="button" class="krea-pill" data-value="espansione">Espansione locale</button>
             </div>
           </div>
         </div>
 
-        <!-- STEP 4: Quando -->
-        <div class="form-step" data-step="4">
-          <h3 class="step-title">Quando parliamo?</h3>
-          <p class="step-sub">Scegli la tua disponibilità per la chiamata con Vincenzo.</p>
+        <!-- STEP 3 -->
+        <div id="krea-step-3" class="krea-step" style="display:none;">
+          <h3 style="font-family:'Cormorant Garamond',serif; font-size:34px; font-weight:400; font-style:italic; color:#4A2B7F; margin:12px 0 6px;">Cosa ti serve?</h3>
+          <p style="font-size:15px; color:#888; margin-bottom:24px;">Seleziona le categorie di attrezzatura.</p>
 
-          <div class="field-group">
-            <label>Orario preferito</label>
-            <div class="option-pills" data-field="orario">
-              <button type="button" class="pill" data-value="mattina">Mattina (9–13)</button>
-              <button type="button" class="pill" data-value="pomeriggio">Pomeriggio (14–18)</button>
-              <button type="button" class="pill" data-value="indifferente">Indifferente</button>
+          <div style="margin-bottom:20px;">
+            <label style="display:block; font-size:11px; font-weight:600; letter-spacing:0.1em; text-transform:uppercase; color:#555; margin-bottom:10px;">Categorie (anche più di una)</label>
+            <div style="display:flex; flex-wrap:wrap; gap:8px;" data-field="categorie" data-multi="true">
+              <button type="button" class="krea-pill" data-value="cottura">Cottura</button>
+              <button type="button" class="krea-pill" data-value="refrigerazione">Refrigerazione</button>
+              <button type="button" class="krea-pill" data-value="preparazione">Preparazione</button>
+              <button type="button" class="krea-pill" data-value="lavaggio">Lavaggio</button>
+              <button type="button" class="krea-pill" data-value="servizio">Servizio</button>
+              <button type="button" class="krea-pill" data-value="non_so">Non so ancora — ho bisogno di guida</button>
             </div>
           </div>
-
-          <div class="field-group">
-            <label>Urgenza del progetto</label>
-            <div class="option-pills" data-field="urgenza">
-              <button type="button" class="pill" data-value="entro_3_mesi">Apro entro 3 mesi</button>
-              <button type="button" class="pill" data-value="entro_6_mesi">Entro 6 mesi</button>
-              <button type="button" class="pill" data-value="esplorando">Sto ancora esplorando</button>
+          <div style="margin-bottom:20px;">
+            <label style="display:block; font-size:11px; font-weight:600; letter-spacing:0.1em; text-transform:uppercase; color:#555; margin-bottom:10px;">Budget indicativo</label>
+            <div style="display:flex; flex-wrap:wrap; gap:8px;" data-field="budget">
+              <button type="button" class="krea-pill" data-value="sotto_5k">Sotto €5.000</button>
+              <button type="button" class="krea-pill" data-value="5_15k">€5.000 – €15.000</button>
+              <button type="button" class="krea-pill" data-value="15_50k">€15.000 – €50.000</button>
+              <button type="button" class="krea-pill" data-value="oltre_50k">Oltre €50.000</button>
             </div>
           </div>
+        </div>
 
-          <div class="field-group">
-            <label for="f-note">Note libere (facoltativo)</label>
-            <textarea id="f-note" name="note" rows="3" placeholder="Dimensioni cucina, numero coperti, situazione specifica…"></textarea>
+        <!-- STEP 4 -->
+        <div id="krea-step-4" class="krea-step" style="display:none;">
+          <h3 style="font-family:'Cormorant Garamond',serif; font-size:34px; font-weight:400; font-style:italic; color:#4A2B7F; margin:12px 0 6px;">Quando parliamo?</h3>
+          <p style="font-size:15px; color:#888; margin-bottom:24px;">Scegli la disponibilità per la chiamata con Vincenzo.</p>
+
+          <div style="margin-bottom:20px;">
+            <label style="display:block; font-size:11px; font-weight:600; letter-spacing:0.1em; text-transform:uppercase; color:#555; margin-bottom:10px;">Orario preferito</label>
+            <div style="display:flex; flex-wrap:wrap; gap:8px;" data-field="orario">
+              <button type="button" class="krea-pill" data-value="mattina">Mattina (9–13)</button>
+              <button type="button" class="krea-pill" data-value="pomeriggio">Pomeriggio (14–18)</button>
+              <button type="button" class="krea-pill" data-value="indifferente">Indifferente</button>
+            </div>
+          </div>
+          <div style="margin-bottom:20px;">
+            <label style="display:block; font-size:11px; font-weight:600; letter-spacing:0.1em; text-transform:uppercase; color:#555; margin-bottom:10px;">Urgenza del progetto</label>
+            <div style="display:flex; flex-wrap:wrap; gap:8px;" data-field="urgenza">
+              <button type="button" class="krea-pill" data-value="entro_3_mesi">Apro entro 3 mesi</button>
+              <button type="button" class="krea-pill" data-value="entro_6_mesi">Entro 6 mesi</button>
+              <button type="button" class="krea-pill" data-value="esplorando">Sto ancora esplorando</button>
+            </div>
+          </div>
+          <div style="margin-bottom:20px;">
+            <label style="display:block; font-size:11px; font-weight:600; letter-spacing:0.1em; text-transform:uppercase; color:#555; margin-bottom:6px;">Note aggiuntive (facoltativo)</label>
+            <textarea id="k-note" rows="3" placeholder="Dimensioni cucina, numero coperti, situazione specifica…" style="width:100%; padding:12px 16px; border:1.5px solid #e0d9f0; border-radius:10px; font-size:15px; box-sizing:border-box; outline:none; resize:vertical; font-family:inherit;"></textarea>
           </div>
         </div>
 
-        <!-- STEP 5: Conferma (non è uno step numerato, è lo stato finale) -->
-        <div class="form-step success-step" data-step="5">
-          <div class="success-icon">✓</div>
-          <h3 class="step-title">Richiesta inviata.</h3>
-          <p class="step-sub">
-            Vincenzo riceverà tutti i dettagli del tuo progetto e ti contatterà
-            personalmente entro 24 ore al numero che hai indicato.
-          </p>
-          <p class="step-sub" style="margin-top: 8px; font-size: 14px; opacity: 0.6;">
-            Controlla anche la tua email — ti invieremo un riepilogo della richiesta.
-          </p>
+        <!-- STEP 5 — Conferma -->
+        <div id="krea-step-5" class="krea-step" style="display:none; text-align:center; padding:20px 0;">
+          <div style="width:56px; height:56px; border-radius:50%; background:#f0fcf4; border:2px solid #b8f0d4; display:flex; align-items:center; justify-content:center; margin:0 auto 20px; font-size:24px; color:#2D9E6B;">✓</div>
+          <h3 style="font-family:'Cormorant Garamond',serif; font-size:34px; font-weight:400; font-style:italic; color:#4A2B7F; margin-bottom:12px;">Richiesta inviata.</h3>
+          <p style="font-size:16px; color:#777; line-height:1.7; max-width:380px; margin:0 auto;">Vincenzo ha ricevuto i dettagli del tuo progetto e ti contatterà personalmente entro 24 ore.</p>
         </div>
 
-        <!-- Footer navigazione -->
-        <div class="modal-nav" id="modalNav">
-          <button type="button" class="btn-back" id="btnBack">← Indietro</button>
-          <button type="button" class="btn-next" id="btnNext">Continua →</button>
-          <button type="submit" class="btn-submit" id="btnSubmit" style="display:none">
-            Invia la richiesta →
-          </button>
+        <!-- Navigazione -->
+        <div id="krea-nav" style="display:flex; align-items:center; justify-content:space-between; margin-top:24px; padding-top:20px; border-top:1px solid #f0ecf8;">
+          <button id="krea-back" onclick="kreaBack()" style="background:none; border:none; font-size:14px; color:#aaa; cursor:pointer; font-family:inherit; padding:8px 0; visibility:hidden;">← Indietro</button>
+          <button id="krea-next" onclick="kreaNext()" style="background:#4A2B7F; color:#fff; border:none; padding:14px 32px; border-radius:60px; font-size:14px; font-weight:600; cursor:pointer; font-family:inherit;">Continua →</button>
+          <button id="krea-submit" onclick="kreaSubmit()" style="display:none; background:#4A2B7F; color:#fff; border:none; padding:14px 32px; border-radius:60px; font-size:14px; font-weight:600; cursor:pointer; font-family:inherit;">Invia la richiesta →</button>
         </div>
 
-      </form>
+      </div>
     </div>
   </div>
+
+  <style>
+  .krea-pill {
+    padding: 9px 18px;
+    border: 1.5px solid #e0d9f0;
+    border-radius: 60px;
+    background: #fafafa;
+    font-size: 13px;
+    font-weight: 500;
+    color: #666;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-family: inherit;
+  }
+  .krea-pill:hover {
+    border-color: #4A2B7F;
+    color: #4A2B7F;
+    background: #f5f0fc;
+  }
+  .krea-pill.selected {
+    background: #4A2B7F;
+    border-color: #4A2B7F;
+    color: #ffffff;
+  }
+  </style>
+
+  <script>
+  var kreaStep = 1;
+  var kreaData = {};
+
+  function openConsultModal() {
+    document.getElementById('consultModal').style.display = 'flex';
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeConsultModal() {
+    document.getElementById('consultModal').style.display = 'none';
+    document.body.style.overflow = '';
+  }
+
+  function kreaShowStep(n) {
+    for (var i = 1; i <= 5; i++) {
+      var el = document.getElementById('krea-step-' + i);
+      if (el) el.style.display = i === n ? 'block' : 'none';
+    }
+    var label = document.getElementById('krea-step-label');
+    var progress = document.getElementById('krea-progress');
+    var nav = document.getElementById('krea-nav');
+    var back = document.getElementById('krea-back');
+    var next = document.getElementById('krea-next');
+    var submit = document.getElementById('krea-submit');
+
+    if (n <= 4) {
+      label.textContent = 'Passo ' + n + ' di 4';
+      progress.style.width = (n / 4 * 100) + '%';
+      nav.style.display = 'flex';
+      back.style.visibility = n === 1 ? 'hidden' : 'visible';
+      next.style.display = n < 4 ? 'inline-block' : 'none';
+      submit.style.display = n === 4 ? 'inline-block' : 'none';
+    } else {
+      label.textContent = '';
+      progress.style.width = '100%';
+      nav.style.display = 'none';
+    }
+  }
+
+  function kreaNext() {
+    if (kreaStep === 1) {
+      var nome = document.getElementById('k-nome').value.trim();
+      var email = document.getElementById('k-email').value.trim();
+      var tel = document.getElementById('k-tel').value.trim();
+      if (!nome || !email || !tel) {
+        alert('Compila tutti i campi per continuare.');
+        return;
+      }
+      kreaData.nome = nome;
+      kreaData.email = email;
+      kreaData.telefono = tel;
+    }
+    kreaStep++;
+    kreaShowStep(kreaStep);
+  }
+
+  function kreaBack() {
+    if (kreaStep > 1) {
+      kreaStep--;
+      kreaShowStep(kreaStep);
+    }
+  }
+
+  function kreaSubmit() {
+    kreaData.note = document.getElementById('k-note').value.trim();
+    kreaData.data = new Date().toLocaleString('it-IT');
+    console.log('Krea form inviato:', kreaData);
+    // TODO: collegare a Formspree o EmailJS
+    kreaStep = 5;
+    kreaShowStep(5);
+  }
+
+  // Pill click
+  document.addEventListener('click', function(e) {
+    if (!e.target.classList.contains('krea-pill')) return;
+    var group = e.target.parentElement;
+    var isMulti = group.getAttribute('data-multi') === 'true';
+    var field = group.getAttribute('data-field');
+
+    if (!isMulti) {
+      group.querySelectorAll('.krea-pill').forEach(function(p) { p.classList.remove('selected'); });
+    }
+    e.target.classList.toggle('selected');
+
+    if (field) {
+      if (isMulti) {
+        kreaData[field] = Array.from(group.querySelectorAll('.krea-pill.selected')).map(function(p) { return p.dataset.value; });
+      } else {
+        kreaData[field] = e.target.dataset.value;
+      }
+    }
+  });
+
+  // Chiudi cliccando overlay
+  document.getElementById('consultModal').addEventListener('click', function(e) {
+    if (e.target === this) closeConsultModal();
+  });
+
+  // ESC
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') closeConsultModal();
+  });
+
+  // Collega bottone principale
+  document.addEventListener('DOMContentLoaded', function() {
+    var btns = document.querySelectorAll('#openConsultForm, .btn-prenota, [data-open-modal]');
+    btns.forEach(function(btn) {
+      btn.addEventListener('click', function(e) {
+        e.preventDefault();
+        openConsultModal();
+      });
+    });
+  });
+  </script>
 
 
   <!-- =====================================================
