@@ -520,6 +520,7 @@ p {
 ───────────────────────────────────────────────────── */
 .services-section {
   background-color: var(--color-bg);
+  padding-bottom: 0; /* il padding inferiore è gestito dal wrapper .services-seq */
 }
 
 .services-grid {

@@ -225,4 +225,132 @@
     });
   }
 
+  /* ─────────────────────────────────────────────
+     SERVICES CANVAS SCROLL SEQUENCE
+     Replica identica della logica Hero Canvas,
+     applicata alla sezione #servizi
+  ───────────────────────────────────────────── */
+
+  const SVC_FRAME_DIR   = 'assets/videos2/ffffff-ezgif-59ce2a7ecde549b7-webp-jpg/';
+  const SVC_FRAME_COUNT = 286; 
+  const SVC_FRAME_PAD   = 3;
+
+  const svcFramePaths = Array.from({ length: SVC_FRAME_COUNT }, (_, i) => {
+    const n = String(i).padStart(SVC_FRAME_PAD, '0');
+    return `${SVC_FRAME_DIR}frame_${n}_delay-0.076s.jpg`;
+  });
+
+  const svcCanvas = document.getElementById('servicesCanvas');
+  const svcCtx    = svcCanvas ? svcCanvas.getContext('2d') : null;
+
+  if (svcCanvas && svcCtx) {
+
+    // Sizing Retina identico alla Hero
+    function resizeSvcCanvas() {
+      svcCanvas.width  = window.innerWidth  * window.devicePixelRatio;
+      svcCanvas.height = window.innerHeight * window.devicePixelRatio;
+      svcCanvas.style.width  = window.innerWidth  + 'px';
+      svcCanvas.style.height = window.innerHeight + 'px';
+      svcCtx.scale(window.devicePixelRatio, window.devicePixelRatio);
+    }
+    resizeSvcCanvas();
+    window.addEventListener('resize', resizeSvcCanvas, { passive: true });
+
+    const svcImages = new Array(SVC_FRAME_COUNT).fill(null);
+    let svcCurrentFrame = 0;
+
+    function drawSvcFrame(img) {
+      if (!img || !img.complete || img.naturalWidth === 0) return;
+      const cW = svcCanvas.width  / window.devicePixelRatio;
+      const cH = svcCanvas.height / window.devicePixelRatio;
+      const scale = Math.max(cW / img.naturalWidth, cH / img.naturalHeight);
+      const dw = img.naturalWidth  * scale;
+      const dh = img.naturalHeight * scale;
+      svcCtx.clearRect(0, 0, cW, cH);
+      svcCtx.drawImage(img, (cW - dw) / 2, (cH - dh) / 2, dw, dh);
+    }
+
+    function loadSvcFrame(idx) {
+      if (svcImages[idx]) return;
+      const img = new Image();
+      img.src = svcFramePaths[idx];
+      img.onload = () => {
+        svcImages[idx] = img;
+        if (idx === svcCurrentFrame) drawSvcFrame(img);
+      };
+      svcImages[idx] = img;
+    }
+
+    // Preload: prime 36 frame immediate, resto in background
+    for (let i = 0; i <= Math.min(35, SVC_FRAME_COUNT - 1); i++) loadSvcFrame(i);
+    setTimeout(() => {
+      for (let i = 36; i < SVC_FRAME_COUNT; i++) loadSvcFrame(i);
+    }, 500);
+
+    // Primo frame immediato
+    const svcFirstImg = new Image();
+    svcFirstImg.src = svcFramePaths[0];
+    svcFirstImg.onload = () => { svcImages[0] = svcFirstImg; drawSvcFrame(svcFirstImg); };
+
+    function updateSvcFrame(progress) {
+      const idx = Math.min(Math.floor(progress * (SVC_FRAME_COUNT - 1)), SVC_FRAME_COUNT - 1);
+      if (idx === svcCurrentFrame) return;
+      svcCurrentFrame = idx;
+      if (svcImages[idx] && svcImages[idx].complete) {
+        drawSvcFrame(svcImages[idx]);
+      } else {
+        loadSvcFrame(idx);
+      }
+    }
+
+    // ScrollTrigger per il canvas servizi
+    ScrollTrigger.create({
+      trigger:  '#servicesSeq',
+      start:    'top top',
+      end:      'bottom bottom',
+      scrub:    1.5,
+      onUpdate: (self) => updateSvcFrame(self.progress),
+    });
+
+    window.addEventListener('resize', () => {
+      if (svcImages[svcCurrentFrame]?.complete) drawSvcFrame(svcImages[svcCurrentFrame]);
+    }, { passive: true });
+
+    /* ── Beat Timelines (identici alla Hero, trigger su #servicesSeq) ── */
+    function svcBeatTimeline(el, startPct, endPct) {
+      if (!el) return;
+      const fw = 0.08;
+      gsap.fromTo(el,
+        { opacity: 0, y: 30 },
+        { opacity: 1, y: 0, ease: 'power2.out',
+          scrollTrigger: { trigger: '#servicesSeq', start: `${startPct}% top`, end: `${startPct + fw * 100}% top`, scrub: 1 }
+        }
+      );
+      gsap.to(el, {
+        opacity: 0, y: -30, ease: 'power2.in',
+        scrollTrigger: { trigger: '#servicesSeq', start: `${endPct - fw * 100}% top`, end: `${endPct}% top`, scrub: 1 }
+      });
+    }
+
+    svcBeatTimeline(document.getElementById('svcBeatA'),  0, 22);
+    svcBeatTimeline(document.getElementById('svcBeatB'), 25, 48);
+    svcBeatTimeline(document.getElementById('svcBeatC'), 50, 72);
+    svcBeatTimeline(document.getElementById('svcBeatD'), 75, 97);
+
+    /* ── Scroll hint scompare al 10% ── */
+    const svcHint = document.getElementById('svcScrollHint');
+    if (svcHint) {
+      gsap.to(svcHint, {
+        opacity: 0, y: 15, ease: 'none',
+        scrollTrigger: {
+          trigger: '#servicesSeq',
+          start: 'top top',
+          end:   '10% top',
+          scrub: 1,
+          onLeave: () => { svcHint.style.pointerEvents = 'none'; }
+        }
+      });
+    }
+  }
+
 })();

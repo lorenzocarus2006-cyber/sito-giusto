@@ -331,55 +331,64 @@
         <h2 class="section-title">Dalla consulenza alle chiavi in mano.</h2>
         <p class="section-subtitle">Un solo interlocutore affidabile per seguire ogni fase del tuo progetto HoReCa.</p>
       </div>
+    </div>
 
-      <div class="services-grid">
-        <!-- Step 1 -->
-        <div class="service-card reveal-up reveal-d1">
-          <span class="service-number" aria-hidden="true">01</span>
-          <div class="service-content">
-            <div class="service-icon" aria-hidden="true">
-              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
-            </div>
-            <h3>Consulenza gratuita</h3>
-            <p>Capiamo insieme cosa ti serve, analizzando i flussi di lavoro e l'efficienza degli spazi.</p>
+    <!-- Wrapper scroll: 400vh per il canvas sticky -->
+    <div class="services-seq" id="servicesSeq">
+      <div class="services-seq__sticky">
+        <!-- Canvas adattivo -->
+        <canvas id="servicesCanvas" class="services-seq__canvas" aria-hidden="true"></canvas>
+
+        <!-- Veli degradé sopra e sotto per blend con la pagina -->
+        <div class="services-seq__velo services-seq__velo--top" aria-hidden="true"></div>
+        <div class="services-seq__velo services-seq__velo--btm" aria-hidden="true"></div>
+
+        <!-- Beat A: 0%–22% — Consulenza gratuita -->
+        <div class="svc-beat" id="svcBeatA" aria-hidden="true">
+          <div class="svc-beat__inner svc-beat__inner--center">
+            <p class="svc-beat__eyebrow">01 — Consulenza</p>
+            <h3 class="svc-beat__title">Capiamo insieme<br>cosa ti serve.</h3>
+            <p class="svc-beat__sub">Analizziamo i flussi di lavoro e l'efficienza degli spazi.<br>Senza impegno, senza costi.</p>
           </div>
         </div>
 
-        <!-- Step 2 -->
-        <div class="service-card reveal-up reveal-d2">
-          <span class="service-number" aria-hidden="true">02</span>
-          <div class="service-content">
-            <div class="service-icon" aria-hidden="true">
-              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg>
-            </div>
-            <h3>Progettazione 3D</h3>
-            <p>Vedi il tuo locale e la disposizione delle attrezzature prima ancora di iniziare i lavori.</p>
+        <!-- Beat B: 25%–48% — Progettazione 3D -->
+        <div class="svc-beat" id="svcBeatB" aria-hidden="true">
+          <div class="svc-beat__inner svc-beat__inner--left">
+            <p class="svc-beat__eyebrow">02 — Progettazione</p>
+            <h3 class="svc-beat__title">Vedi il tuo locale<br>prima ancora<br>di iniziare.</h3>
+            <p class="svc-beat__sub">Rendering 3D professionali della tua cucina.<br>Ogni centimetro al posto giusto.</p>
           </div>
         </div>
 
-        <!-- Step 3 -->
-        <div class="service-card reveal-up reveal-d3">
-          <span class="service-number" aria-hidden="true">03</span>
-          <div class="service-content">
-            <div class="service-icon" aria-hidden="true">
-              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg>
-            </div>
-            <h3>Fornitura e posa</h3>
-            <p>Selezioniamo i macchinari dei migliori 500+ brand internazionali, installati a regola d'arte.</p>
+        <!-- Beat C: 50%–72% — Fornitura e posa -->
+        <div class="svc-beat" id="svcBeatC" aria-hidden="true">
+          <div class="svc-beat__inner svc-beat__inner--right">
+            <p class="svc-beat__eyebrow">03 — Fornitura</p>
+            <h3 class="svc-beat__title">500+ brand.<br>Installati<br>a regola d'arte.</h3>
+            <p class="svc-beat__sub">Selezioniamo i migliori macchinari professionali<br>e li installiamo in ogni angolo della Sicilia.</p>
           </div>
         </div>
 
-        <!-- Step 4 -->
-        <div class="service-card reveal-up reveal-d4">
-          <span class="service-number" aria-hidden="true">04</span>
-          <div class="service-content">
-            <div class="service-icon" aria-hidden="true">
-              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path></svg>
-            </div>
-            <h3>Assistenza 24h</h3>
-            <p>Siamo qui anche dopo. Interventi rapidi e manutenzione costante per non fermare mai la tua cucina.</p>
+        <!-- Beat D: 75%–97% — Assistenza 24h -->
+        <div class="svc-beat" id="svcBeatD" aria-hidden="true">
+          <div class="svc-beat__inner svc-beat__inner--center">
+            <p class="svc-beat__eyebrow">04 — Assistenza</p>
+            <h3 class="svc-beat__title">Siamo qui.<br>Anche dopo.</h3>
+            <p class="svc-beat__sub">Interventi rapidi e manutenzione costante.<br>La tua cucina non si ferma mai.</p>
+            <a href="#contatti" class="svc-beat__cta" aria-label="Prenota consulenza gratuita">
+              Prenota consulenza gratuita
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8H13M13 8L9 4M13 8L9 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
           </div>
         </div>
+
+        <!-- Scroll hint (scompare al 10%) -->
+        <div class="services-seq__scroll-hint" id="svcScrollHint" aria-hidden="true">
+          <svg width="14" height="20" viewBox="0 0 14 20" fill="none"><path d="M7 1v14M1 11l6 7 6-7" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <span>Scorri per scoprire</span>
+        </div>
+
       </div>
     </div>
   </section>
