@@ -168,95 +168,28 @@
     });
   }
 
-  /* ─────────────────────────────────────────────
-     6. FORM CONSULENZA — APERTURA MODALE
-  ───────────────────────────────────────────── */
+  /* FORM MODALE */
   function apriModale() {
-    var modal = document.getElementById('consultModal');
-    if (!modal) return;
-    modal.classList.add('open');
+    var m = document.getElementById('consultModal');
+    if (!m) return;
+    m.removeAttribute('style');
+    m.classList.add('open');
     document.body.style.overflow = 'hidden';
     for (var i = 1; i <= 5; i++) {
       var s = document.getElementById('ks' + i);
       if (s) s.style.display = i === 1 ? 'block' : 'none';
     }
   }
-
-  // Bottone sezione contatti
-  var btnContatti = document.getElementById('openConsultForm');
-  if (btnContatti) {
-    btnContatti.addEventListener('click', function(e) {
-      e.preventDefault();
-      apriModale();
-    });
+  function chiudiModale() {
+    var m = document.getElementById('consultModal');
+    if (!m) return;
+    m.classList.remove('open');
+    document.body.style.overflow = '';
   }
-
-  // Bottone navbar e mobile drawer
-  document.querySelectorAll('.nav-cta, .drawer-cta').forEach(function(btn) {
-    btn.addEventListener('click', function(e) {
-      e.preventDefault();
-      // Chiudi drawer mobile se aperto
-      var hamburger = document.getElementById('hamburger');
-      var drawer = document.getElementById('mobileDrawer');
-      if (hamburger && hamburger.classList.contains('active')) {
-        hamburger.classList.remove('active');
-        drawer.classList.remove('active');
-        hamburger.setAttribute('aria-expanded', false);
-        drawer.setAttribute('aria-hidden', true);
-      }
-      apriModale();
-    });
+  document.querySelectorAll('#openConsultForm, .nav-cta, .drawer-cta, #heroCta, #fabContatti').forEach(function(b) {
+    b.addEventListener('click', function(e) { e.preventDefault(); e.stopPropagation(); apriModale(); });
   });
-
-  // CTA hero
-  var heroCta = document.getElementById('heroCta');
-  if (heroCta) {
-    heroCta.addEventListener('click', function(e) {
-      e.preventDefault();
-      apriModale();
-    });
-  }
-
-  // FAB contatti
-  var fab = document.getElementById('fabContatti');
-  if (fab) {
-    fab.addEventListener('click', function(e) {
-      e.preventDefault();
-      apriModale();
-    });
-  }
-
-  // ESC per chiudere
-  document.addEventListener('keydown', function(e) {
-    if (e.key === 'Escape') {
-      var modal = document.getElementById('consultModal');
-      if (modal) {
-        modal.style.display = 'none';
-        document.body.style.overflow = '';
-      }
-    }
-  });
-
-  var _modal = document.getElementById('consultModal');
-  function _apri() {
-    if (!_modal) return;
-    _modal.classList.add('open');
-    document.body.style.overflow = 'hidden';
-    for (var _i = 1; _i <= 5; _i++) {
-      var _s = document.getElementById('ks' + _i);
-      if (_s) _s.style.display = _i === 1 ? 'block' : 'none';
-    }
-  }
-  ['openConsultForm','heroCta','fabContatti'].forEach(function(_id) {
-    var _el = document.getElementById(_id);
-    if (_el) _el.addEventListener('click', function(_e) { _e.preventDefault(); _apri(); });
-  });
-  document.querySelectorAll('.nav-cta,.drawer-cta').forEach(function(_el) {
-    _el.addEventListener('click', function(_e) { _e.preventDefault(); _apri(); });
-  });
-  document.addEventListener('keydown', function(_e) {
-    if (_e.key === 'Escape' && _modal) { _modal.classList.remove('open'); document.body.style.overflow = ''; }
-  });
+  document.addEventListener('keydown', function(e) { if (e.key === 'Escape') chiudiModale(); });
 
 })();
 
