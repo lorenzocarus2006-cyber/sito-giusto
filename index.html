@@ -657,8 +657,8 @@
             <button type="button" class="kpill" data-group="fase" data-value="espansione" onclick="kreaSelectPill(this,'fase')">Espansione locale</button>
           </div>
           <div style="margin-top:36px; display:flex; justify-content:space-between;">
-            <button onclick="kreaGo(1,'back')" style="background:none; border:none; color:rgba(255,255,255,0.5); font-size:15px; cursor:pointer; font-family:inherit;">← Indietro</button>
-            <button onclick="kreaGo(3)" style="background:#fff; color:#4A2B7F; border:none; padding:16px 40px; border-radius:60px; font-size:15px; font-weight:700; cursor:pointer; font-family:inherit;">Continua →</button>
+            <button onclick="kreaGoAnimated(1,'back')" style="background:none; border:none; color:rgba(255,255,255,0.5); font-size:15px; cursor:pointer; font-family:inherit;">← Indietro</button>
+            <button onclick="kreaGoAnimated(3,'next')" style="background:#fff; color:#4A2B7F; border:none; padding:16px 40px; border-radius:60px; font-size:15px; font-weight:700; cursor:pointer; font-family:inherit;">Continua →</button>
           </div>
         </div>
 
@@ -684,8 +684,8 @@
             <button type="button" class="kpill" data-group="budget" data-value="oltre50k" onclick="kreaSelectPill(this,'budget')">Oltre €50.000</button>
           </div>
           <div style="margin-top:36px; display:flex; justify-content:space-between;">
-            <button onclick="kreaGo(2,'back')" style="background:none; border:none; color:rgba(255,255,255,0.5); font-size:15px; cursor:pointer; font-family:inherit;">← Indietro</button>
-            <button onclick="kreaGo(4)" style="background:#fff; color:#4A2B7F; border:none; padding:16px 40px; border-radius:60px; font-size:15px; font-weight:700; cursor:pointer; font-family:inherit;">Continua →</button>
+            <button onclick="kreaGoAnimated(2,'back')" style="background:none; border:none; color:rgba(255,255,255,0.5); font-size:15px; cursor:pointer; font-family:inherit;">← Indietro</button>
+            <button onclick="kreaGoAnimated(4,'next')" style="background:#fff; color:#4A2B7F; border:none; padding:16px 40px; border-radius:60px; font-size:15px; font-weight:700; cursor:pointer; font-family:inherit;">Continua →</button>
           </div>
         </div>
 
@@ -708,8 +708,8 @@
           </div>
           <div style="margin-bottom:20px;"><label style="display:block; font-size:11px; font-weight:600; letter-spacing:0.12em; text-transform:uppercase; color:rgba(255,255,255,0.6); margin-bottom:8px;">Note aggiuntive (facoltativo)</label><textarea id="k-note" rows="3" placeholder="Dimensioni cucina, numero coperti…" style="width:100%; padding:15px 18px; background:rgba(255,255,255,0.1); border:1.5px solid rgba(255,255,255,0.25); border-radius:10px; font-size:16px; color:#fff; box-sizing:border-box; outline:none; resize:vertical; font-family:inherit;"></textarea></div>
           <div style="margin-top:36px; display:flex; justify-content:space-between;">
-            <button onclick="kreaGo(3,'back')" style="background:none; border:none; color:rgba(255,255,255,0.5); font-size:15px; cursor:pointer; font-family:inherit;">← Indietro</button>
-            <button onclick="kreaSubmitForm()" style="background:#fff; color:#4A2B7F; border:none; padding:16px 40px; border-radius:60px; font-size:15px; font-weight:700; cursor:pointer; font-family:inherit;">Invia la richiesta →</button>
+            <button onclick="kreaGoAnimated(3,'back')" style="background:none; border:none; color:rgba(255,255,255,0.5); font-size:15px; cursor:pointer; font-family:inherit;">← Indietro</button>
+            <button onclick="kreaSubmitForm(); kreaGoAnimated(5,'next');" style="background:#fff; color:#4A2B7F; border:none; padding:16px 40px; border-radius:60px; font-size:15px; font-weight:700; cursor:pointer; font-family:inherit;">Invia la richiesta →</button>
           </div>
         </div>
 
@@ -791,7 +791,7 @@
     kreaFormData.nome     = nome;
     kreaFormData.email    = email;
     kreaFormData.telefono = tel;
-    kreaGo(2);
+    kreaGoAnimated(2, 'next');
   }
 
   function kreaSelectPill(btn, group) {
@@ -813,7 +813,7 @@
     kreaFormData.data    = new Date().toLocaleString('it-IT');
     console.log('Krea lead:', kreaFormData);
     // TODO: fetch Formspree/EmailJS qui
-    kreaGo(5);
+    kreaGoAnimated(5, 'next');
   }
 
 

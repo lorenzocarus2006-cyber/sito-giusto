@@ -1306,28 +1306,245 @@ p {
   }
 }
 
-/* ── FORM FULLSCREEN ANIMAZIONI ── */
+/* ── FORM FULLSCREEN ── */
+
+/* Apertura modale con fade */
 #consultModal {
   opacity: 0;
+  transition: opacity 0.4s ease;
 }
 #consultModal.open {
-  animation: kreaFadeIn 0.35s ease forwards;
+  opacity: 1;
 }
-@keyframes kreaFadeIn {
-  from { opacity: 0; }
-  to   { opacity: 1; }
+
+/* Layout interno */
+#consultModal > div {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 100px 24px 60px;
+  box-sizing: border-box;
 }
-.krea-step-wrap {
-  animation: kreaSlideIn 0.4s cubic-bezier(0.16,1,0.3,1) both;
+
+/* Contenitore step */
+#consultModal > div > div {
+  width: 100%;
+  max-width: 600px;
 }
-@keyframes kreaSlideIn {
-  from { opacity: 0; transform: translateX(48px); }
+
+/* Progress dots */
+.krea-dots {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  position: fixed;
+  top: 36px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10000;
+}
+.krea-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.25);
+  transition: background 0.3s, transform 0.3s;
+}
+.krea-dot.active {
+  background: #ffffff;
+  transform: scale(1.5);
+}
+.krea-dot.done {
+  background: rgba(255,255,255,0.6);
+}
+
+/* Label passo */
+#consultModal [id^="ks"] > p:first-child {
+  font-size: 11px !important;
+  letter-spacing: 0.22em !important;
+  text-transform: uppercase !important;
+  color: rgba(255,255,255,0.4) !important;
+  margin-bottom: 12px !important;
+}
+
+/* Titolo step */
+#consultModal h3 {
+  font-family: 'Cormorant Garamond', serif !important;
+  font-size: clamp(52px, 8vw, 80px) !important;
+  font-weight: 300 !important;
+  font-style: italic !important;
+  color: #ffffff !important;
+  line-height: 1.0 !important;
+  margin: 0 0 14px !important;
+}
+
+/* Sottotitolo step */
+#consultModal [id^="ks"] > p:nth-child(3) {
+  color: rgba(255,255,255,0.55) !important;
+  font-size: 17px !important;
+  margin-bottom: 40px !important;
+  line-height: 1.6 !important;
+}
+
+/* Label campi */
+#consultModal label {
+  font-size: 11px !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.16em !important;
+  text-transform: uppercase !important;
+  color: rgba(255,255,255,0.55) !important;
+  margin-bottom: 10px !important;
+  display: block !important;
+}
+
+/* Input e textarea */
+#consultModal input,
+#consultModal textarea {
+  width: 100% !important;
+  padding: 18px 22px !important;
+  background: rgba(255,255,255,0.08) !important;
+  border: 1.5px solid rgba(255,255,255,0.2) !important;
+  border-radius: 14px !important;
+  font-size: 17px !important;
+  color: #ffffff !important;
+  box-sizing: border-box !important;
+  outline: none !important;
+  font-family: inherit !important;
+  transition: border-color 0.2s, background 0.2s !important;
+}
+#consultModal input::placeholder,
+#consultModal textarea::placeholder {
+  color: rgba(255,255,255,0.3) !important;
+}
+#consultModal input:focus,
+#consultModal textarea:focus {
+  border-color: rgba(255,255,255,0.65) !important;
+  background: rgba(255,255,255,0.13) !important;
+}
+
+/* Pill opzioni */
+.kpill {
+  padding: 12px 24px !important;
+  border: 1.5px solid rgba(255,255,255,0.22) !important;
+  border-radius: 60px !important;
+  background: rgba(255,255,255,0.07) !important;
+  font-size: 14px !important;
+  font-weight: 500 !important;
+  color: rgba(255,255,255,0.8) !important;
+  cursor: pointer !important;
+  font-family: inherit !important;
+  transition: all 0.18s !important;
+  letter-spacing: 0.01em !important;
+}
+.kpill:hover {
+  border-color: rgba(255,255,255,0.6) !important;
+  background: rgba(255,255,255,0.14) !important;
+  color: #ffffff !important;
+}
+.kpill.on {
+  background: #ffffff !important;
+  border-color: #ffffff !important;
+  color: #4A2B7F !important;
+  font-weight: 600 !important;
+}
+
+/* Bottone Continua / Invia */
+#consultModal button[onclick*="kreaGo"],
+#consultModal button[onclick*="kreaValidate"],
+#consultModal button[onclick*="kreaSubmit"] {
+  background: #ffffff !important;
+  color: #4A2B7F !important;
+  border: none !important;
+  padding: 17px 44px !important;
+  border-radius: 60px !important;
+  font-size: 15px !important;
+  font-weight: 700 !important;
+  cursor: pointer !important;
+  font-family: inherit !important;
+  letter-spacing: 0.03em !important;
+  transition: transform 0.2s, box-shadow 0.2s !important;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.15) !important;
+}
+#consultModal button[onclick*="kreaGo"]:hover,
+#consultModal button[onclick*="kreaValidate"]:hover,
+#consultModal button[onclick*="kreaSubmit"]:hover {
+  transform: translateY(-2px) !important;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.25) !important;
+}
+
+/* Bottone Indietro */
+#consultModal button[onclick*="kreaGo(1)"],
+#consultModal button[onclick*="kreaGo(2)"],
+#consultModal button[onclick*="kreaGo(3)"] {
+  background: none !important;
+  color: rgba(255,255,255,0.45) !important;
+  border: none !important;
+  padding: 17px 0 !important;
+  font-size: 15px !important;
+  font-weight: 400 !important;
+  box-shadow: none !important;
+  letter-spacing: 0 !important;
+}
+#consultModal button[onclick*="kreaGo(1)"]:hover,
+#consultModal button[onclick*="kreaGo(2)"]:hover,
+#consultModal button[onclick*="kreaGo(3)"]:hover {
+  color: rgba(255,255,255,0.85) !important;
+  transform: none !important;
+  box-shadow: none !important;
+}
+
+/* Bottone X chiusura */
+#consultModal > button:first-child {
+  position: fixed !important;
+  top: 32px !important;
+  right: 40px !important;
+  width: 44px !important;
+  height: 44px !important;
+  border-radius: 50% !important;
+  background: rgba(255,255,255,0.12) !important;
+  border: 1px solid rgba(255,255,255,0.2) !important;
+  color: #ffffff !important;
+  font-size: 18px !important;
+  cursor: pointer !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  transition: background 0.2s !important;
+  z-index: 10000 !important;
+}
+#consultModal > button:first-child:hover {
+  background: rgba(255,255,255,0.22) !important;
+}
+
+/* Step success */
+#ks5 {
+  text-align: center !important;
+  padding: 40px 0 !important;
+}
+
+/* Animazioni step */
+@keyframes kreaIn {
+  from { opacity: 0; transform: translateX(40px); }
   to   { opacity: 1; transform: translateX(0); }
 }
-.krea-step-wrap.going-back {
-  animation: kreaSlideInBack 0.4s cubic-bezier(0.16,1,0.3,1) both;
-}
-@keyframes kreaSlideInBack {
-  from { opacity: 0; transform: translateX(-48px); }
+@keyframes kreaInBack {
+  from { opacity: 0; transform: translateX(-40px); }
   to   { opacity: 1; transform: translateX(0); }
+}
+.krea-anim-in {
+  animation: kreaIn 0.38s cubic-bezier(0.16,1,0.3,1) both;
+}
+.krea-anim-back {
+  animation: kreaInBack 0.38s cubic-bezier(0.16,1,0.3,1) both;
+}
+
+@media (max-width: 600px) {
+  #consultModal h3 {
+    font-size: 44px !important;
+  }
+  #consultModal > button:first-child {
+    top: 16px !important;
+    right: 16px !important;
+  }
 }

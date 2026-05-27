@@ -172,24 +172,58 @@
   function apriModale() {
     var m = document.getElementById('consultModal');
     if (!m) return;
-    m.removeAttribute('style');
     m.classList.add('open');
     document.body.style.overflow = 'hidden';
-    if (typeof kreaGo === 'function') {
-      kreaGo(1);
-    } else {
-      for (var i = 1; i <= 5; i++) {
-        var s = document.getElementById('ks' + i);
-        if (s) s.style.display = i === 1 ? 'block' : 'none';
-      }
+    kreaGoAnimated(1, 'next');
+    // Aggiungi dots se non esistono
+    if (!document.getElementById('kreaDots')) {
+      var dots = document.createElement('div');
+      dots.id = 'kreaDots';
+      dots.className = 'krea-dots';
+      dots.innerHTML = '<div class="krea-dot active" id="kd1"></div><div class="krea-dot" id="kd2"></div><div class="krea-dot" id="kd3"></div><div class="krea-dot" id="kd4"></div>';
+      m.appendChild(dots);
     }
+    updateDots(1);
   }
+
   function chiudiModale() {
     var m = document.getElementById('consultModal');
     if (!m) return;
     m.classList.remove('open');
     document.body.style.overflow = '';
   }
+
+  function updateDots(n) {
+    for (var i = 1; i <= 4; i++) {
+      var d = document.getElementById('kd' + i);
+      if (!d) continue;
+      d.classList.remove('active', 'done');
+      if (i === n) d.classList.add('active');
+      else if (i < n) d.classList.add('done');
+    }
+  }
+
+  function kreaGoAnimated(n, dir) {
+    for (var i = 1; i <= 5; i++) {
+      var s = document.getElementById('ks' + i);
+      if (!s) continue;
+      if (i === n) {
+        s.style.display = 'block';
+        s.classList.remove('krea-anim-in', 'krea-anim-back');
+        void s.offsetWidth;
+        s.classList.add(dir === 'back' ? 'krea-anim-back' : 'krea-anim-in');
+      } else {
+        s.style.display = 'none';
+      }
+    }
+    if (n <= 4) updateDots(n);
+    var modal = document.getElementById('consultModal');
+    if (modal) modal.scrollTop = 0;
+  }
+
+  // Esponi globalmente per gli onclick inline
+  window.kreaGoAnimated = kreaGoAnimated;
+  window.chiudiModale = chiudiModale;
   document.querySelectorAll('#openConsultForm, .nav-cta, .drawer-cta, #heroCta, #fabContatti').forEach(function(b) {
     b.addEventListener('click', function(e) { e.preventDefault(); e.stopPropagation(); apriModale(); });
   });
