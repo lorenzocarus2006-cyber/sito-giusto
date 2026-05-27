@@ -168,5 +168,75 @@
     });
   }
 
+  /* ─────────────────────────────────────────────
+     6. FORM CONSULENZA — APERTURA MODALE
+  ───────────────────────────────────────────── */
+  function apriModale() {
+    var modal = document.getElementById('consultModal');
+    if (!modal) return;
+    modal.style.display = 'block';
+    document.body.style.overflow = 'hidden';
+    // Reset al primo step
+    for (var i = 1; i <= 5; i++) {
+      var s = document.getElementById('ks' + i);
+      if (s) s.style.display = i === 1 ? 'block' : 'none';
+    }
+  }
+
+  // Bottone sezione contatti
+  var btnContatti = document.getElementById('openConsultForm');
+  if (btnContatti) {
+    btnContatti.addEventListener('click', function(e) {
+      e.preventDefault();
+      apriModale();
+    });
+  }
+
+  // Bottone navbar e mobile drawer
+  document.querySelectorAll('.nav-cta, .drawer-cta').forEach(function(btn) {
+    btn.addEventListener('click', function(e) {
+      e.preventDefault();
+      // Chiudi drawer mobile se aperto
+      var hamburger = document.getElementById('hamburger');
+      var drawer = document.getElementById('mobileDrawer');
+      if (hamburger && hamburger.classList.contains('active')) {
+        hamburger.classList.remove('active');
+        drawer.classList.remove('active');
+        hamburger.setAttribute('aria-expanded', false);
+        drawer.setAttribute('aria-hidden', true);
+      }
+      apriModale();
+    });
+  });
+
+  // CTA hero
+  var heroCta = document.getElementById('heroCta');
+  if (heroCta) {
+    heroCta.addEventListener('click', function(e) {
+      e.preventDefault();
+      apriModale();
+    });
+  }
+
+  // FAB contatti
+  var fab = document.getElementById('fabContatti');
+  if (fab) {
+    fab.addEventListener('click', function(e) {
+      e.preventDefault();
+      apriModale();
+    });
+  }
+
+  // ESC per chiudere
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') {
+      var modal = document.getElementById('consultModal');
+      if (modal) {
+        modal.style.display = 'none';
+        document.body.style.overflow = '';
+      }
+    }
+  });
+
 })();
 
