@@ -174,9 +174,8 @@
   function apriModale() {
     var modal = document.getElementById('consultModal');
     if (!modal) return;
-    modal.style.display = 'block';
+    modal.classList.add('open');
     document.body.style.overflow = 'hidden';
-    // Reset al primo step
     for (var i = 1; i <= 5; i++) {
       var s = document.getElementById('ks' + i);
       if (s) s.style.display = i === 1 ? 'block' : 'none';
