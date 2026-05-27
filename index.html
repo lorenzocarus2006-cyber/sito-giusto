@@ -816,34 +816,7 @@
     kreaGo(5);
   }
 
-  // Collega tutti i bottoni che aprono il form
-  document.addEventListener('DOMContentLoaded', function() {
-    document.querySelectorAll('#openConsultForm, .btn-prenota, [data-open-modal], .navbar .cta, nav .btn-primary').forEach(function(btn) {
-      btn.addEventListener('click', function(e) {
-        e.preventDefault();
-        document.getElementById('consultModal').classList.add('open');
-        document.body.style.overflow = 'hidden';
-        kreaGo(1);
-      });
-    });
 
-    // Collega bottone della navbar e mobile menu
-    document.querySelectorAll('.nav-cta, .drawer-cta').forEach(function(btn) {
-      btn.addEventListener('click', function(e) {
-        e.preventDefault();
-        document.getElementById('consultModal').classList.add('open');
-        document.body.style.overflow = 'hidden';
-        kreaGo(1);
-      });
-    });
-  });
-
-  document.addEventListener('keydown', function(e) {
-    if (e.key === 'Escape') {
-      document.getElementById('consultModal').classList.remove('open');
-      document.body.style.overflow = '';
-    }
-  });
   </script>
 
 

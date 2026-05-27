@@ -175,9 +175,13 @@
     m.removeAttribute('style');
     m.classList.add('open');
     document.body.style.overflow = 'hidden';
-    for (var i = 1; i <= 5; i++) {
-      var s = document.getElementById('ks' + i);
-      if (s) s.style.display = i === 1 ? 'block' : 'none';
+    if (typeof kreaGo === 'function') {
+      kreaGo(1);
+    } else {
+      for (var i = 1; i <= 5; i++) {
+        var s = document.getElementById('ks' + i);
+        if (s) s.style.display = i === 1 ? 'block' : 'none';
+      }
     }
   }
   function chiudiModale() {
