@@ -172,6 +172,7 @@
   function apriModale() {
     var m = document.getElementById('consultModal');
     if (!m) return;
+    m.removeAttribute('style');
     m.classList.add('open');
     document.body.style.overflow = 'hidden';
     kreaGoAnimated(1, 'next');
