@@ -86,7 +86,7 @@
         <li role="none"><a href="#contatti" role="menuitem">Contattaci</a></li>
       </ul>
 
-      <a href="#" class="nav-cta" aria-label="Prenota consulenza">Prenota consulenza</a>
+      <button type="button" class="nav-cta" aria-label="Prenota consulenza" onclick="event.preventDefault();event.stopPropagation();document.getElementById('consultModal').style.display='block';document.body.style.overflow='hidden';for(var i=1;i<=5;i++){var s=document.getElementById('ks'+i);if(s)s.style.display=i===1?'block':'none';}return false;">Prenota consulenza</button>
 
       <button class="hamburger" id="hamburger" aria-label="Apri Menu Mobile" aria-expanded="false" aria-controls="mobileDrawer">
         <span></span><span></span><span></span>
@@ -181,7 +181,7 @@
         <div class="hero-beat__inner hero-beat__inner--center">
           <h2 class="hero-beat__title hero-beat__title--xl"><em>Parliamoci.</em></h2>
           <p class="hero-beat__sub">Prenota una consulenza gratuita. Senza impegno.</p>
-          <a href="#" class="hero-beat__cta" id="heroCta" aria-label="Prenota consulenza gratuita">
+          <a href="#" class="hero-beat__cta" id="heroCta" onclick="event.preventDefault();event.stopPropagation();document.getElementById('consultModal').style.display='block';document.body.style.overflow='hidden';for(var i=1;i<=5;i++){var s=document.getElementById('ks'+i);if(s)s.style.display=i===1?'block':'none';}return false;" aria-label="Prenota consulenza gratuita">
             Prenota consulenza gratuita
             <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8H13M13 8L9 4M13 8L9 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
           </a>
@@ -523,7 +523,7 @@
         Vincenzo ti risponde personalmente entro 24 ore.
       </p>
 
-      <button class="btn-prenota" id="openConsultForm" aria-label="Prenota una consulenza gratuita">
+      <button type="button" class="btn-prenota" id="openConsultForm" aria-label="Prenota una consulenza gratuita" onclick="event.preventDefault();event.stopPropagation();document.getElementById('consultModal').style.display='block';document.body.style.overflow='hidden';for(var i=1;i<=5;i++){var s=document.getElementById('ks'+i);if(s)s.style.display=i===1?'block':'none';}return false;">
         Prenota una consulenza gratuita
         <span class="btn-arrow">→</span>
       </button>
@@ -657,7 +657,7 @@
             <button type="button" class="kpill" data-group="fase" data-value="espansione" onclick="kreaSelectPill(this,'fase')">Espansione locale</button>
           </div>
           <div style="margin-top:36px; display:flex; justify-content:space-between;">
-            <button onclick="kreaGo(1)" style="background:none; border:none; color:rgba(255,255,255,0.5); font-size:15px; cursor:pointer; font-family:inherit;">← Indietro</button>
+            <button onclick="kreaGo(1,'back')" style="background:none; border:none; color:rgba(255,255,255,0.5); font-size:15px; cursor:pointer; font-family:inherit;">← Indietro</button>
             <button onclick="kreaGo(3)" style="background:#fff; color:#4A2B7F; border:none; padding:16px 40px; border-radius:60px; font-size:15px; font-weight:700; cursor:pointer; font-family:inherit;">Continua →</button>
           </div>
         </div>
@@ -684,7 +684,7 @@
             <button type="button" class="kpill" data-group="budget" data-value="oltre50k" onclick="kreaSelectPill(this,'budget')">Oltre €50.000</button>
           </div>
           <div style="margin-top:36px; display:flex; justify-content:space-between;">
-            <button onclick="kreaGo(2)" style="background:none; border:none; color:rgba(255,255,255,0.5); font-size:15px; cursor:pointer; font-family:inherit;">← Indietro</button>
+            <button onclick="kreaGo(2,'back')" style="background:none; border:none; color:rgba(255,255,255,0.5); font-size:15px; cursor:pointer; font-family:inherit;">← Indietro</button>
             <button onclick="kreaGo(4)" style="background:#fff; color:#4A2B7F; border:none; padding:16px 40px; border-radius:60px; font-size:15px; font-weight:700; cursor:pointer; font-family:inherit;">Continua →</button>
           </div>
         </div>
@@ -708,7 +708,7 @@
           </div>
           <div style="margin-bottom:20px;"><label style="display:block; font-size:11px; font-weight:600; letter-spacing:0.12em; text-transform:uppercase; color:rgba(255,255,255,0.6); margin-bottom:8px;">Note aggiuntive (facoltativo)</label><textarea id="k-note" rows="3" placeholder="Dimensioni cucina, numero coperti…" style="width:100%; padding:15px 18px; background:rgba(255,255,255,0.1); border:1.5px solid rgba(255,255,255,0.25); border-radius:10px; font-size:16px; color:#fff; box-sizing:border-box; outline:none; resize:vertical; font-family:inherit;"></textarea></div>
           <div style="margin-top:36px; display:flex; justify-content:space-between;">
-            <button onclick="kreaGo(3)" style="background:none; border:none; color:rgba(255,255,255,0.5); font-size:15px; cursor:pointer; font-family:inherit;">← Indietro</button>
+            <button onclick="kreaGo(3,'back')" style="background:none; border:none; color:rgba(255,255,255,0.5); font-size:15px; cursor:pointer; font-family:inherit;">← Indietro</button>
             <button onclick="kreaSubmitForm()" style="background:#fff; color:#4A2B7F; border:none; padding:16px 40px; border-radius:60px; font-size:15px; font-weight:700; cursor:pointer; font-family:inherit;">Invia la richiesta →</button>
           </div>
         </div>
@@ -754,12 +754,23 @@
   <script>
   var kreaFormData = {};
 
-  function kreaGo(n) {
+  var kreaGoDir = 'next';
+  function kreaGo(n, dir) {
+    kreaGoDir = dir || 'next';
     for (var i = 1; i <= 5; i++) {
       var el = document.getElementById('ks' + i);
-      if (el) el.style.display = i === n ? 'block' : 'none';
+      if (el) el.style.display = 'none';
     }
-    window.scrollTo(0, 0);
+    var target = document.getElementById('ks' + n);
+    if (target) {
+      target.style.display = 'block';
+      target.classList.remove('krea-step-wrap', 'going-back');
+      void target.offsetWidth; // force reflow
+      target.classList.add('krea-step-wrap');
+      if (kreaGoDir === 'back') target.classList.add('going-back');
+    }
+    var modal = document.getElementById('consultModal');
+    if (modal) modal.scrollTop = 0;
   }
 
   function kreaValidateStep1() {

@@ -242,11 +242,13 @@
   function _apri() {
     if (!_modal) return;
     _modal.style.display = 'block';
+    _modal.style.opacity = '0';
     document.body.style.overflow = 'hidden';
     for (var _i = 1; _i <= 5; _i++) {
       var _s = document.getElementById('ks' + _i);
       if (_s) _s.style.display = _i === 1 ? 'block' : 'none';
     }
+    setTimeout(function() { _modal.style.opacity = '1'; }, 10);
   }
   ['openConsultForm','heroCta','fabContatti'].forEach(function(_id) {
     var _el = document.getElementById(_id);
