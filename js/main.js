@@ -165,6 +165,7 @@
       } else {
         navbar.classList.remove('navbar--scrolled');
       }
+    });
   }
 
 })();
