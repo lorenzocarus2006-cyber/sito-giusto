@@ -617,7 +617,7 @@
        FORM MULTI-STEP — MODALE POPUP CLASSICO
   ===================================================== -->
   <div id="consultModal" style="display:none; position:fixed; inset:0; background:#4A2B7F; z-index:9999; overflow-y:auto;">
-    <button onclick="document.getElementById('consultModal').style.display='none'; document.body.style.overflow='';" style="position:fixed; top:28px; right:36px; background:rgba(255,255,255,0.15); border:none; color:#fff; width:40px; height:40px; border-radius:50%; font-size:18px; cursor:pointer; z-index:10;">✕</button>
+    <button onclick="document.getElementById('consultModal').classList.remove('open'); document.body.style.overflow='';" style="position:fixed; top:28px; right:36px; background:rgba(255,255,255,0.15); border:none; color:#fff; width:40px; height:40px; border-radius:50%; font-size:18px; cursor:pointer; z-index:10;">✕</button>
 
     <div style="min-height:100vh; display:flex; align-items:center; justify-content:center; padding:80px 20px;">
       <div style="width:100%; max-width:580px;">
@@ -718,7 +718,7 @@
           <div style="width:70px; height:70px; border-radius:50%; border:2px solid rgba(255,255,255,0.4); display:flex; align-items:center; justify-content:center; font-size:32px; color:#fff; margin:0 auto 28px;">✓</div>
           <h3 style="font-family:'Cormorant Garamond',serif; font-size:56px; font-weight:300; font-style:italic; color:#fff; margin:0 0 16px;">Richiesta inviata.</h3>
           <p style="color:rgba(255,255,255,0.7); font-size:18px; line-height:1.7; max-width:400px; margin:0 auto 40px;">Vincenzo ha ricevuto i dettagli del tuo progetto e ti contatterà personalmente entro 24 ore.</p>
-          <button onclick="document.getElementById('consultModal').style.display='none'; document.body.style.overflow='';" style="background:#fff; color:#4A2B7F; border:none; padding:16px 40px; border-radius:60px; font-size:15px; font-weight:700; cursor:pointer; font-family:inherit;">Torna al sito →</button>
+          <button onclick="document.getElementById('consultModal').classList.remove('open'); document.body.style.overflow='';" style="background:#fff; color:#4A2B7F; border:none; padding:16px 40px; border-radius:60px; font-size:15px; font-weight:700; cursor:pointer; font-family:inherit;">Torna al sito →</button>
         </div>
 
       </div>
@@ -840,7 +840,7 @@
 
   document.addEventListener('keydown', function(e) {
     if (e.key === 'Escape') {
-      document.getElementById('consultModal').style.display = 'none';
+      document.getElementById('consultModal').classList.remove('open');
       document.body.style.overflow = '';
     }
   });

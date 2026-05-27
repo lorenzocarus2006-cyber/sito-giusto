@@ -830,21 +830,17 @@ p {
 /* Modale Overlay */
 #consultModal,
 .modal-overlay {
-  display: none !important;
-  position: fixed !important;
-  inset: 0 !important;
-  background: rgba(20, 10, 40, 0.75) !important;
-  backdrop-filter: blur(8px) !important;
-  -webkit-backdrop-filter: blur(8px) !important;
-  z-index: 9999 !important;
-  align-items: center !important;
-  justify-content: center !important;
-  padding: 20px !important;
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: #4A2B7F;
+  z-index: 9999;
+  overflow-y: auto;
 }
 
 #consultModal.open,
 .modal-overlay.open {
-  display: flex !important;
+  display: block;
 }
 
 /* Card */

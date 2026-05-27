@@ -241,14 +241,12 @@
   var _modal = document.getElementById('consultModal');
   function _apri() {
     if (!_modal) return;
-    _modal.style.display = 'block';
-    _modal.style.opacity = '0';
+    _modal.classList.add('open');
     document.body.style.overflow = 'hidden';
     for (var _i = 1; _i <= 5; _i++) {
       var _s = document.getElementById('ks' + _i);
       if (_s) _s.style.display = _i === 1 ? 'block' : 'none';
     }
-    setTimeout(function() { _modal.style.opacity = '1'; }, 10);
   }
   ['openConsultForm','heroCta','fabContatti'].forEach(function(_id) {
     var _el = document.getElementById(_id);
@@ -258,7 +256,7 @@
     _el.addEventListener('click', function(_e) { _e.preventDefault(); _apri(); });
   });
   document.addEventListener('keydown', function(_e) {
-    if (_e.key === 'Escape' && _modal) { _modal.style.display = 'none'; document.body.style.overflow = ''; }
+    if (_e.key === 'Escape' && _modal) { _modal.classList.remove('open'); document.body.style.overflow = ''; }
   });
 
 })();
