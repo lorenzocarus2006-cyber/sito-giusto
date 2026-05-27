@@ -169,75 +169,87 @@
   /* ─────────────────────────────────────────────
      6. FORM MULTI-STEP CONSULENZA
   ───────────────────────────────────────────── */
-  const modal        = document.getElementById('consultModal');
-  const openBtn      = document.getElementById('openConsultForm');
-  const fabBtn       = document.getElementById('fabContatti');
-  const closeBtn     = document.getElementById('closeModal');
-  const form         = document.getElementById('consultForm');
+  var modal = document.getElementById('consultModal');
+  var form  = document.getElementById('consultForm');
 
   if (modal && form) {
-    const steps        = form.querySelectorAll('.form-step');
-    const btnBack      = document.getElementById('btnBack');
-    const btnNext      = document.getElementById('btnNext');
-    const btnSubmit    = document.getElementById('btnSubmit');
-    const progressBar  = document.getElementById('progressBar');
-    const stepLabel    = document.getElementById('stepLabel');
-    const modalNav     = document.getElementById('modalNav');
-
-    const TOTAL_STEPS = 4;
-    let currentStep = 1;
-    const formData = {};
-
-    function openModal(e) {
-      if (e) e.preventDefault();
-      modal.classList.add('open');
-      modal.setAttribute('aria-hidden', 'false');
+    // Apri modale
+    function openConsultModal() {
+      modal.style.display = 'flex';
       document.body.style.overflow = 'hidden';
       // Focus trap o primo input
-      const firstInput = form.querySelector('input');
-      if (firstInput) setTimeout(() => firstInput.focus(), 100);
+      var firstInput = form.querySelector('input');
+      if (firstInput) setTimeout(function() { firstInput.focus(); }, 100);
     }
 
-    function closeModal() {
-      modal.classList.remove('open');
-      modal.setAttribute('aria-hidden', 'true');
+    // Chiudi modale  
+    function closeConsultModal() {
+      modal.style.display = 'none';
       document.body.style.overflow = '';
     }
 
-    if (openBtn) openBtn.addEventListener('click', openModal);
+    // Bottone principale "Prenota consulenza" nella sezione contatti
+    var openBtn = document.getElementById('openConsultForm');
+    if (openBtn) openBtn.addEventListener('click', openConsultModal);
+
+    // Bottone "PRENOTA CONSULENZA" nella navbar
+    var navBtn = document.querySelector('.btn-prenota-nav, .navbar .btn-primary, nav .cta-button');
+    if (navBtn) navBtn.addEventListener('click', function(e) {
+      e.preventDefault();
+      openConsultModal();
+    });
+
+    // Chiudi cliccando fuori dalla card
+    modal.addEventListener('click', function(e) {
+      if (e.target === this) closeConsultModal();
+    });
+
+    // Chiudi con ESC
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') closeConsultModal();
+    });
+
+    // Bottone X di chiusura dentro il modale
+    var closeBtn = document.getElementById('closeModal');
+    if (closeBtn) closeBtn.addEventListener('click', closeConsultModal);
+
+    // Gestione del FAB (se presente sulla pagina)
+    var fabBtn = document.getElementById('fabContatti');
     if (fabBtn) {
-      fabBtn.addEventListener('click', (e) => {
-        // Se siamo sulla homepage apriamo la modale, altrimenti se ha un href (tipo su altre pagine) segue il link
-        const href = fabBtn.getAttribute('href');
+      fabBtn.addEventListener('click', function(e) {
+        var href = fabBtn.getAttribute('href');
         if (href === '#' || !href) {
-          openModal(e);
+          e.preventDefault();
+          openConsultModal();
         }
       });
     }
 
-    if (closeBtn) closeBtn.addEventListener('click', closeModal);
-    modal.addEventListener('click', (e) => {
-      if (e.target === modal) closeModal();
-    });
+    // --- LOGICA MULTI-STEP ---
+    var steps        = form.querySelectorAll('.form-step');
+    var btnBack      = document.getElementById('btnBack');
+    var btnNext      = document.getElementById('btnNext');
+    var btnSubmit    = document.getElementById('btnSubmit');
+    var progressBar  = document.getElementById('progressBar');
+    var stepLabel    = document.getElementById('stepLabel');
+    var modalNav     = document.getElementById('modalNav');
 
-    // ESC per chiudere
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape' && modal.classList.contains('open')) closeModal();
-    });
+    var TOTAL_STEPS = 4;
+    var currentStep = 1;
+    var formData = {};
 
-    // Aggiorna UI step
     function updateStepUI() {
-      steps.forEach(s => s.classList.remove('active'));
-      const current = form.querySelector(`[data-step="${currentStep}"]`);
+      steps.forEach(function(s) { s.classList.remove('active'); });
+      var current = form.querySelector('[data-step="' + currentStep + '"]');
       if (current) current.classList.add('active');
 
       // Progress bar
-      const pct = (currentStep / TOTAL_STEPS) * 100;
+      var pct = (currentStep / TOTAL_STEPS) * 100;
       if (progressBar) progressBar.style.width = pct + '%';
 
       // Label
       if (stepLabel && currentStep <= TOTAL_STEPS) {
-        stepLabel.textContent = `Passo ${currentStep} di ${TOTAL_STEPS}`;
+        stepLabel.textContent = 'Passo ' + currentStep + ' di ' + TOTAL_STEPS;
       }
 
       // Bottoni navigazione
@@ -261,7 +273,7 @@
 
     // Navigazione Avanti
     if (btnNext) {
-      btnNext.addEventListener('click', () => {
+      btnNext.addEventListener('click', function() {
         if (validateStep(currentStep)) {
           currentStep++;
           updateStepUI();
@@ -271,7 +283,7 @@
 
     // Navigazione Indietro
     if (btnBack) {
-      btnBack.addEventListener('click', () => {
+      btnBack.addEventListener('click', function() {
         if (currentStep > 1) {
           currentStep--;
           updateStepUI();
@@ -279,20 +291,20 @@
       });
     }
 
-    // Validazione base dei campi dello step
+    // Validazione base
     function validateStep(step) {
       if (step === 1) {
-        const nome  = form.querySelector('#f-nome').value.trim();
-        const email = form.querySelector('#f-email').value.trim();
-        const tel   = form.querySelector('#f-tel').value.trim();
+        var nome  = form.querySelector('#f-nome').value.trim();
+        var email = form.querySelector('#f-email').value.trim();
+        var tel   = form.querySelector('#f-tel').value.trim();
         if (!nome || !email || !tel) {
           alert('Compila tutti i campi per continuare.');
           return false;
         }
       }
       if (step === 2) {
-        const tipoAttivita = formData['tipo_attivita'];
-        const fase = formData['fase'];
+        var tipoAttivita = formData['tipo_attivita'];
+        var fase = formData['fase'];
         if (!tipoAttivita || !fase) {
           alert('Seleziona il tipo di attività e la fase del progetto.');
           return false;
@@ -301,43 +313,41 @@
       return true;
     }
 
-    // Gestione Pill Selection (Scelta singola)
-    form.querySelectorAll('.option-pills:not(.multi)').forEach(group => {
-      group.querySelectorAll('.pill').forEach(pill => {
-        pill.addEventListener('click', () => {
-          group.querySelectorAll('.pill').forEach(p => p.classList.remove('selected'));
+    // Option Pills (singola)
+    form.querySelectorAll('.option-pills:not(.multi)').forEach(function(group) {
+      group.querySelectorAll('.pill').forEach(function(pill) {
+        pill.addEventListener('click', function() {
+          group.querySelectorAll('.pill').forEach(function(p) { p.classList.remove('selected'); });
           pill.classList.add('selected');
           formData[group.getAttribute('data-field')] = pill.getAttribute('data-value');
         });
       });
     });
 
-    // Gestione Pill Selection (Scelta multipla)
-    form.querySelectorAll('.option-pills.multi').forEach(group => {
-      group.querySelectorAll('.pill').forEach(pill => {
-        pill.addEventListener('click', () => {
+    // Option Pills (multipla)
+    form.querySelectorAll('.option-pills.multi').forEach(function(group) {
+      group.querySelectorAll('.pill').forEach(function(pill) {
+        pill.addEventListener('click', function() {
           pill.classList.toggle('selected');
-          const selected = Array.from(group.querySelectorAll('.pill.selected')).map(p => p.getAttribute('data-value'));
+          var selected = Array.from(group.querySelectorAll('.pill.selected')).map(function(p) {
+            return p.getAttribute('data-value');
+          });
           formData[group.getAttribute('data-field')] = selected;
         });
       });
     });
 
-    // Submit del form
-    form.addEventListener('submit', (e) => {
+    // Submit
+    form.addEventListener('submit', function(e) {
       e.preventDefault();
-
-      // Raccogli dati finali dai campi di testo
       formData['nome']     = form.querySelector('#f-nome').value.trim();
       formData['email']    = form.querySelector('#f-email').value.trim();
       formData['telefono'] = form.querySelector('#f-tel').value.trim();
       formData['note']     = form.querySelector('#f-note').value.trim();
       formData['data']     = new Date().toLocaleString('it-IT');
 
-      // Console log per simulare invio dati
       console.log('Richiesta consulenza ricevuta:', formData);
 
-      // Mostra schermata successo
       currentStep = 5;
       updateStepUI();
     });

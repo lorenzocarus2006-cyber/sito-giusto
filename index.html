@@ -18,6 +18,53 @@
   <!-- Styles -->
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="css/animations.css">
+  <!-- Local overrides for Contact Section & Modal visibility -->
+  <style>
+    #contatti, .contact-section {
+      background: #4A2B7F !important;
+      padding: 120px 5vw 100px !important;
+      text-align: center !important;
+    }
+    #contatti h2, .contact-section h2, .contact-headline {
+      font-family: 'Cormorant Garamond', serif !important;
+      font-size: clamp(64px, 10vw, 120px) !important;
+      font-weight: 300 !important;
+      font-style: italic !important;
+      color: #ffffff !important;
+      margin-bottom: 24px !important;
+      line-height: 1 !important;
+    }
+    #contatti p, .contact-section p, .contact-sub {
+      color: rgba(255,255,255,0.7) !important;
+      font-size: 18px !important;
+      max-width: 480px !important;
+      margin: 0 auto 40px !important;
+      line-height: 1.7 !important;
+    }
+    #openConsultForm, .btn-prenota {
+      display: inline-flex !important;
+      align-items: center !important;
+      gap: 10px !important;
+      background: #ffffff !important;
+      color: #4A2B7F !important;
+      font-size: 16px !important;
+      font-weight: 600 !important;
+      padding: 18px 40px !important;
+      border: none !important;
+      border-radius: 60px !important;
+      cursor: pointer !important;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.2) !important;
+    }
+    .contact-details, #contatti .details {
+      margin-top: 48px !important;
+      color: rgba(255,255,255,0.4) !important;
+      font-size: 14px !important;
+    }
+    .contact-details a, #contatti .details a {
+      color: rgba(255,255,255,0.4) !important;
+      text-decoration: none !important;
+    }
+  </style>
 </head>
 <body>
 
@@ -569,8 +616,8 @@
   <!-- =====================================================
        FORM MULTI-STEP — MODALE OVERLAY
   ===================================================== -->
-  <div class="modal-overlay" id="consultModal" aria-hidden="true">
-    <div class="modal-card" role="dialog" aria-modal="true" aria-label="Prenota una consulenza">
+  <div id="consultModal" style="display:none; position:fixed; inset:0; background:rgba(20,10,40,0.75); z-index:9999; align-items:center; justify-content:center; padding:20px;">
+    <div style="background:#fff; border-radius:20px; width:100%; max-width:560px; max-height:90vh; overflow-y:auto; padding:32px;">
 
       <!-- Header modale -->
       <div class="modal-header">
