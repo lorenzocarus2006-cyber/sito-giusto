@@ -464,36 +464,31 @@
 
 
   <!-- =====================================================
-       SEZIONE 5 — CTA FINALE (CONTATTI)
+       SEZIONE 5 — CONTATTI (PARLIAMOCI)
   ===================================================== -->
-  <section class="section cta-final-section" id="contatti">
-    <div class="container">
-      <div class="cta-final-inner reveal-up">
-        <h2 class="cta-final-title">Parliamoci.</h2>
-        <p class="cta-final-sub">Consulenza gratuita, senza impegno. Raccontaci il tuo progetto HoReCa o la tua idea di locale e ti guideremo passo dopo passo.</p>
-        
-        <div class="cta-final-btns">
-          <!-- WhatsApp Link -->
-          <a href="https://wa.me/39091123456" class="btn btn--primary cta-btn-white" target="_blank" rel="noopener" aria-label="Scrivici su WhatsApp">
-            <!-- Minimal SVG WhatsApp Icon -->
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12.012 2c-5.506 0-9.988 4.47-9.988 9.951 0 1.758.459 3.407 1.259 4.848l-1.283 4.693 4.82-1.254c1.397.755 2.99 1.188 4.68 1.188 5.507 0 9.991-4.473 9.991-9.954C22.003 6.47 17.52 2 12.012 2zm5.793 14.195c-.247.69-1.218 1.25-1.685 1.32-.429.066-.991.1-2.923-.655-2.47-1.026-4.048-3.52-4.17-3.68-.124-.165-.98-1.298-.98-2.48 0-1.182.62-1.76.845-2.003.226-.242.493-.303.66-.303.165 0 .328.005.47.01.147.006.347-.057.545.414.2.484.685 1.65.742 1.765.058.115.099.248.02.399-.077.155-.119.248-.239.387-.12.14-.249.313-.357.42-.119.117-.245.244-.105.48.14.234.62 1.011 1.33 1.637.915.807 1.684 1.059 1.92 1.178.236.118.375.1.514-.06.14-.16.6-1.002.76-1.344.16-.342.32-.284.54-.202.22.083 1.401.656 1.639.773.24.117.399.176.458.277.06.1.06.58-.187 1.27z"/></svg>
-            Scrivici su WhatsApp
-          </a>
+  <section class="contact-section" id="contatti">
+    <div class="contact-inner reveal-up">
 
-          <!-- Telefono Call Link -->
-          <a href="#" class="btn btn--outline cta-btn-outline-white" aria-label="Prenota una chiamata">
-            Prenota una chiamata
-          </a>
-        </div>
+      <p class="contact-label">Consulenza gratuita</p>
+      <h2 class="contact-headline">Parliamoci.</h2>
+      <p class="contact-sub">
+        Raccontaci il tuo progetto HoReCa.<br>
+        Vincenzo ti risponde personalmente entro 24 ore.
+      </p>
 
-        <div class="cta-final-info">
-          <span>Palermo, Sicilia</span>
-          <span aria-hidden="true">&bull;</span>
-          <a href="tel:+39091123456">+39 091 123 456</a>
-          <span aria-hidden="true">&bull;</span>
-          <a href="mailto:info@kreaglobalcontract.it">info@kreaglobalcontract.it</a>
-        </div>
+      <button class="btn-prenota" id="openConsultForm" aria-label="Prenota una consulenza gratuita">
+        Prenota una consulenza gratuita
+        <span class="btn-arrow">→</span>
+      </button>
+
+      <div class="contact-details">
+        <span>Palermo, Sicilia</span>
+        <span class="dot">·</span>
+        <a href="tel:+39091123456">+39 091 123 456</a>
+        <span class="dot">·</span>
+        <a href="mailto:info@kreaglobalcontract.it">info@kreaglobalcontract.it</a>
       </div>
+
     </div>
   </section>
 
@@ -563,12 +558,161 @@
 
 
   <!-- =====================================================
-       FAB CONTATTI (WHATSAPP ACCESSIBILE)
+       FAB CONTATTI (MODALE ACCESSIBILE)
   ===================================================== -->
-  <a href="https://wa.me/39091123456" class="fab-contact" target="_blank" rel="noopener" aria-label="Scrivici su WhatsApp">
-    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12.012 2c-5.506 0-9.988 4.47-9.988 9.951 0 1.758.459 3.407 1.259 4.848l-1.283 4.693 4.82-1.254c1.397.755 2.99 1.188 4.68 1.188 5.507 0 9.991-4.473 9.991-9.954C22.003 6.47 17.52 2 12.012 2zm5.793 14.195c-.247.69-1.218 1.25-1.685 1.32-.429.066-.991.1-2.923-.655-2.47-1.026-4.048-3.52-4.17-3.68-.124-.165-.98-1.298-.98-2.48 0-1.182.62-1.76.845-2.003.226-.242.493-.303.66-.303.165 0 .328.005.47.01.147.006.347-.057.545.414.2.484.685 1.65.742 1.765.058.115.099.248.02.399-.077.155-.119.248-.239.387-.12.14-.249.313-.357.42-.119.117-.245.244-.105.48.14.234.62 1.011 1.33 1.637.915.807 1.684 1.059 1.92 1.178.236.118.375.1.514-.06.14-.16.6-1.002.76-1.344.16-.342.32-.284.54-.202.22.083 1.401.656 1.639.773.24.117.399.176.458.277.06.1.06.58-.187 1.27z"/></svg>
+  <a href="#" class="fab-contact" id="fabContatti" aria-label="Prenota una consulenza">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
     <span>Contattaci</span>
   </a>
+
+
+  <!-- =====================================================
+       FORM MULTI-STEP — MODALE OVERLAY
+  ===================================================== -->
+  <div class="modal-overlay" id="consultModal" aria-hidden="true">
+    <div class="modal-card" role="dialog" aria-modal="true" aria-label="Prenota una consulenza">
+
+      <!-- Header modale -->
+      <div class="modal-header">
+        <div class="modal-progress">
+          <div class="progress-bar" id="progressBar"></div>
+        </div>
+        <span class="modal-step-label" id="stepLabel">Passo 1 di 4</span>
+        <button class="modal-close" id="closeModal" aria-label="Chiudi">✕</button>
+      </div>
+
+      <!-- Form wrapper -->
+      <form class="modal-form" id="consultForm" novalidate>
+
+        <!-- STEP 1: Chi sei -->
+        <div class="form-step active" data-step="1">
+          <h3 class="step-title">Chi sei?</h3>
+          <p class="step-sub">Iniziamo con i tuoi dati di contatto.</p>
+
+          <div class="field-group">
+            <label for="f-nome">Nome e cognome *</label>
+            <input type="text" id="f-nome" name="nome" placeholder="Es. Mario Rossi" required>
+          </div>
+          <div class="field-group">
+            <label for="f-email">Email *</label>
+            <input type="email" id="f-email" name="email" placeholder="mario@iltuoristorante.it" required>
+          </div>
+          <div class="field-group">
+            <label for="f-tel">Telefono *</label>
+            <input type="tel" id="f-tel" name="telefono" placeholder="+39 320 000 0000" required>
+          </div>
+        </div>
+
+        <!-- STEP 2: Il tuo progetto -->
+        <div class="form-step" data-step="2">
+          <h3 class="step-title">Il tuo progetto</h3>
+          <p class="step-sub">Raccontaci cosa stai aprendo o ristrutturando.</p>
+
+          <div class="field-group">
+            <label>Tipo di attività *</label>
+            <div class="option-pills" data-field="tipo_attivita">
+              <button type="button" class="pill" data-value="ristorante">Ristorante</button>
+              <button type="button" class="pill" data-value="bar_caffetteria">Bar / Caffetteria</button>
+              <button type="button" class="pill" data-value="hotel">Hotel</button>
+              <button type="button" class="pill" data-value="catering">Catering</button>
+              <button type="button" class="pill" data-value="pizzeria">Pizzeria</button>
+              <button type="button" class="pill" data-value="altro">Altro</button>
+            </div>
+          </div>
+
+          <div class="field-group">
+            <label>Fase del progetto *</label>
+            <div class="option-pills" data-field="fase">
+              <button type="button" class="pill" data-value="nuova_apertura">Nuova apertura</button>
+              <button type="button" class="pill" data-value="ristrutturazione">Ristrutturazione</button>
+              <button type="button" class="pill" data-value="sostituzione">Sostituzione attrezzature</button>
+              <button type="button" class="pill" data-value="espansione">Espansione locale</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- STEP 3: Le esigenze -->
+        <div class="form-step" data-step="3">
+          <h3 class="step-title">Cosa ti serve?</h3>
+          <p class="step-sub">Seleziona le categorie di attrezzatura (anche più di una).</p>
+
+          <div class="field-group">
+            <label>Categorie di interesse *</label>
+            <div class="option-pills multi" data-field="categorie">
+              <button type="button" class="pill" data-value="cottura">Cottura</button>
+              <button type="button" class="pill" data-value="refrigerazione">Refrigerazione</button>
+              <button type="button" class="pill" data-value="preparazione">Preparazione</button>
+              <button type="button" class="pill" data-value="lavaggio">Lavaggio</button>
+              <button type="button" class="pill" data-value="servizio">Servizio</button>
+              <button type="button" class="pill" data-value="non_so">Non so ancora — ho bisogno di guida</button>
+            </div>
+          </div>
+
+          <div class="field-group">
+            <label>Budget indicativo</label>
+            <div class="option-pills" data-field="budget">
+              <button type="button" class="pill" data-value="sotto_5k">Sotto €5.000</button>
+              <button type="button" class="pill" data-value="5_15k">€5.000 – €15.000</button>
+              <button type="button" class="pill" data-value="15_50k">€15.000 – €50.000</button>
+              <button type="button" class="pill" data-value="oltre_50k">Oltre €50.000</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- STEP 4: Quando -->
+        <div class="form-step" data-step="4">
+          <h3 class="step-title">Quando parliamo?</h3>
+          <p class="step-sub">Scegli la tua disponibilità per la chiamata con Vincenzo.</p>
+
+          <div class="field-group">
+            <label>Orario preferito</label>
+            <div class="option-pills" data-field="orario">
+              <button type="button" class="pill" data-value="mattina">Mattina (9–13)</button>
+              <button type="button" class="pill" data-value="pomeriggio">Pomeriggio (14–18)</button>
+              <button type="button" class="pill" data-value="indifferente">Indifferente</button>
+            </div>
+          </div>
+
+          <div class="field-group">
+            <label>Urgenza del progetto</label>
+            <div class="option-pills" data-field="urgenza">
+              <button type="button" class="pill" data-value="entro_3_mesi">Apro entro 3 mesi</button>
+              <button type="button" class="pill" data-value="entro_6_mesi">Entro 6 mesi</button>
+              <button type="button" class="pill" data-value="esplorando">Sto ancora esplorando</button>
+            </div>
+          </div>
+
+          <div class="field-group">
+            <label for="f-note">Note libere (facoltativo)</label>
+            <textarea id="f-note" name="note" rows="3" placeholder="Dimensioni cucina, numero coperti, situazione specifica…"></textarea>
+          </div>
+        </div>
+
+        <!-- STEP 5: Conferma (non è uno step numerato, è lo stato finale) -->
+        <div class="form-step success-step" data-step="5">
+          <div class="success-icon">✓</div>
+          <h3 class="step-title">Richiesta inviata.</h3>
+          <p class="step-sub">
+            Vincenzo riceverà tutti i dettagli del tuo progetto e ti contatterà
+            personalmente entro 24 ore al numero che hai indicato.
+          </p>
+          <p class="step-sub" style="margin-top: 8px; font-size: 14px; opacity: 0.6;">
+            Controlla anche la tua email — ti invieremo un riepilogo della richiesta.
+          </p>
+        </div>
+
+        <!-- Footer navigazione -->
+        <div class="modal-nav" id="modalNav">
+          <button type="button" class="btn-back" id="btnBack">← Indietro</button>
+          <button type="button" class="btn-next" id="btnNext">Continua →</button>
+          <button type="submit" class="btn-submit" id="btnSubmit" style="display:none">
+            Invia la richiesta →
+          </button>
+        </div>
+
+      </form>
+    </div>
+  </div>
 
 
   <!-- =====================================================

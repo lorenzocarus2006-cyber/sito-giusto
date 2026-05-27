@@ -166,6 +166,185 @@
         navbar.classList.remove('navbar--scrolled');
       }
     }, { passive: true });
+  /* ─────────────────────────────────────────────
+     6. FORM MULTI-STEP CONSULENZA
+  ───────────────────────────────────────────── */
+  const modal        = document.getElementById('consultModal');
+  const openBtn      = document.getElementById('openConsultForm');
+  const fabBtn       = document.getElementById('fabContatti');
+  const closeBtn     = document.getElementById('closeModal');
+  const form         = document.getElementById('consultForm');
+
+  if (modal && form) {
+    const steps        = form.querySelectorAll('.form-step');
+    const btnBack      = document.getElementById('btnBack');
+    const btnNext      = document.getElementById('btnNext');
+    const btnSubmit    = document.getElementById('btnSubmit');
+    const progressBar  = document.getElementById('progressBar');
+    const stepLabel    = document.getElementById('stepLabel');
+    const modalNav     = document.getElementById('modalNav');
+
+    const TOTAL_STEPS = 4;
+    let currentStep = 1;
+    const formData = {};
+
+    function openModal(e) {
+      if (e) e.preventDefault();
+      modal.classList.add('open');
+      modal.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+      // Focus trap o primo input
+      const firstInput = form.querySelector('input');
+      if (firstInput) setTimeout(() => firstInput.focus(), 100);
+    }
+
+    function closeModal() {
+      modal.classList.remove('open');
+      modal.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+    }
+
+    if (openBtn) openBtn.addEventListener('click', openModal);
+    if (fabBtn) {
+      fabBtn.addEventListener('click', (e) => {
+        // Se siamo sulla homepage apriamo la modale, altrimenti se ha un href (tipo su altre pagine) segue il link
+        const href = fabBtn.getAttribute('href');
+        if (href === '#' || !href) {
+          openModal(e);
+        }
+      });
+    }
+
+    if (closeBtn) closeBtn.addEventListener('click', closeModal);
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) closeModal();
+    });
+
+    // ESC per chiudere
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && modal.classList.contains('open')) closeModal();
+    });
+
+    // Aggiorna UI step
+    function updateStepUI() {
+      steps.forEach(s => s.classList.remove('active'));
+      const current = form.querySelector(`[data-step="${currentStep}"]`);
+      if (current) current.classList.add('active');
+
+      // Progress bar
+      const pct = (currentStep / TOTAL_STEPS) * 100;
+      if (progressBar) progressBar.style.width = pct + '%';
+
+      // Label
+      if (stepLabel && currentStep <= TOTAL_STEPS) {
+        stepLabel.textContent = `Passo ${currentStep} di ${TOTAL_STEPS}`;
+      }
+
+      // Bottoni navigazione
+      if (btnBack) btnBack.classList.toggle('hidden', currentStep === 1);
+      
+      if (currentStep === TOTAL_STEPS) {
+        if (btnNext) btnNext.style.display = 'none';
+        if (btnSubmit) btnSubmit.style.display = 'inline-flex';
+      } else {
+        if (btnNext) btnNext.style.display = 'inline-flex';
+        if (btnSubmit) btnSubmit.style.display = 'none';
+      }
+
+      // Nascondi barra navigazione sullo step di successo/conferma
+      if (currentStep === 5) {
+        if (modalNav) modalNav.style.display = 'none';
+        if (stepLabel) stepLabel.textContent = '';
+        if (progressBar) progressBar.style.width = '100%';
+      }
+    }
+
+    // Navigazione Avanti
+    if (btnNext) {
+      btnNext.addEventListener('click', () => {
+        if (validateStep(currentStep)) {
+          currentStep++;
+          updateStepUI();
+        }
+      });
+    }
+
+    // Navigazione Indietro
+    if (btnBack) {
+      btnBack.addEventListener('click', () => {
+        if (currentStep > 1) {
+          currentStep--;
+          updateStepUI();
+        }
+      });
+    }
+
+    // Validazione base dei campi dello step
+    function validateStep(step) {
+      if (step === 1) {
+        const nome  = form.querySelector('#f-nome').value.trim();
+        const email = form.querySelector('#f-email').value.trim();
+        const tel   = form.querySelector('#f-tel').value.trim();
+        if (!nome || !email || !tel) {
+          alert('Compila tutti i campi per continuare.');
+          return false;
+        }
+      }
+      if (step === 2) {
+        const tipoAttivita = formData['tipo_attivita'];
+        const fase = formData['fase'];
+        if (!tipoAttivita || !fase) {
+          alert('Seleziona il tipo di attività e la fase del progetto.');
+          return false;
+        }
+      }
+      return true;
+    }
+
+    // Gestione Pill Selection (Scelta singola)
+    form.querySelectorAll('.option-pills:not(.multi)').forEach(group => {
+      group.querySelectorAll('.pill').forEach(pill => {
+        pill.addEventListener('click', () => {
+          group.querySelectorAll('.pill').forEach(p => p.classList.remove('selected'));
+          pill.classList.add('selected');
+          formData[group.getAttribute('data-field')] = pill.getAttribute('data-value');
+        });
+      });
+    });
+
+    // Gestione Pill Selection (Scelta multipla)
+    form.querySelectorAll('.option-pills.multi').forEach(group => {
+      group.querySelectorAll('.pill').forEach(pill => {
+        pill.addEventListener('click', () => {
+          pill.classList.toggle('selected');
+          const selected = Array.from(group.querySelectorAll('.pill.selected')).map(p => p.getAttribute('data-value'));
+          formData[group.getAttribute('data-field')] = selected;
+        });
+      });
+    });
+
+    // Submit del form
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+
+      // Raccogli dati finali dai campi di testo
+      formData['nome']     = form.querySelector('#f-nome').value.trim();
+      formData['email']    = form.querySelector('#f-email').value.trim();
+      formData['telefono'] = form.querySelector('#f-tel').value.trim();
+      formData['note']     = form.querySelector('#f-note').value.trim();
+      formData['data']     = new Date().toLocaleString('it-IT');
+
+      // Console log per simulare invio dati
+      console.log('Richiesta consulenza ricevuta:', formData);
+
+      // Mostra schermata successo
+      currentStep = 5;
+      updateStepUI();
+    });
+
+    // Inizializza UI
+    updateStepUI();
   }
 
 })();
+
