@@ -614,607 +614,224 @@
 
 
   <!-- =====================================================
-       FORM FULLSCREEN KREA (TYPEFORM STYLE)
+       FORM MULTI-STEP — MODALE POPUP CLASSICO
   ===================================================== -->
-  <div id="consultModal">
+  <div id="consultModal" style="display:none; position:fixed; inset:0; background:#4A2B7F; z-index:9999; overflow-y:auto;">
+    <button onclick="document.getElementById('consultModal').style.display='none'; document.body.style.overflow='';" style="position:fixed; top:28px; right:36px; background:rgba(255,255,255,0.15); border:none; color:#fff; width:40px; height:40px; border-radius:50%; font-size:18px; cursor:pointer; z-index:10;">✕</button>
 
-    <!-- Close -->
-    <button class="krea-close-btn" onclick="closeConsultModal()" aria-label="Chiudi">✕</button>
+    <div style="min-height:100vh; display:flex; align-items:center; justify-content:center; padding:80px 20px;">
+      <div style="width:100%; max-width:580px;">
 
-    <!-- Progress dots -->
-    <div class="krea-dots">
-      <div class="krea-dot active" id="dot-1"></div>
-      <div class="krea-dot" id="dot-2"></div>
-      <div class="krea-dot" id="dot-3"></div>
-      <div class="krea-dot" id="dot-4"></div>
-    </div>
+        <!-- Step 1 -->
+        <div id="ks1" style="display:block;">
+          <p style="font-size:11px; letter-spacing:0.2em; text-transform:uppercase; color:rgba(255,255,255,0.5); margin-bottom:16px;">Passo 1 di 4</p>
+          <h3 style="font-family:'Cormorant Garamond',serif; font-size:56px; font-weight:300; font-style:italic; color:#fff; margin:0 0 10px;">Chi sei?</h3>
+          <p style="color:rgba(255,255,255,0.6); font-size:17px; margin-bottom:36px;">Iniziamo con i tuoi dati di contatto.</p>
+          <div style="margin-bottom:16px;"><label style="display:block; font-size:11px; font-weight:600; letter-spacing:0.12em; text-transform:uppercase; color:rgba(255,255,255,0.6); margin-bottom:8px;">Nome e cognome *</label><input id="k-nome" type="text" placeholder="Es. Mario Rossi" style="width:100%; padding:15px 18px; background:rgba(255,255,255,0.1); border:1.5px solid rgba(255,255,255,0.25); border-radius:10px; font-size:16px; color:#fff; box-sizing:border-box; outline:none; font-family:inherit;"></div>
+          <div style="margin-bottom:16px;"><label style="display:block; font-size:11px; font-weight:600; letter-spacing:0.12em; text-transform:uppercase; color:rgba(255,255,255,0.6); margin-bottom:8px;">Email *</label><input id="k-email" type="email" placeholder="mario@iltuoristorante.it" style="width:100%; padding:15px 18px; background:rgba(255,255,255,0.1); border:1.5px solid rgba(255,255,255,0.25); border-radius:10px; font-size:16px; color:#fff; box-sizing:border-box; outline:none; font-family:inherit;"></div>
+          <div style="margin-bottom:16px;"><label style="display:block; font-size:11px; font-weight:600; letter-spacing:0.12em; text-transform:uppercase; color:rgba(255,255,255,0.6); margin-bottom:8px;">Telefono *</label><input id="k-tel" type="tel" placeholder="+39 320 000 0000" style="width:100%; padding:15px 18px; background:rgba(255,255,255,0.1); border:1.5px solid rgba(255,255,255,0.25); border-radius:10px; font-size:16px; color:#fff; box-sizing:border-box; outline:none; font-family:inherit;"></div>
+          <div style="margin-top:36px; text-align:right;">
+            <button onclick="kreaValidateStep1()" style="background:#fff; color:#4A2B7F; border:none; padding:16px 40px; border-radius:60px; font-size:15px; font-weight:700; cursor:pointer; font-family:inherit;">Continua →</button>
+          </div>
+        </div>
 
-    <!-- Steps wrapper -->
-    <div class="krea-form-wrap">
+        <!-- Step 2 -->
+        <div id="ks2" style="display:none;">
+          <p style="font-size:11px; letter-spacing:0.2em; text-transform:uppercase; color:rgba(255,255,255,0.5); margin-bottom:16px;">Passo 2 di 4</p>
+          <h3 style="font-family:'Cormorant Garamond',serif; font-size:56px; font-weight:300; font-style:italic; color:#fff; margin:0 0 10px;">Il tuo progetto</h3>
+          <p style="color:rgba(255,255,255,0.6); font-size:17px; margin-bottom:36px;">Cosa stai aprendo o ristrutturando?</p>
+          <p style="font-size:11px; font-weight:600; letter-spacing:0.12em; text-transform:uppercase; color:rgba(255,255,255,0.6); margin-bottom:10px;">Tipo di attività *</p>
+          <div style="display:flex; flex-wrap:wrap; gap:10px; margin-bottom:28px;" id="pills-tipo">
+            <button type="button" class="kpill" data-group="tipo" data-value="ristorante" onclick="kreaSelectPill(this,'tipo')">Ristorante</button>
+            <button type="button" class="kpill" data-group="tipo" data-value="bar" onclick="kreaSelectPill(this,'tipo')">Bar / Caffetteria</button>
+            <button type="button" class="kpill" data-group="tipo" data-value="hotel" onclick="kreaSelectPill(this,'tipo')">Hotel</button>
+            <button type="button" class="kpill" data-group="tipo" data-value="catering" onclick="kreaSelectPill(this,'tipo')">Catering</button>
+            <button type="button" class="kpill" data-group="tipo" data-value="pizzeria" onclick="kreaSelectPill(this,'tipo')">Pizzeria</button>
+            <button type="button" class="kpill" data-group="tipo" data-value="altro" onclick="kreaSelectPill(this,'tipo')">Altro</button>
+          </div>
+          <p style="font-size:11px; font-weight:600; letter-spacing:0.12em; text-transform:uppercase; color:rgba(255,255,255,0.6); margin-bottom:10px;">Fase del progetto *</p>
+          <div style="display:flex; flex-wrap:wrap; gap:10px; margin-bottom:28px;" id="pills-fase">
+            <button type="button" class="kpill" data-group="fase" data-value="nuova" onclick="kreaSelectPill(this,'fase')">Nuova apertura</button>
+            <button type="button" class="kpill" data-group="fase" data-value="ristrutturazione" onclick="kreaSelectPill(this,'fase')">Ristrutturazione</button>
+            <button type="button" class="kpill" data-group="fase" data-value="sostituzione" onclick="kreaSelectPill(this,'fase')">Sostituzione attrezzature</button>
+            <button type="button" class="kpill" data-group="fase" data-value="espansione" onclick="kreaSelectPill(this,'fase')">Espansione locale</button>
+          </div>
+          <div style="margin-top:36px; display:flex; justify-content:space-between;">
+            <button onclick="kreaGo(1)" style="background:none; border:none; color:rgba(255,255,255,0.5); font-size:15px; cursor:pointer; font-family:inherit;">← Indietro</button>
+            <button onclick="kreaGo(3)" style="background:#fff; color:#4A2B7F; border:none; padding:16px 40px; border-radius:60px; font-size:15px; font-weight:700; cursor:pointer; font-family:inherit;">Continua →</button>
+          </div>
+        </div>
 
-      <!-- STEP 1 -->
-      <div id="krea-step-1" class="krea-step active">
-        <span class="krea-step-label">Passo 1 di 4</span>
-        <h3>Chi sei?</h3>
-        <p>Iniziamo con i tuoi dati di contatto.</p>
-        <div class="krea-field">
-          <label>Nome e cognome *</label>
-          <input id="k-nome" type="text" placeholder="Es. Mario Rossi">
+        <!-- Step 3 -->
+        <div id="ks3" style="display:none;">
+          <p style="font-size:11px; letter-spacing:0.2em; text-transform:uppercase; color:rgba(255,255,255,0.5); margin-bottom:16px;">Passo 3 di 4</p>
+          <h3 style="font-family:'Cormorant Garamond',serif; font-size:56px; font-weight:300; font-style:italic; color:#fff; margin:0 0 10px;">Cosa ti serve?</h3>
+          <p style="color:rgba(255,255,255,0.6); font-size:17px; margin-bottom:36px;">Seleziona le categorie (anche più di una).</p>
+          <p style="font-size:11px; font-weight:600; letter-spacing:0.12em; text-transform:uppercase; color:rgba(255,255,255,0.6); margin-bottom:10px;">Categorie attrezzatura</p>
+          <div style="display:flex; flex-wrap:wrap; gap:10px; margin-bottom:28px;">
+            <button type="button" class="kpill" data-group="cat" data-value="cottura" onclick="kreaTogglePill(this)">Cottura</button>
+            <button type="button" class="kpill" data-group="cat" data-value="refrigerazione" onclick="kreaTogglePill(this)">Refrigerazione</button>
+            <button type="button" class="kpill" data-group="cat" data-value="preparazione" onclick="kreaTogglePill(this)">Preparazione</button>
+            <button type="button" class="kpill" data-group="cat" data-value="lavaggio" onclick="kreaTogglePill(this)">Lavaggio</button>
+            <button type="button" class="kpill" data-group="cat" data-value="servizio" onclick="kreaTogglePill(this)">Servizio</button>
+            <button type="button" class="kpill" data-group="cat" data-value="non_so" onclick="kreaTogglePill(this)">Non so ancora</button>
+          </div>
+          <p style="font-size:11px; font-weight:600; letter-spacing:0.12em; text-transform:uppercase; color:rgba(255,255,255,0.6); margin-bottom:10px;">Budget indicativo</p>
+          <div style="display:flex; flex-wrap:wrap; gap:10px; margin-bottom:28px;">
+            <button type="button" class="kpill" data-group="budget" data-value="sotto5k" onclick="kreaSelectPill(this,'budget')">Sotto €5.000</button>
+            <button type="button" class="kpill" data-group="budget" data-value="5_15k" onclick="kreaSelectPill(this,'budget')">€5.000 – €15.000</button>
+            <button type="button" class="kpill" data-group="budget" data-value="15_50k" onclick="kreaSelectPill(this,'budget')">€15.000 – €50.000</button>
+            <button type="button" class="kpill" data-group="budget" data-value="oltre50k" onclick="kreaSelectPill(this,'budget')">Oltre €50.000</button>
+          </div>
+          <div style="margin-top:36px; display:flex; justify-content:space-between;">
+            <button onclick="kreaGo(2)" style="background:none; border:none; color:rgba(255,255,255,0.5); font-size:15px; cursor:pointer; font-family:inherit;">← Indietro</button>
+            <button onclick="kreaGo(4)" style="background:#fff; color:#4A2B7F; border:none; padding:16px 40px; border-radius:60px; font-size:15px; font-weight:700; cursor:pointer; font-family:inherit;">Continua →</button>
+          </div>
         </div>
-        <div class="krea-field">
-          <label>Email *</label>
-          <input id="k-email" type="email" placeholder="mario@iltuoristorante.it">
+
+        <!-- Step 4 -->
+        <div id="ks4" style="display:none;">
+          <p style="font-size:11px; letter-spacing:0.2em; text-transform:uppercase; color:rgba(255,255,255,0.5); margin-bottom:16px;">Passo 4 di 4</p>
+          <h3 style="font-family:'Cormorant Garamond',serif; font-size:56px; font-weight:300; font-style:italic; color:#fff; margin:0 0 10px;">Quando parliamo?</h3>
+          <p style="color:rgba(255,255,255,0.6); font-size:17px; margin-bottom:36px;">Scegli la disponibilità per la chiamata con Vincenzo.</p>
+          <p style="font-size:11px; font-weight:600; letter-spacing:0.12em; text-transform:uppercase; color:rgba(255,255,255,0.6); margin-bottom:10px;">Orario preferito</p>
+          <div style="display:flex; flex-wrap:wrap; gap:10px; margin-bottom:28px;">
+            <button type="button" class="kpill" data-group="orario" data-value="mattina" onclick="kreaSelectPill(this,'orario')">Mattina (9–13)</button>
+            <button type="button" class="kpill" data-group="orario" data-value="pomeriggio" onclick="kreaSelectPill(this,'orario')">Pomeriggio (14–18)</button>
+            <button type="button" class="kpill" data-group="orario" data-value="indifferente" onclick="kreaSelectPill(this,'orario')">Indifferente</button>
+          </div>
+          <p style="font-size:11px; font-weight:600; letter-spacing:0.12em; text-transform:uppercase; color:rgba(255,255,255,0.6); margin-bottom:10px;">Urgenza</p>
+          <div style="display:flex; flex-wrap:wrap; gap:10px; margin-bottom:28px;">
+            <button type="button" class="kpill" data-group="urgenza" data-value="3mesi" onclick="kreaSelectPill(this,'urgenza')">Apro entro 3 mesi</button>
+            <button type="button" class="kpill" data-group="urgenza" data-value="6mesi" onclick="kreaSelectPill(this,'urgenza')">Entro 6 mesi</button>
+            <button type="button" class="kpill" data-group="urgenza" data-value="esplorando" onclick="kreaSelectPill(this,'urgenza')">Sto ancora esplorando</button>
+          </div>
+          <div style="margin-bottom:20px;"><label style="display:block; font-size:11px; font-weight:600; letter-spacing:0.12em; text-transform:uppercase; color:rgba(255,255,255,0.6); margin-bottom:8px;">Note aggiuntive (facoltativo)</label><textarea id="k-note" rows="3" placeholder="Dimensioni cucina, numero coperti…" style="width:100%; padding:15px 18px; background:rgba(255,255,255,0.1); border:1.5px solid rgba(255,255,255,0.25); border-radius:10px; font-size:16px; color:#fff; box-sizing:border-box; outline:none; resize:vertical; font-family:inherit;"></textarea></div>
+          <div style="margin-top:36px; display:flex; justify-content:space-between;">
+            <button onclick="kreaGo(3)" style="background:none; border:none; color:rgba(255,255,255,0.5); font-size:15px; cursor:pointer; font-family:inherit;">← Indietro</button>
+            <button onclick="kreaSubmitForm()" style="background:#fff; color:#4A2B7F; border:none; padding:16px 40px; border-radius:60px; font-size:15px; font-weight:700; cursor:pointer; font-family:inherit;">Invia la richiesta →</button>
+          </div>
         </div>
-        <div class="krea-field">
-          <label>Telefono *</label>
-          <input id="k-tel" type="tel" placeholder="+39 320 000 0000">
+
+        <!-- Step 5 — Conferma -->
+        <div id="ks5" style="display:none; text-align:center; padding:40px 0;">
+          <div style="width:70px; height:70px; border-radius:50%; border:2px solid rgba(255,255,255,0.4); display:flex; align-items:center; justify-content:center; font-size:32px; color:#fff; margin:0 auto 28px;">✓</div>
+          <h3 style="font-family:'Cormorant Garamond',serif; font-size:56px; font-weight:300; font-style:italic; color:#fff; margin:0 0 16px;">Richiesta inviata.</h3>
+          <p style="color:rgba(255,255,255,0.7); font-size:18px; line-height:1.7; max-width:400px; margin:0 auto 40px;">Vincenzo ha ricevuto i dettagli del tuo progetto e ti contatterà personalmente entro 24 ore.</p>
+          <button onclick="document.getElementById('consultModal').style.display='none'; document.body.style.overflow='';" style="background:#fff; color:#4A2B7F; border:none; padding:16px 40px; border-radius:60px; font-size:15px; font-weight:700; cursor:pointer; font-family:inherit;">Torna al sito →</button>
         </div>
-        <div class="krea-nav">
-          <button class="krea-btn-back invisible">← Indietro</button>
-          <button class="krea-btn-next" onclick="kreaNext()">Continua →</button>
-        </div>
+
       </div>
-
-      <!-- STEP 2 -->
-      <div id="krea-step-2" class="krea-step">
-        <span class="krea-step-label">Passo 2 di 4</span>
-        <h3>Il tuo progetto</h3>
-        <p>Cosa stai aprendo o ristrutturando?</p>
-        <div class="krea-field">
-          <label>Tipo di attività *</label>
-          <div class="krea-pills" data-field="tipo_attivita">
-            <button type="button" class="krea-pill" data-value="ristorante">Ristorante</button>
-            <button type="button" class="krea-pill" data-value="bar">Bar / Caffetteria</button>
-            <button type="button" class="krea-pill" data-value="hotel">Hotel</button>
-            <button type="button" class="krea-pill" data-value="catering">Catering</button>
-            <button type="button" class="krea-pill" data-value="pizzeria">Pizzeria</button>
-            <button type="button" class="krea-pill" data-value="altro">Altro</button>
-          </div>
-        </div>
-        <div class="krea-field">
-          <label>Fase del progetto *</label>
-          <div class="krea-pills" data-field="fase">
-            <button type="button" class="krea-pill" data-value="nuova_apertura">Nuova apertura</button>
-            <button type="button" class="krea-pill" data-value="ristrutturazione">Ristrutturazione</button>
-            <button type="button" class="krea-pill" data-value="sostituzione">Sostituzione attrezzature</button>
-            <button type="button" class="krea-pill" data-value="espansione">Espansione locale</button>
-          </div>
-        </div>
-        <div class="krea-nav">
-          <button class="krea-btn-back" onclick="kreaBack()">← Indietro</button>
-          <button class="krea-btn-next" onclick="kreaNext()">Continua →</button>
-        </div>
-      </div>
-
-      <!-- STEP 3 -->
-      <div id="krea-step-3" class="krea-step">
-        <span class="krea-step-label">Passo 3 di 4</span>
-        <h3>Cosa ti serve?</h3>
-        <p>Seleziona le categorie di attrezzatura.</p>
-        <div class="krea-field">
-          <label>Categorie (anche più di una)</label>
-          <div class="krea-pills" data-field="categorie" data-multi="true">
-            <button type="button" class="krea-pill" data-value="cottura">Cottura</button>
-            <button type="button" class="krea-pill" data-value="refrigerazione">Refrigerazione</button>
-            <button type="button" class="krea-pill" data-value="preparazione">Preparazione</button>
-            <button type="button" class="krea-pill" data-value="lavaggio">Lavaggio</button>
-            <button type="button" class="krea-pill" data-value="servizio">Servizio</button>
-            <button type="button" class="krea-pill" data-value="non_so">Non so ancora — ho bisogno di guida</button>
-          </div>
-        </div>
-        <div class="krea-field">
-          <label>Budget indicativo</label>
-          <div class="krea-pills" data-field="budget">
-            <button type="button" class="krea-pill" data-value="sotto_5k">Sotto €5.000</button>
-            <button type="button" class="krea-pill" data-value="5_15k">€5.000 – €15.000</button>
-            <button type="button" class="krea-pill" data-value="15_50k">€15.000 – €50.000</button>
-            <button type="button" class="krea-pill" data-value="oltre_50k">Oltre €50.000</button>
-          </div>
-        </div>
-        <div class="krea-nav">
-          <button class="krea-btn-back" onclick="kreaBack()">← Indietro</button>
-          <button class="krea-btn-next" onclick="kreaNext()">Continua →</button>
-        </div>
-      </div>
-
-      <!-- STEP 4 -->
-      <div id="krea-step-4" class="krea-step">
-        <span class="krea-step-label">Passo 4 di 4</span>
-        <h3>Quando parliamo?</h3>
-        <p>Scegli la disponibilità per la chiamata con Vincenzo.</p>
-        <div class="krea-field">
-          <label>Orario preferito</label>
-          <div class="krea-pills" data-field="orario">
-            <button type="button" class="krea-pill" data-value="mattina">Mattina (9–13)</button>
-            <button type="button" class="krea-pill" data-value="pomeriggio">Pomeriggio (14–18)</button>
-            <button type="button" class="krea-pill" data-value="indifferente">Indifferente</button>
-          </div>
-        </div>
-        <div class="krea-field">
-          <label>Urgenza del progetto</label>
-          <div class="krea-pills" data-field="urgenza">
-            <button type="button" class="krea-pill" data-value="entro_3_mesi">Apro entro 3 mesi</button>
-            <button type="button" class="krea-pill" data-value="entro_6_mesi">Entro 6 mesi</button>
-            <button type="button" class="krea-pill" data-value="esplorando">Sto ancora esplorando</button>
-          </div>
-        </div>
-        <div class="krea-field">
-          <label>Note aggiuntive (facoltativo)</label>
-          <textarea id="k-note" placeholder="Dimensioni cucina, numero coperti, situazione specifica…"></textarea>
-        </div>
-        <div class="krea-nav">
-          <button class="krea-btn-back" onclick="kreaBack()">← Indietro</button>
-          <button class="krea-btn-submit" onclick="kreaSubmit()">Invia la richiesta →</button>
-        </div>
-      </div>
-
-      <!-- STEP 5 — Conferma -->
-      <div id="krea-step-5" class="krea-step">
-        <div class="krea-success">
-          <div class="krea-success-icon">✓</div>
-          <h3>Richiesta inviata.</h3>
-          <p>Vincenzo ha ricevuto i dettagli del tuo progetto e ti contatterà personalmente entro 24 ore.</p>
-          <div style="margin-top:40px;">
-            <button class="krea-btn-next" onclick="closeConsultModal()" style="margin:0 auto;">Torna al sito →</button>
-          </div>
-        </div>
-      </div>
-
     </div>
   </div>
 
   <style>
-  /* ===== FORM FULLSCREEN KREA ===== */
-
-  #consultModal {
-    display: none;
-    position: fixed;
-    inset: 0;
-    background: #4A2B7F;
-    z-index: 9999;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;
-  }
-
-  #consultModal.open {
-    display: flex;
-  }
-
-  /* Animazione apertura overlay */
-  #consultModal {
-    opacity: 0;
-    transition: opacity 0.4s ease;
-  }
-  #consultModal.open {
-    opacity: 1;
-  }
-
-  /* Contenitore centrale */
-  .krea-form-wrap {
-    width: 100%;
-    max-width: 640px;
-    padding: 0 32px;
-    position: relative;
-  }
-
-  /* Close button */
-  .krea-close-btn {
-    position: fixed;
-    top: 32px;
-    right: 40px;
-    background: rgba(255,255,255,0.15);
-    border: none;
-    color: #fff;
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    font-size: 18px;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: background 0.2s;
-    z-index: 10;
-  }
-  .krea-close-btn:hover {
-    background: rgba(255,255,255,0.25);
-  }
-
-  /* Progress dots */
-  .krea-dots {
-    position: fixed;
-    top: 40px;
-    left: 50%;
-    transform: translateX(-50%);
-    display: flex;
-    gap: 8px;
-    z-index: 10;
-  }
-  .krea-dot {
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
-    background: rgba(255,255,255,0.3);
-    transition: background 0.3s, transform 0.3s;
-  }
-  .krea-dot.active {
-    background: #ffffff;
-    transform: scale(1.4);
-  }
-  .krea-dot.done {
-    background: rgba(255,255,255,0.7);
-  }
-
-  /* Ogni step */
-  .krea-step {
-    position: absolute;
-    width: 100%;
-    max-width: 640px;
-    padding: 0 32px;
-    box-sizing: border-box;
-    opacity: 0;
-    pointer-events: none;
-    transform: translateX(60px);
-    transition: opacity 0.4s cubic-bezier(0.16,1,0.3,1), transform 0.4s cubic-bezier(0.16,1,0.3,1);
-  }
-
-  .krea-step.active {
-    opacity: 1;
-    pointer-events: all;
-    transform: translateX(0);
-    position: relative;
-  }
-
-  .krea-step.exit-left {
-    opacity: 0;
-    transform: translateX(-60px);
-    pointer-events: none;
-  }
-
-  /* Aggiungi questo al CSS */
-  .krea-step.exit-right {
-    opacity: 0;
-    transform: translateX(60px);
-    pointer-events: none;
-  }
-
-  /* Titoli step */
-  .krea-step-label {
-    font-size: 11px;
-    font-weight: 600;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: rgba(255,255,255,0.5);
-    margin-bottom: 16px;
-    display: block;
-  }
-
-  .krea-step h3 {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(40px, 6vw, 64px);
-    font-weight: 300;
-    font-style: italic;
-    color: #ffffff;
-    margin: 0 0 12px;
-    line-height: 1.05;
-  }
-
-  .krea-step > p {
-    font-size: 17px;
-    color: rgba(255,255,255,0.65);
-    margin-bottom: 40px;
-    line-height: 1.6;
-  }
-
-  /* Campi input */
-  .krea-field {
-    margin-bottom: 20px;
-  }
-
-  .krea-field label {
-    display: block;
-    font-size: 11px;
-    font-weight: 600;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    color: rgba(255,255,255,0.6);
-    margin-bottom: 10px;
-  }
-
-  .krea-field input,
-  .krea-field textarea {
-    width: 100%;
-    padding: 16px 20px;
-    background: rgba(255,255,255,0.1);
-    border: 1.5px solid rgba(255,255,255,0.2);
-    border-radius: 12px;
-    font-size: 17px;
-    color: #ffffff;
-    box-sizing: border-box;
-    outline: none;
-    font-family: inherit;
-    transition: border-color 0.2s, background 0.2s;
-  }
-
-  .krea-field input::placeholder,
-  .krea-field textarea::placeholder {
-    color: rgba(255,255,255,0.35);
-  }
-
-  .krea-field input:focus,
-  .krea-field textarea:focus {
-    border-color: rgba(255,255,255,0.7);
-    background: rgba(255,255,255,0.15);
-  }
-
-  .krea-field textarea {
-    resize: vertical;
-    min-height: 100px;
-  }
-
-  /* Pill opzioni */
-  .krea-pills {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    margin-bottom: 28px;
-  }
-
-  .krea-pill {
+  .kpill {
     padding: 11px 22px;
-    border: 1.5px solid rgba(255,255,255,0.25);
+    border: 1.5px solid rgba(255,255,255,0.3);
     border-radius: 60px;
     background: rgba(255,255,255,0.08);
     font-size: 14px;
     font-weight: 500;
-    color: rgba(255,255,255,0.8);
+    color: rgba(255,255,255,0.85);
     cursor: pointer;
-    transition: all 0.2s;
     font-family: inherit;
+    transition: all 0.18s;
   }
-
-  .krea-pill:hover {
-    border-color: rgba(255,255,255,0.6);
+  .kpill:hover {
+    border-color: rgba(255,255,255,0.7);
     background: rgba(255,255,255,0.15);
     color: #fff;
   }
-
-  .krea-pill.selected {
-    background: #ffffff;
-    border-color: #ffffff;
+  .kpill.on {
+    background: #fff;
+    border-color: #fff;
     color: #4A2B7F;
     font-weight: 600;
-  }
-
-  /* Navigazione */
-  .krea-nav {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-top: 40px;
-  }
-
-  .krea-btn-back {
-    background: none;
-    border: none;
-    font-size: 15px;
-    color: rgba(255,255,255,0.5);
-    cursor: pointer;
-    font-family: inherit;
-    padding: 0;
-    transition: color 0.2s;
-  }
-  .krea-btn-back:hover { color: rgba(255,255,255,0.9); }
-  .krea-btn-back.invisible { visibility: hidden; }
-
-  .krea-btn-next,
-  .krea-btn-submit {
-    background: #ffffff;
-    color: #4A2B7F;
-    border: none;
-    padding: 16px 40px;
-    border-radius: 60px;
-    font-size: 15px;
-    font-weight: 700;
-    cursor: pointer;
-    font-family: inherit;
-    letter-spacing: 0.02em;
-    transition: transform 0.2s, box-shadow 0.2s;
-    box-shadow: 0 4px 24px rgba(0,0,0,0.2);
-  }
-  .krea-btn-next:hover,
-  .krea-btn-submit:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 32px rgba(0,0,0,0.3);
-  }
-
-  /* Step conferma */
-  .krea-success {
-    text-align: center;
-    padding: 20px 0;
-  }
-  .krea-success-icon {
-    width: 72px;
-    height: 72px;
-    border-radius: 50%;
-    border: 2px solid rgba(255,255,255,0.4);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 32px;
-    margin: 0 auto 28px;
-    color: #fff;
-    animation: krea-pop 0.5s cubic-bezier(0.16,1,0.3,1);
-  }
-  @keyframes krea-pop {
-    from { transform: scale(0.5); opacity: 0; }
-    to   { transform: scale(1);   opacity: 1; }
-  }
-  .krea-success h3 {
-    font-size: clamp(40px, 6vw, 64px) !important;
-  }
-  .krea-success p {
-    color: rgba(255,255,255,0.7);
-    font-size: 18px;
-    line-height: 1.7;
-    max-width: 420px;
-    margin: 0 auto;
-  }
-
-  /* Mobile */
-  @media (max-width: 600px) {
-    .krea-form-wrap, .krea-step {
-      padding: 0 20px;
-    }
-    .krea-close-btn {
-      top: 20px;
-      right: 20px;
-    }
-    .krea-dots {
-      top: 28px;
-    }
   }
   </style>
 
   <script>
-  var kreaCurrentStep = 1;
-  var kreaTotalSteps = 4;
-  var kreaData = {};
-  var kreaDirection = 'next'; // 'next' o 'back'
+  var kreaFormData = {};
 
-  function openConsultModal() {
-    var modal = document.getElementById('consultModal');
-    modal.style.display = 'flex';
-    document.body.style.overflow = 'hidden';
-    var dots = document.querySelector('.krea-dots');
-    if (dots) dots.style.display = 'flex';
-    setTimeout(function() { modal.style.opacity = '1'; }, 10);
+  function kreaGo(n) {
+    for (var i = 1; i <= 5; i++) {
+      var el = document.getElementById('ks' + i);
+      if (el) el.style.display = i === n ? 'block' : 'none';
+    }
+    window.scrollTo(0, 0);
   }
 
-  function closeConsultModal() {
-    var modal = document.getElementById('consultModal');
-    modal.style.opacity = '0';
-    setTimeout(function() {
-      modal.style.display = 'none';
-      document.body.style.overflow = '';
-      // Reset form al primo step
-      kreaGoToStep(1, 'next', true);
-    }, 400);
-  }
-
-  function kreaGoToStep(newStep, direction, silent) {
-    var current = document.getElementById('krea-step-' + kreaCurrentStep);
-    var next    = document.getElementById('krea-step-' + newStep);
-    if (!next) return;
-
-    if (!silent && current) {
-      // Anima uscita step corrente
-      current.classList.remove('active');
-      current.classList.add(direction === 'next' ? 'exit-left' : 'exit-right');
+  function kreaValidateStep1() {
+    var nome  = document.getElementById('k-nome').value.trim();
+    var email = document.getElementById('k-email').value.trim();
+    var tel   = document.getElementById('k-tel').value.trim();
+    if (!nome || !email || !tel) {
+      if (!nome)  document.getElementById('k-nome').style.borderColor  = 'rgba(255,120,120,0.8)';
+      if (!email) document.getElementById('k-email').style.borderColor = 'rgba(255,120,120,0.8)';
+      if (!tel)   document.getElementById('k-tel').style.borderColor   = 'rgba(255,120,120,0.8)';
       setTimeout(function() {
-        current.classList.remove('exit-left', 'exit-right');
-      }, 450);
-    }
-
-    // Imposta posizione iniziale del nuovo step
-    if (!silent) {
-      next.style.transform = direction === 'next' ? 'translateX(60px)' : 'translateX(-60px)';
-      next.style.opacity = '0';
-    }
-
-    kreaCurrentStep = newStep;
-
-    setTimeout(function() {
-      next.style.transform = '';
-      next.style.opacity = '';
-      next.classList.add('active');
-    }, silent ? 0 : 50);
-
-    // Aggiorna dots
-    for (var i = 1; i <= kreaTotalSteps; i++) {
-      var dot = document.getElementById('dot-' + i);
-      if (!dot) continue;
-      dot.classList.remove('active', 'done');
-      if (i === newStep) dot.classList.add('active');
-      else if (i < newStep) dot.classList.add('done');
-    }
-  }
-
-  function kreaNext() {
-    // Validazione step 1
-    if (kreaCurrentStep === 1) {
-      var nome  = document.getElementById('k-nome').value.trim();
-      var email = document.getElementById('k-email').value.trim();
-      var tel   = document.getElementById('k-tel').value.trim();
-      if (!nome || !email || !tel) {
-        // Shake sui campi vuoti
         ['k-nome','k-email','k-tel'].forEach(function(id) {
-          var el = document.getElementById(id);
-          if (!el.value.trim()) {
-            el.style.borderColor = 'rgba(255,100,100,0.8)';
-            setTimeout(function() { el.style.borderColor = ''; }, 2000);
-          }
+          document.getElementById(id).style.borderColor = '';
         });
-        return;
-      }
-      kreaData.nome     = nome;
-      kreaData.email    = email;
-      kreaData.telefono = tel;
+      }, 2500);
+      return;
     }
-    if (kreaCurrentStep < kreaTotalSteps) {
-      kreaGoToStep(kreaCurrentStep + 1, 'next');
-    }
+    kreaFormData.nome     = nome;
+    kreaFormData.email    = email;
+    kreaFormData.telefono = tel;
+    kreaGo(2);
   }
 
-  function kreaBack() {
-    if (kreaCurrentStep > 1) {
-      kreaGoToStep(kreaCurrentStep - 1, 'back');
-    }
+  function kreaSelectPill(btn, group) {
+    var container = btn.parentElement;
+    container.querySelectorAll('.kpill').forEach(function(p) { p.classList.remove('on'); });
+    btn.classList.add('on');
+    kreaFormData[group] = btn.dataset.value;
   }
 
-  function kreaSubmit() {
-    kreaData.note = document.getElementById('k-note').value.trim();
-    kreaData.data = new Date().toLocaleString('it-IT');
-    console.log('Krea lead:', kreaData);
-    // TODO: fetch a Formspree/EmailJS
-    kreaGoToStep(5, 'next');
-    // Nascondi dots
-    document.querySelector('.krea-dots').style.display = 'none';
+  function kreaTogglePill(btn) {
+    btn.classList.toggle('on');
+    var group = btn.dataset.group;
+    var selected = Array.from(btn.parentElement.querySelectorAll('.kpill.on')).map(function(p) { return p.dataset.value; });
+    kreaFormData[group] = selected;
   }
 
-  // Pill click
-  document.addEventListener('click', function(e) {
-    if (!e.target.classList.contains('krea-pill')) return;
-    var group  = e.target.parentElement;
-    var isMulti = group.getAttribute('data-multi') === 'true';
-    var field  = group.getAttribute('data-field');
-    if (!isMulti) {
-      group.querySelectorAll('.krea-pill').forEach(function(p) { p.classList.remove('selected'); });
-    }
-    e.target.classList.toggle('selected');
-    if (field) {
-      if (isMulti) {
-        kreaData[field] = Array.from(group.querySelectorAll('.krea-pill.selected')).map(function(p) { return p.dataset.value; });
-      } else {
-        kreaData[field] = e.target.classList.contains('selected') ? e.target.dataset.value : null;
-      }
-    }
-  });
+  function kreaSubmitForm() {
+    kreaFormData.note    = document.getElementById('k-note').value.trim();
+    kreaFormData.data    = new Date().toLocaleString('it-IT');
+    console.log('Krea lead:', kreaFormData);
+    // TODO: fetch Formspree/EmailJS qui
+    kreaGo(5);
+  }
 
-  // Collega bottoni apertura
+  // Collega tutti i bottoni che aprono il form
   document.addEventListener('DOMContentLoaded', function() {
-    document.querySelectorAll('#openConsultForm, .btn-prenota, [data-open-modal]').forEach(function(btn) {
+    document.querySelectorAll('#openConsultForm, .btn-prenota, [data-open-modal], .navbar .cta, nav .btn-primary').forEach(function(btn) {
       btn.addEventListener('click', function(e) {
         e.preventDefault();
-        openConsultModal();
+        document.getElementById('consultModal').style.display = 'block';
+        document.body.style.overflow = 'hidden';
+        kreaGo(1);
+      });
+    });
+
+    // Collega bottone della navbar e mobile menu
+    document.querySelectorAll('.nav-cta, .drawer-cta').forEach(function(btn) {
+      btn.addEventListener('click', function(e) {
+        e.preventDefault();
+        document.getElementById('consultModal').style.display = 'block';
+        document.body.style.overflow = 'hidden';
+        kreaGo(1);
       });
     });
   });
 
-  // ESC
   document.addEventListener('keydown', function(e) {
-    if (e.key === 'Escape') closeConsultModal();
+    if (e.key === 'Escape') {
+      document.getElementById('consultModal').style.display = 'none';
+      document.body.style.overflow = '';
+    }
   });
   </script>
 
