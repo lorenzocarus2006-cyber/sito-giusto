@@ -3,268 +3,583 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Global-Contract — Fornitura di macchinari professionali per ristoranti, hotel e industria alimentare. Forni, cucine industriali e frigoriferi commerciali.">
-  <title>Global-Contract | Macchinari Professionali</title>
+  <meta name="description" content="Krea Global Contract — Progettazione e fornitura di arredamento contract e attrezzature professionali HoReCa in Sicilia. Da 30 anni al fianco dell'ospitalità.">
+  <meta name="robots" content="index, follow">
+  <meta property="og:title" content="Krea | Global Contract — HoReCa Premium Sicilia">
+  <meta property="og:description" content="Progettazione, fornitura e installazione di attrezzature professionali e arredo contract in Sicilia.">
+  <meta property="og:type" content="website">
+  <title>Krea | Global Contract — HoReCa Premium Sicilia</title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,600&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Styles -->
   <link rel="stylesheet" href="css/style.css">
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Open+Sans:wght@400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="css/animations.css">
 </head>
 <body>
 
+  <!-- Grain texture overlay -->
+  <div class="grain" aria-hidden="true"></div>
+
   <!-- NAVBAR -->
-  <nav class="navbar" id="navbar">
+  <nav class="navbar" id="navbar" role="navigation" aria-label="Navigazione Principale">
     <div class="container nav-container">
-      <a href="index.html" class="logo">
-        <span class="logo-icon">GC</span>
-        <span class="logo-text">Global<span class="accent">Contract</span></span>
+      <a href="index.html" class="logo-link" aria-label="Krea Global Contract Home">
+        <img src="assets/images/logo-krea.svg" alt="Krea Global Contract Logo" height="40">
       </a>
-      <ul class="nav-links" id="navLinks">
-        <li><a href="index.html" class="active">Home</a></li>
-        <li><a href="products.html">Prodotti</a></li>
-        <li><a href="shop.html">Shop</a></li>
-        <li><a href="index.html#about">Chi Siamo</a></li>
-        <li><a href="contact.html">Contatti</a></li>
+      
+      <ul class="nav-links" role="menubar">
+        <li role="none"><a href="#servizi" role="menuitem">Servizi</a></li>
+        <li role="none"><a href="#portfolio" role="menuitem">Portfolio</a></li>
+        <li role="none"><a href="#chi-siamo" role="menuitem">Chi Siamo</a></li>
+        <li role="none"><a href="#contatti" role="menuitem">Contattaci</a></li>
       </ul>
-      <a href="contact.html#booking" class="btn btn-accent">Prenota Consulenza</a>
-      <button class="hamburger" id="hamburger" aria-label="Menu">
+
+      <a href="#contatti" class="nav-cta" aria-label="Prenota consulenza">Prenota consulenza</a>
+
+      <button class="hamburger" id="hamburger" aria-label="Apri Menu Mobile" aria-expanded="false" aria-controls="mobileDrawer">
         <span></span><span></span><span></span>
       </button>
     </div>
   </nav>
 
-  <!-- HERO -->
-  <section class="hero" id="home">
-    <div class="hero-bg"></div>
-    <div class="container hero-content">
-      <span class="hero-badge">Macchinari Professionali B2B</span>
-      <h1>Equipaggia la tua <span class="accent">cucina professionale</span> con il meglio del mercato</h1>
-      <p>Forni industriali, cucine professionali e frigoriferi commerciali per ristoranti, hotel e aziende alimentari. Qualità certificata e assistenza dedicata.</p>
-      <div class="hero-cta">
-        <a href="shop.html" class="btn btn-accent btn-lg">Scopri lo Shop</a>
-        <a href="contact.html#booking" class="btn btn-outline btn-lg">Prenota una Chiamata</a>
+  <!-- Mobile Drawer Menu -->
+  <div class="nav-drawer" id="mobileDrawer" aria-hidden="true" role="dialog">
+    <nav class="nav-drawer-links" aria-label="Menu Mobile">
+      <a href="#servizi" class="drawer-link">Servizi</a>
+      <a href="#portfolio" class="drawer-link">Portfolio</a>
+      <a href="#chi-siamo" class="drawer-link">Chi Siamo</a>
+      <a href="#contatti" class="drawer-link">Contattaci</a>
+      <a href="#contatti" class="btn btn--primary drawer-cta" style="margin-top: 1.5rem; text-align: center; justify-content: center;">Prenota consulenza</a>
+    </nav>
+  </div>
+
+
+  <!-- =====================================================
+       HERO — Canvas Scroll Sequence (0% - 100%)
+  ===================================================== -->
+  <section class="hero-seq" id="hero" aria-label="Krea Hero Presentation">
+    <div class="hero-seq__sticky">
+      <!-- Adaptive WebGL/2D Canvas -->
+      <canvas id="heroCanvas" class="hero-seq__canvas" aria-hidden="true"></canvas>
+
+      <!-- Veli scuri gradient (nav area + bottom area) -->
+      <div class="hero-seq__velo hero-seq__velo--top" aria-hidden="true"></div>
+      <div class="hero-seq__velo hero-seq__velo--btm" aria-hidden="true"></div>
+
+      <!-- ── Beat A: 0%–22% ─────────────────────── -->
+      <div class="hero-beat" id="beatA" aria-hidden="true">
+        <div class="hero-beat__inner hero-beat__inner--center">
+          <p class="hero-beat__eyebrow">Sicilia · HoReCa · Dal 1994</p>
+          <h1 class="hero-beat__title hero-beat__title--xl"><em>Il tuo locale.</em><br>Fatto bene.</h1>
+          <p class="hero-beat__sub">Attrezzature professionali e arredo contract.<br>Dalla consulenza all'installazione.</p>
+        </div>
       </div>
-      <div class="hero-stats">
-        <div class="stat">
-          <span class="stat-number">500+</span>
-          <span class="stat-label">Clienti Attivi</span>
-        </div>
-        <div class="stat">
-          <span class="stat-number">15+</span>
-          <span class="stat-label">Anni di Esperienza</span>
-        </div>
-        <div class="stat">
-          <span class="stat-number">98%</span>
-          <span class="stat-label">Clienti Soddisfatti</span>
-        </div>
-        <div class="stat">
-          <span class="stat-number">24h</span>
-          <span class="stat-label">Assistenza Tecnica</span>
+
+      <!-- ── Beat B: 25%–48% ─────────────────────── -->
+      <div class="hero-beat" id="beatB" aria-hidden="true">
+        <div class="hero-beat__inner hero-beat__inner--left">
+          <h2 class="hero-beat__title hero-beat__title--lg">30 anni<br>di mestiere</h2>
+          <p class="hero-beat__sub">Oltre 850 locali attrezzati in Sicilia.<br>Il tuo sarà il prossimo.</p>
+          <div class="hero-beat__stats" role="list">
+            <div class="hero-beat__stat" role="listitem">
+              <span class="hero-beat__stat-num">850+</span>
+              <span class="hero-beat__stat-label">locali</span>
+            </div>
+            <div class="hero-beat__stat" role="listitem">
+              <span class="hero-beat__stat-num">30</span>
+              <span class="hero-beat__stat-label">anni</span>
+            </div>
+            <div class="hero-beat__stat" role="listitem">
+              <span class="hero-beat__stat-num">500+</span>
+              <span class="hero-beat__stat-label">brand</span>
+            </div>
+          </div>
         </div>
       </div>
-    </div>
-    <div class="hero-scroll">
-      <span>Scopri</span>
-      <div class="scroll-line"></div>
+
+      <!-- ── Beat C: 50%–72% ─────────────────────── -->
+      <div class="hero-beat" id="beatC" aria-hidden="true">
+        <div class="hero-beat__inner hero-beat__inner--right">
+          <h2 class="hero-beat__title hero-beat__title--md">Dalla cucina<br>al chiavi in mano</h2>
+          <p class="hero-beat__sub">Progettazione 3D, fornitura, installazione<br>e assistenza post-vendita.</p>
+          <div class="hero-beat__cards" role="list">
+            <div class="hero-beat__card" role="listitem">
+              <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M2 14V6l7-3 7 3v8" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/><rect x="6" y="9" width="6" height="5" rx=".5" stroke="currentColor" stroke-width="1.2"/></svg>
+              <span>Attrezzature</span>
+            </div>
+            <div class="hero-beat__card" role="listitem">
+              <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><rect x="2" y="4" width="14" height="10" rx="1" stroke="currentColor" stroke-width="1.2"/><path d="M6 4V3M12 4V3" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
+              <span>Arredo Contract</span>
+            </div>
+            <div class="hero-beat__card" role="listitem">
+              <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M3 15l4-4 3 2 5-6" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/><rect x="2" y="2" width="14" height="14" rx="1" stroke="currentColor" stroke-width="1.2"/></svg>
+              <span>Progettazione 3D</span>
+            </div>
+            <div class="hero-beat__card" role="listitem">
+              <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><circle cx="9" cy="9" r="7" stroke="currentColor" stroke-width="1.2"/><path d="M9 6v3.5l2.5 1.5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
+              <span>Assistenza</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── Beat D: 75%–97% ─────────────────────── -->
+      <div class="hero-beat" id="beatD" aria-hidden="true">
+        <div class="hero-beat__inner hero-beat__inner--center">
+          <h2 class="hero-beat__title hero-beat__title--xl"><em>Parliamoci.</em></h2>
+          <p class="hero-beat__sub">Prenota una consulenza gratuita. Senza impegno.</p>
+          <a href="#contatti" class="hero-beat__cta" id="heroCta" aria-label="Prenota consulenza gratuita">
+            Prenota consulenza gratuita
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8H13M13 8L9 4M13 8L9 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <!-- Scroll indicator (faded out at 10% scroll progress) -->
+      <div class="hero-seq__scroll-hint" id="heroScrollHint" aria-hidden="true">
+        <div class="hero-seq__scroll-arrow">
+          <svg width="14" height="20" viewBox="0 0 14 20" fill="none" aria-hidden="true">
+            <path d="M7 1v14M1 11l6 7 6-7" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <span>Scorri per scoprire</span>
+      </div>
+
     </div>
   </section>
 
-  <!-- CATEGORIES -->
-  <section class="categories section" id="categories">
+
+  <!-- =====================================================
+       SEZIONE 1 — PORTFOLIO
+  ===================================================== -->
+  <section class="section portfolio-section" id="portfolio">
     <div class="container">
-      <div class="section-header">
-        <span class="section-badge">Il Nostro Catalogo</span>
-        <h2>Soluzioni per ogni <span class="accent">esigenza professionale</span></h2>
-        <p>Una gamma completa di macchinari per la ristorazione e l'industria alimentare, selezionati tra i migliori produttori mondiali.</p>
+      <div class="section-header reveal-up">
+        <span class="section-eyebrow">I NOSTRI PROGETTI</span>
+        <h2 class="section-title">Locali che parlano da soli.</h2>
+        <p class="section-subtitle">Realizziamo cucine e spazi commerciali che coniugano efficienza operativa ed eleganza estetica in tutta la Sicilia.</p>
       </div>
-      <div class="categories-grid">
-        <a href="shop.html?cat=forni" class="category-card fade-in fade-in-d1">
-          <div class="category-icon">🔥</div>
-          <h3>Forni Professionali</h3>
-          <p>Forni a convezione, combinati e rotativi per ogni volume produttivo. Dalla piccola pasticceria alla grande industria.</p>
-          <span class="category-link">Scopri la gamma →</span>
-        </a>
-        <a href="shop.html?cat=cucine" class="category-card featured fade-in fade-in-d2">
-          <div class="category-badge-top">Più Venduti</div>
-          <div class="category-icon">👨‍🍳</div>
-          <h3>Cucine Industriali</h3>
-          <p>Piani cottura, linee modulari, friggitrici e attrezzature complete per grandi cucine professionali.</p>
-          <span class="category-link">Scopri la gamma →</span>
-        </a>
-        <a href="shop.html?cat=frigoriferi" class="category-card fade-in fade-in-d3">
-          <div class="category-icon">❄️</div>
-          <h3>Frigoriferi Commerciali</h3>
-          <p>Celle frigorifere, banchi refrigerati e abbattitori di temperatura per la conservazione professionale.</p>
-          <span class="category-link">Scopri la gamma →</span>
-        </a>
+
+      <div class="portfolio-grid">
+        <!-- Card 1 -->
+        <div class="portfolio-card reveal-up reveal-d1" role="button" tabindex="0">
+          <img data-src="assets/images/portfolio/portfolio_1.jpg" alt="Ristorante Scirocco — Palermo" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 4 3'%3E%3Crect width='4' height='3' fill='%23E6E2DA'/%3E%3C/svg%3E">
+          <div class="portfolio-info">
+            <h3>Ristorante Scirocco</h3>
+            <p class="portfolio-details">Palermo · Cucina completa + sala</p>
+          </div>
+        </div>
+
+        <!-- Card 2 -->
+        <div class="portfolio-card reveal-up reveal-d2" role="button" tabindex="0">
+          <img data-src="assets/images/portfolio/portfolio_2.jpg" alt="Hotel Villa Etnea — Catania" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 4 3'%3E%3Crect width='4' height='3' fill='%23E6E2DA'/%3E%3C/svg%3E">
+          <div class="portfolio-info">
+            <h3>Hotel Villa Etnea</h3>
+            <p class="portfolio-details">Catania · Cucina professionale + arredo camere</p>
+          </div>
+        </div>
+
+        <!-- Card 3 -->
+        <div class="portfolio-card reveal-up reveal-d1" role="button" tabindex="0">
+          <img data-src="assets/images/portfolio/portfolio_3.jpg" alt="Bar Centrale — Agrigento" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 4 3'%3E%3Crect width='4' height='3' fill='%23E6E2DA'/%3E%3C/svg%3E">
+          <div class="portfolio-info">
+            <h3>Bar Centrale</h3>
+            <p class="portfolio-details">Agrigento · Attrezzature bar + arredo</p>
+          </div>
+        </div>
+
+        <!-- Card 4 -->
+        <div class="portfolio-card reveal-up reveal-d2" role="button" tabindex="0">
+          <img data-src="assets/images/portfolio/portfolio_4.jpg" alt="Trattoria dei Vespri — Palermo" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 4 3'%3E%3Crect width='4' height='3' fill='%23E6E2DA'/%3E%3C/svg%3E">
+          <div class="portfolio-info">
+            <h3>Trattoria dei Vespri</h3>
+            <p class="portfolio-details">Palermo · Ristrutturazione cucina</p>
+          </div>
+        </div>
+
+        <!-- Card 5 -->
+        <div class="portfolio-card reveal-up reveal-d1" role="button" tabindex="0">
+          <img data-src="assets/images/portfolio/portfolio_5.jpg" alt="Resort Capo Peloro — Messina" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 4 3'%3E%3Crect width='4' height='3' fill='%23E6E2DA'/%3E%3C/svg%3E">
+          <div class="portfolio-info">
+            <h3>Resort Capo Peloro</h3>
+            <p class="portfolio-details">Messina · Cucina + sala banchetti</p>
+          </div>
+        </div>
+
+        <!-- Card 6 -->
+        <div class="portfolio-card reveal-up reveal-d2" role="button" tabindex="0">
+          <img data-src="assets/images/portfolio/portfolio_6.jpg" alt="Pizzeria Normanno — Palermo" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 4 3'%3E%3Crect width='4' height='3' fill='%23E6E2DA'/%3E%3C/svg%3E">
+          <div class="portfolio-info">
+            <h3>Pizzeria Normanno</h3>
+            <p class="portfolio-details">Palermo · Cucina + forno professionale</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="portfolio-footer reveal-up">
+        <a href="#contatti" class="btn btn--outline" aria-label="Vedi tutti i progetti">Vedi tutti i progetti &rarr;</a>
       </div>
     </div>
   </section>
 
-  <!-- ABOUT -->
-  <section class="section" id="about">
+
+  <!-- =====================================================
+       SEZIONE 2 — CHI SIAMO (NUMERI + PADRE)
+  ===================================================== -->
+  <section class="section about-section" id="chi-siamo">
     <div class="container">
       <div class="about-grid">
-        <div class="about-visual fade-in">
-          <div class="about-img-placeholder">
-            <div class="img-label">Global-Contract — Dal 2010</div>
-          </div>
-          <div class="about-badge-float">
-            <span class="badge-number">15+</span>
-            <span class="badge-text">Anni nel settore</span>
-          </div>
-        </div>
-        <div class="about-content fade-in fade-in-d2">
-          <span class="section-badge">Chi Siamo</span>
-          <h2>Il partner di fiducia per i <span class="accent">professionisti della ristorazione</span></h2>
-          <p class="lead">Global-Contract nasce dalla passione per l'eccellenza nel settore dell'attrezzatura professionale. Da oltre 15 anni siamo il punto di riferimento per ristoranti, hotel, catene di ristorazione e industrie alimentari in tutta Italia.</p>
-          <p>Il nostro team di esperti seleziona e fornisce solo i migliori macchinari sul mercato, garantendo supporto completo dalla consulenza iniziale fino all'assistenza post-vendita.</p>
-          <div class="about-features">
-            <div class="feature">
-              <div class="feature-icon">✓</div>
-              <div>
-                <strong>Garanzia Estesa</strong>
-                <span>2 anni su tutti i prodotti</span>
-              </div>
+        
+        <!-- Colonna sinistra: stats/numeri -->
+        <div class="about-stats-col reveal-up">
+          <span class="section-eyebrow">LA NOSTRA STORIA</span>
+          <h2 class="section-title">Trent'anni a fianco di chi apre.</h2>
+          
+          <div class="stats-list" id="statsContainer">
+            <div class="stat-item">
+              <span class="stat-number" data-target="30">0</span>
+              <span class="stat-label">anni di attività</span>
             </div>
-            <div class="feature">
-              <div class="feature-icon">✓</div>
-              <div>
-                <strong>Assistenza 24h</strong>
-                <span>Intervento entro 24 ore</span>
-              </div>
+            <div class="stat-item">
+              <span class="stat-number" data-target="850">0</span>
+              <span class="stat-label">locali attrezzati in Sicilia</span>
             </div>
-            <div class="feature">
-              <div class="feature-icon">✓</div>
-              <div>
-                <strong>Spedizione Gratuita</strong>
-                <span>Ordini superiori a €2.000</span>
-              </div>
-            </div>
-            <div class="feature">
-              <div class="feature-icon">✓</div>
-              <div>
-                <strong>Finanziamento</strong>
-                <span>Soluzioni personalizzate</span>
-              </div>
+            <div class="stat-item">
+              <span class="stat-number" data-target="500">0</span>
+              <span class="stat-label">brand professionali trattati</span>
             </div>
           </div>
-          <a href="contact.html" class="btn btn-primary">Contattaci Ora</a>
         </div>
+
+        <!-- Colonna destra: il fondatore Vincenzo -->
+        <div class="about-founder-col reveal-up reveal-d2">
+          <div class="founder-img-wrapper">
+            <img data-src="assets/images/founder.jpg" alt="Vincenzo — Fondatore di Krea" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 3 4'%3E%3Crect width='3' height='4' fill='%23E6E2DA'/%3E%3C/svg%3E">
+          </div>
+          <div class="founder-quote-decor"></div>
+          <blockquote class="founder-quote">
+            "Ho attrezzato oltre 850 locali in Sicilia. So cosa serve per aprire un'attività che funziona davvero."
+          </blockquote>
+          <span class="founder-name">Vincenzo &mdash; Fondatore di Krea</span>
+        </div>
+
       </div>
     </div>
   </section>
 
-  <!-- MISSION -->
-  <section class="mission section">
+
+  <!-- =====================================================
+       SEZIONE 3 — SERVIZI
+  ===================================================== -->
+  <section class="section services-section" id="servizi">
     <div class="container">
-      <div class="section-header">
-        <span class="section-badge">Il Nostro Obiettivo</span>
-        <h2>La nostra <span class="accent">missione</span></h2>
-        <p>Ogni giorno lavoriamo per offrire le migliori soluzioni ai professionisti del settore alimentare e della ristorazione.</p>
+      <div class="section-header reveal-up">
+        <span class="section-eyebrow">COSA FACCIAMO</span>
+        <h2 class="section-title">Dalla consulenza alle chiavi in mano.</h2>
+        <p class="section-subtitle">Un solo interlocutore affidabile per seguire ogni fase del tuo progetto HoReCa.</p>
       </div>
-      <div class="mission-grid">
-        <div class="mission-card fade-in fade-in-d1">
-          <div class="mission-icon">🎯</div>
-          <h3>Qualità Senza Compromessi</h3>
-          <p>Selezioniamo solo i migliori produttori mondiali per garantire affidabilità, performance elevate e lunga durata.</p>
+
+      <div class="services-grid">
+        <!-- Step 1 -->
+        <div class="service-card reveal-up reveal-d1">
+          <span class="service-number" aria-hidden="true">01</span>
+          <div class="service-content">
+            <div class="service-icon" aria-hidden="true">
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+            </div>
+            <h3>Consulenza gratuita</h3>
+            <p>Capiamo insieme cosa ti serve, analizzando i flussi di lavoro e l'efficienza degli spazi.</p>
+          </div>
         </div>
-        <div class="mission-card fade-in fade-in-d2">
-          <div class="mission-icon">🤝</div>
-          <h3>Partnership Durature</h3>
-          <p>Non vendiamo solo macchinari, costruiamo relazioni a lungo termine con ogni nostro cliente. Il tuo successo è il nostro successo.</p>
+
+        <!-- Step 2 -->
+        <div class="service-card reveal-up reveal-d2">
+          <span class="service-number" aria-hidden="true">02</span>
+          <div class="service-content">
+            <div class="service-icon" aria-hidden="true">
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg>
+            </div>
+            <h3>Progettazione 3D</h3>
+            <p>Vedi il tuo locale e la disposizione delle attrezzature prima ancora di iniziare i lavori.</p>
+          </div>
         </div>
-        <div class="mission-card fade-in fade-in-d3">
-          <div class="mission-icon">🚀</div>
-          <h3>Innovazione Continua</h3>
-          <p>Sempre aggiornati sulle ultime tecnologie per offrirti soluzioni all'avanguardia che migliorano l'efficienza della tua cucina.</p>
+
+        <!-- Step 3 -->
+        <div class="service-card reveal-up reveal-d3">
+          <span class="service-number" aria-hidden="true">03</span>
+          <div class="service-content">
+            <div class="service-icon" aria-hidden="true">
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg>
+            </div>
+            <h3>Fornitura e posa</h3>
+            <p>Selezioniamo i macchinari dei migliori 500+ brand internazionali, installati a regola d'arte.</p>
+          </div>
         </div>
-        <div class="mission-card fade-in fade-in-d4">
-          <div class="mission-icon">🌱</div>
-          <h3>Sostenibilità</h3>
-          <p>Promuoviamo macchinari energy-efficient per ridurre i consumi energetici e l'impatto ambientale della tua attività.</p>
+
+        <!-- Step 4 -->
+        <div class="service-card reveal-up reveal-d4">
+          <span class="service-number" aria-hidden="true">04</span>
+          <div class="service-content">
+            <div class="service-icon" aria-hidden="true">
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path></svg>
+            </div>
+            <h3>Assistenza 24h</h3>
+            <p>Siamo qui anche dopo. Interventi rapidi e manutenzione costante per non fermare mai la tua cucina.</p>
+          </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- FEATURED PRODUCTS -->
-  <section class="featured section">
+
+  <!-- =====================================================
+       SEZIONE 4 — SOCIAL PROOF (TESTIMONIANZE SCORREVOLI)
+  ===================================================== -->
+  <section class="section testimonials-section" id="testimonianze">
     <div class="container">
-      <div class="section-header">
-        <span class="section-badge">I Più Richiesti</span>
-        <h2>Prodotti <span class="accent">in evidenza</span></h2>
-        <p>I macchinari più scelti dai professionisti del settore, disponibili per acquisto diretto o consulenza personalizzata.</p>
+      <div class="section-header reveal-up">
+        <span class="section-eyebrow">I NOSTRI CLIENTI</span>
+        <h2 class="section-title">Chi ha scelto Krea.</h2>
+        <p class="section-subtitle">Le storie reali e le voci dei ristoratori e albergatori che si affidano al nostro metodo di lavoro in tutta la Sicilia.</p>
       </div>
-      <div class="products-grid" id="featuredProducts"></div>
-      <div class="section-cta">
-        <a href="products.html" class="btn btn-outline-dark btn-lg">Vedi Tutto il Catalogo</a>
-        <a href="shop.html" class="btn btn-accent btn-lg">Vai allo Shop Online</a>
+
+      <div class="testimonials-carousel-wrapper reveal-up">
+        <div class="testimonials-track-container" id="testimonialsTrack">
+          
+          <!-- Card 1 -->
+          <div class="testimonial-card">
+            <div class="testimonial-media">
+              <img data-src="assets/images/portfolio/client_1.jpg" alt="Marco Ferraro — Ristorante Scirocco" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1 1'%3E%3Crect width='1' height='1' fill='%23E6E2DA'/%3E%3C/svg%3E">
+              <div class="testimonial-play" role="button" aria-label="Riproduci testimonianza video">
+                <div class="play-btn-circle">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+                </div>
+              </div>
+            </div>
+            <div class="testimonial-author">
+              <h4>Marco Ferraro</h4>
+              <span class="testimonial-meta">Ristorante Scirocco, Palermo</span>
+            </div>
+            <blockquote class="testimonial-quote">
+              "Krea ha rivoluzionato il flusso della mia cucina. Precisione svizzera, cuore siciliano."
+            </blockquote>
+          </div>
+
+          <!-- Card 2 -->
+          <div class="testimonial-card">
+            <div class="testimonial-media">
+              <img data-src="assets/images/portfolio/client_2.jpg" alt="Giulia Amato — Hotel Villa Etnea" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1 1'%3E%3Crect width='1' height='1' fill='%23E6E2DA'/%3E%3C/svg%3E">
+              <div class="testimonial-play" role="button" aria-label="Riproduci testimonianza video">
+                <div class="play-btn-circle">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+                </div>
+              </div>
+            </div>
+            <div class="testimonial-author">
+              <h4>Giulia Amato</h4>
+              <span class="testimonial-meta">Hotel Villa Etnea, Catania</span>
+            </div>
+            <blockquote class="testimonial-quote">
+              "La progettazione 3D ci ha evitato errori di ingombro enormi. Consigliatissimi."
+            </blockquote>
+          </div>
+
+          <!-- Card 3 -->
+          <div class="testimonial-card">
+            <div class="testimonial-media">
+              <img data-src="assets/images/portfolio/client_3.jpg" alt="Salvatore Greco — Bar Centrale" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1 1'%3E%3Crect width='1' height='1' fill='%23E6E2DA'/%3E%3C/svg%3E">
+              <div class="testimonial-play" role="button" aria-label="Riproduci testimonianza video">
+                <div class="play-btn-circle">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+                </div>
+              </div>
+            </div>
+            <div class="testimonial-author">
+              <h4>Salvatore Greco</h4>
+              <span class="testimonial-meta">Bar Centrale, Agrigento</span>
+            </div>
+            <blockquote class="testimonial-quote">
+              "Attrezzature bar eccellenti e un'assistenza post-vendita che risponde anche di domenica."
+            </blockquote>
+          </div>
+
+          <!-- Card 4 -->
+          <div class="testimonial-card">
+            <div class="testimonial-media">
+              <img data-src="assets/images/portfolio/client_4.jpg" alt="Anna Marino — Trattoria dei Vespri" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1 1'%3E%3Crect width='1' height='1' fill='%23E6E2DA'/%3E%3C/svg%3E">
+              <div class="testimonial-play" role="button" aria-label="Riproduci testimonianza video">
+                <div class="play-btn-circle">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+                </div>
+              </div>
+            </div>
+            <div class="testimonial-author">
+              <h4>Anna Marino</h4>
+              <span class="testimonial-meta">Trattoria dei Vespri, Palermo</span>
+            </div>
+            <blockquote class="testimonial-quote">
+              "L'ottimizzazione degli spazi della cucina ha ridotto i tempi di servizio del 20%."
+            </blockquote>
+          </div>
+
+          <!-- Card 5 -->
+          <div class="testimonial-card">
+            <div class="testimonial-media">
+              <img data-src="assets/images/portfolio/client_5.jpg" alt="Luca Rizzo — Resort Capo Peloro" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1 1'%3E%3Crect width='1' height='1' fill='%23E6E2DA'/%3E%3C/svg%3E">
+              <div class="testimonial-play" role="button" aria-label="Riproduci testimonianza video">
+                <div class="play-btn-circle">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+                </div>
+              </div>
+            </div>
+            <div class="testimonial-author">
+              <h4>Luca Rizzo</h4>
+              <span class="testimonial-meta">Resort Capo Peloro, Messina</span>
+            </div>
+            <blockquote class="testimonial-quote">
+              "Affidare il chiavi in mano a Krea ci ha permesso di aprire l'hotel nei tempi prestabiliti."
+            </blockquote>
+          </div>
+
+        </div>
+
+        <!-- Frecce Navigazione Editoriale -->
+        <div class="carousel-nav" aria-hidden="true">
+          <button class="carousel-arrow" id="carouselPrev" aria-label="Testimonianza precedente">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+          </button>
+          <button class="carousel-arrow" id="carouselNext" aria-label="Testimonianza successiva">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+          </button>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- CTA BANNER -->
-  <section class="cta-section">
+
+  <!-- =====================================================
+       SEZIONE 5 — CTA FINALE (CONTATTI)
+  ===================================================== -->
+  <section class="section cta-final-section" id="contatti">
     <div class="container">
-      <div class="cta-content">
-        <h2>Non sai quale macchinario fa al caso tuo?</h2>
-        <p>I nostri esperti ti guideranno nella scelta perfetta per la tua attività. Consulenza gratuita, senza impegno, anche a distanza.</p>
-        <a href="contact.html#booking" class="btn btn-accent btn-lg">Prenota una Consulenza Gratuita</a>
+      <div class="cta-final-inner reveal-up">
+        <h2 class="cta-final-title">Parliamoci.</h2>
+        <p class="cta-final-sub">Consulenza gratuita, senza impegno. Raccontaci il tuo progetto HoReCa o la tua idea di locale e ti guideremo passo dopo passo.</p>
+        
+        <div class="cta-final-btns">
+          <!-- WhatsApp Link -->
+          <a href="https://wa.me/39091123456" class="btn btn--primary cta-btn-white" target="_blank" rel="noopener" aria-label="Scrivici su WhatsApp">
+            <!-- Minimal SVG WhatsApp Icon -->
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12.012 2c-5.506 0-9.988 4.47-9.988 9.951 0 1.758.459 3.407 1.259 4.848l-1.283 4.693 4.82-1.254c1.397.755 2.99 1.188 4.68 1.188 5.507 0 9.991-4.473 9.991-9.954C22.003 6.47 17.52 2 12.012 2zm5.793 14.195c-.247.69-1.218 1.25-1.685 1.32-.429.066-.991.1-2.923-.655-2.47-1.026-4.048-3.52-4.17-3.68-.124-.165-.98-1.298-.98-2.48 0-1.182.62-1.76.845-2.003.226-.242.493-.303.66-.303.165 0 .328.005.47.01.147.006.347-.057.545.414.2.484.685 1.65.742 1.765.058.115.099.248.02.399-.077.155-.119.248-.239.387-.12.14-.249.313-.357.42-.119.117-.245.244-.105.48.14.234.62 1.011 1.33 1.637.915.807 1.684 1.059 1.92 1.178.236.118.375.1.514-.06.14-.16.6-1.002.76-1.344.16-.342.32-.284.54-.202.22.083 1.401.656 1.639.773.24.117.399.176.458.277.06.1.06.58-.187 1.27z"/></svg>
+            Scrivici su WhatsApp
+          </a>
+
+          <!-- Telefono Call Link -->
+          <a href="#" class="btn btn--outline cta-btn-outline-white" aria-label="Prenota una chiamata">
+            Prenota una chiamata
+          </a>
+        </div>
+
+        <div class="cta-final-info">
+          <span>Palermo, Sicilia</span>
+          <span aria-hidden="true">&bull;</span>
+          <a href="tel:+39091123456">+39 091 123 456</a>
+          <span aria-hidden="true">&bull;</span>
+          <a href="mailto:info@kreaglobalcontract.it">info@kreaglobalcontract.it</a>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- FOOTER -->
+
+  <!-- =====================================================
+       FOOTER
+  ===================================================== -->
   <footer class="footer">
     <div class="container">
+      
       <div class="footer-grid">
-        <div class="footer-brand">
-          <a href="index.html" class="logo">
-            <span class="logo-icon">GC</span>
-            <span class="logo-text">Global<span class="accent">Contract</span></span>
-          </a>
-          <p>Il tuo partner di fiducia per macchinari professionali. Qualità, affidabilità e assistenza dedicata dal 2010.</p>
-          <div class="social-links">
-            <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
-            <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-            <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+        <!-- Logo & Descrizione -->
+        <div class="footer-brand-col">
+          <img src="assets/images/logo-krea.svg" alt="Krea Global Contract Logo" height="32">
+          <p class="footer-brand-text">Progettiamo spazi commerciali e forniamo attrezzature professionali HoReCa di altissima qualità da 30 anni in Sicilia.</p>
+          
+          <div class="footer-socials">
+            <!-- Instagram -->
+            <a href="#" aria-label="Krea su Instagram" target="_blank" rel="noopener">
+              <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.051.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg>
+            </a>
+            <!-- LinkedIn -->
+            <a href="#" aria-label="Krea su LinkedIn" target="_blank" rel="noopener">
+              <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+            </a>
+            <!-- Facebook -->
+            <a href="#" aria-label="Krea su Facebook" target="_blank" rel="noopener">
+              <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.596 0-5.192 1.583-5.192 4.615v3.385z"/></svg>
+            </a>
           </div>
         </div>
-        <div class="footer-links">
-          <h4>Navigazione</h4>
-          <ul>
-            <li><a href="index.html">Home</a></li>
-            <li><a href="products.html">Catalogo Prodotti</a></li>
-            <li><a href="shop.html">Shop Online</a></li>
-            <li><a href="index.html#about">Chi Siamo</a></li>
-            <li><a href="contact.html">Contatti</a></li>
-          </ul>
+
+        <!-- Links Navigazione 1 -->
+        <div class="footer-nav-col">
+          <h4>Azienda</h4>
+          <nav class="footer-nav-list" aria-label="Link Footer 1">
+            <a href="#chi-siamo">Chi Siamo</a>
+            <a href="#portfolio">I Nostri Progetti</a>
+            <a href="#servizi">Cosa Facciamo</a>
+            <a href="#contatti">Contattaci</a>
+          </nav>
         </div>
-        <div class="footer-links">
-          <h4>Categorie</h4>
-          <ul>
-            <li><a href="shop.html?cat=forni">Forni Professionali</a></li>
-            <li><a href="shop.html?cat=cucine">Cucine Industriali</a></li>
-            <li><a href="shop.html?cat=frigoriferi">Frigoriferi Commerciali</a></li>
-          </ul>
-        </div>
-        <div class="footer-contact">
-          <h4>Contatti</h4>
-          <ul>
-            <li><i class="fas fa-phone"></i> +39 02 1234 5678</li>
-            <li><i class="fas fa-envelope"></i> info@globalcontract.it</li>
-            <li><i class="fas fa-map-marker-alt"></i> Via Roma 1, 20121 Milano</li>
-            <li><i class="fas fa-clock"></i> Lun–Ven 9:00–18:00</li>
-          </ul>
-          <a href="contact.html#booking" class="btn btn-accent btn-sm" style="margin-top:1.2rem;display:inline-flex;">Prenota Chiamata</a>
+
+        <!-- Links Navigazione 2 -->
+        <div class="footer-nav-col">
+          <h4>Servizi</h4>
+          <nav class="footer-nav-list" aria-label="Link Footer 2">
+            <a href="#servizi">Consulenza tecnica</a>
+            <a href="#servizi">Progettazione cucine 3D</a>
+            <a href="#servizi">Arredamento Contract</a>
+            <a href="#servizi">Assistenza 24h HoReCa</a>
+          </nav>
         </div>
       </div>
+
+      <!-- Copyright e note legali -->
       <div class="footer-bottom">
-        <p>&copy; 2026 Global-Contract S.r.l. &nbsp;|&nbsp; P.IVA 12345678901 &nbsp;|&nbsp; <a href="#">Privacy Policy</a> &nbsp;|&nbsp; <a href="#">Termini di Servizio</a></p>
+        <span class="copyright">&copy; 2026 Krea Global Contract &bull; P.IVA 01234567890 &bull; Palermo, Sicilia. Tutti i diritti riservati.</span>
+        <nav aria-label="Note Legali" style="display: flex; gap: 1rem;">
+          <a href="#" class="copyright" style="text-decoration: underline;">Privacy Policy</a>
+          <a href="#" class="copyright" style="text-decoration: underline;">Cookie Policy</a>
+        </nav>
       </div>
+
     </div>
   </footer>
 
+
+  <!-- =====================================================
+       FAB CONTATTI (WHATSAPP ACCESSIBILE)
+  ===================================================== -->
+  <a href="https://wa.me/39091123456" class="fab-contact" target="_blank" rel="noopener" aria-label="Scrivici su WhatsApp">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12.012 2c-5.506 0-9.988 4.47-9.988 9.951 0 1.758.459 3.407 1.259 4.848l-1.283 4.693 4.82-1.254c1.397.755 2.99 1.188 4.68 1.188 5.507 0 9.991-4.473 9.991-9.954C22.003 6.47 17.52 2 12.012 2zm5.793 14.195c-.247.69-1.218 1.25-1.685 1.32-.429.066-.991.1-2.923-.655-2.47-1.026-4.048-3.52-4.17-3.68-.124-.165-.98-1.298-.98-2.48 0-1.182.62-1.76.845-2.003.226-.242.493-.303.66-.303.165 0 .328.005.47.01.147.006.347-.057.545.414.2.484.685 1.65.742 1.765.058.115.099.248.02.399-.077.155-.119.248-.239.387-.12.14-.249.313-.357.42-.119.117-.245.244-.105.48.14.234.62 1.011 1.33 1.637.915.807 1.684 1.059 1.92 1.178.236.118.375.1.514-.06.14-.16.6-1.002.76-1.344.16-.342.32-.284.54-.202.22.083 1.401.656 1.639.773.24.117.399.176.458.277.06.1.06.58-.187 1.27z"/></svg>
+    <span>Contattaci</span>
+  </a>
+
+
+  <!-- =====================================================
+       SCRIPTS (GSAP + ScrollTrigger + Custom Engines)
+  ===================================================== -->
+  <!-- GSAP Suite CDN -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+
+  <!-- Local Engines -->
+  <script src="js/gsap-scroll.js"></script>
+  <script src="js/carousel.js"></script>
   <script src="js/main.js"></script>
+
 </body>
 </html>

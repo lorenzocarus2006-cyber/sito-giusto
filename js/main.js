@@ -1,89 +1,171 @@
-// ============================================
-// GLOBAL-CONTRACT — Homepage JS
-// ============================================
+/* =====================================================
+   KREA GLOBAL CONTRACT — Main Website Controller
+===================================================== */
 
-const featuredProducts = [
-  { id: 1, category: 'forni', name: 'Forno a Convezione GC-500', description: 'Forno professionale con vapore integrato, 10 teglie GN 1/1. Ideale per volumi elevati.', price: 3500, originalPrice: 4200, badge: 'Best Seller', rating: 4.8, reviews: 124, emoji: '🔥' },
-  { id: 4, category: 'cucine', name: 'Piano Cottura 6 Fuochi', description: 'Linea cottura professionale in acciaio inox con 6 bruciatori ad alta potenza.', price: 2800, originalPrice: 3200, badge: 'Offerta', rating: 4.7, reviews: 89, emoji: '👨‍🍳' },
-  { id: 7, category: 'frigoriferi', name: 'Banco Refrigerato BF-200', description: 'Banco refrigerato a vetrina con illuminazione LED. Temperatura 0-4°C regolabile.', price: 2100, originalPrice: 2400, badge: 'Offerta', rating: 4.6, reviews: 67, emoji: '❄️' }
-];
+(function () {
+  'use strict';
 
-function formatPrice(n) {
-  return new Intl.NumberFormat('it-IT', { style: 'currency', currency: 'EUR', maximumFractionDigits: 0 }).format(n);
-}
+  /* ─────────────────────────────────────────────
+     1. MOBILE NAVIGATION DRAWER
+  ───────────────────────────────────────────── */
+  const hamburger = document.getElementById('hamburger');
+  const mobileDrawer = document.getElementById('mobileDrawer');
+  const drawerLinks = document.querySelectorAll('.drawer-link, .drawer-cta');
 
-function getCategoryLabel(cat) {
-  return { forni: 'Forni', cucine: 'Cucine', frigoriferi: 'Frigoriferi' }[cat] || cat;
-}
+  if (hamburger && mobileDrawer) {
+    function toggleMenu() {
+      const active = hamburger.classList.toggle('active');
+      mobileDrawer.classList.toggle('active');
+      hamburger.setAttribute('aria-expanded', active);
+      mobileDrawer.setAttribute('aria-hidden', !active);
+      document.body.style.overflow = active ? 'hidden' : '';
+    }
 
-function getBadgeClass(b) {
-  if (b === 'Nuovo') return 'new';
-  if (b === 'Offerta') return 'sale';
-  return '';
-}
+    hamburger.addEventListener('click', toggleMenu);
 
-function renderStars(r) {
-  return '★'.repeat(Math.floor(r)) + (r % 1 >= 0.5 ? '½' : '');
-}
+    drawerLinks.forEach(link => {
+      link.addEventListener('click', () => {
+        if (hamburger.classList.contains('active')) {
+          toggleMenu();
+        }
+      });
+    });
+  }
 
-// Render featured products on homepage
-const featuredEl = document.getElementById('featuredProducts');
-if (featuredEl) {
-  featuredEl.innerHTML = featuredProducts.map((p, i) => `
-    <div class="product-card fade-in fade-in-d${i + 1}">
-      <div class="product-img">
-        <span>${p.emoji}</span>
-        ${p.badge ? `<div class="product-badge ${getBadgeClass(p.badge)}">${p.badge}</div>` : ''}
-      </div>
-      <div class="product-body">
-        <div class="product-category">${getCategoryLabel(p.category)}</div>
-        <div class="product-name">${p.name}</div>
-        <div class="product-desc">${p.description}</div>
-        <div class="product-rating">
-          <span class="stars">${renderStars(p.rating)}</span>
-          <span>${p.rating}</span>
-          <span class="rating-count">(${p.reviews} recensioni)</span>
-        </div>
-        <div class="product-footer">
-          <div class="product-price">
-            <span class="price-current">${formatPrice(p.price)}</span>
-            ${p.originalPrice ? `<span class="price-original">${formatPrice(p.originalPrice)}</span>` : ''}
-          </div>
-          <div class="product-actions">
-            <a href="shop.html" class="btn btn-accent btn-sm">Acquista</a>
-          </div>
-        </div>
-      </div>
-    </div>
-  `).join('');
-}
+  /* ─────────────────────────────────────────────
+     2. REVEAL ANIMATIONS (INTERSECTION OBSERVER)
+  ───────────────────────────────────────────── */
+  const revealElements = document.querySelectorAll('.reveal-up');
 
-// Navbar scroll effect
-const navbar = document.getElementById('navbar');
-window.addEventListener('scroll', () => {
-  navbar?.classList.toggle('scrolled', window.scrollY > 60);
-});
+  if ('IntersectionObserver' in window && revealElements.length > 0) {
+    const revealObserver = new IntersectionObserver((entries, observer) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target); // Ferma l'ascolto per performance
+        }
+      });
+    }, {
+      root: null,
+      rootMargin: '0px 0px -8% 0px', // Attiva l'animazione leggermente prima di entrare nel viewport
+      threshold: 0.15
+    });
 
-// Mobile menu
-const hamburger = document.getElementById('hamburger');
-const navLinks = document.getElementById('navLinks');
-hamburger?.addEventListener('click', () => {
-  navLinks.classList.toggle('open');
-  hamburger.classList.toggle('active');
-});
-navLinks?.querySelectorAll('a').forEach(a => {
-  a.addEventListener('click', () => {
-    navLinks.classList.remove('open');
-    hamburger.classList.remove('active');
-  });
-});
+    revealElements.forEach(el => revealObserver.observe(el));
+  } else {
+    // Fallback se l'observer non è supportato
+    revealElements.forEach(el => el.classList.add('visible'));
+  }
 
-// Scroll animations
-const observer = new IntersectionObserver(entries => {
-  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
-}, { threshold: 0.1 });
+  /* ─────────────────────────────────────────────
+     3. LAZY LOADING IMAGES WITH OBSERVER
+  ───────────────────────────────────────────── */
+  const lazyImages = document.querySelectorAll('img[data-src]');
 
-document.querySelectorAll('.fade-in, .category-card, .mission-card').forEach(el => {
-  el.classList.add('fade-in');
-  observer.observe(el);
-});
+  if ('IntersectionObserver' in window && lazyImages.length > 0) {
+    const lazyObserver = new IntersectionObserver((entries, observer) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const img = entry.target;
+          img.src = img.getAttribute('data-src');
+          img.onload = () => img.removeAttribute('data-src');
+          observer.unobserve(img);
+        }
+      });
+    }, {
+      rootMargin: '200px 0px', // Precarica 200px prima di scorrere alla vista
+      threshold: 0.01
+    });
+
+    lazyImages.forEach(img => lazyObserver.observe(img));
+  } else {
+    // Fallback
+    lazyImages.forEach(img => {
+      img.src = img.getAttribute('data-src');
+    });
+  }
+
+  /* ─────────────────────────────────────────────
+     4. COUNT UP ANIMATION FOR STATS (CHI SIAMO)
+  ───────────────────────────────────────────── */
+  const statsContainer = document.getElementById('statsContainer');
+  const statNumbers = document.querySelectorAll('.stat-number');
+
+  if ('IntersectionObserver' in window && statsContainer && statNumbers.length > 0) {
+    let hasCounted = false;
+
+    function countUp(el) {
+      const target = parseInt(el.getAttribute('data-target'), 10);
+      const duration = 2000; // millisecondi
+      const startTime = performance.now();
+
+      function update(currentTime) {
+        const elapsed = currentTime - startTime;
+        const progress = Math.min(elapsed / duration, 1);
+        
+        // Easing out quadratico
+        const easeProgress = progress * (2 - progress);
+        const currentVal = Math.floor(easeProgress * target);
+
+        // Aggiunge il segno "+" se presente nel valore target originale
+        if (target === 850) {
+          el.textContent = currentVal + '+';
+        } else if (target === 500) {
+          el.textContent = currentVal + '+';
+        } else {
+          el.textContent = currentVal;
+        }
+
+        if (progress < 1) {
+          requestAnimationFrame(update);
+        } else {
+          // Valore finale per precisione
+          if (target === 850) {
+            el.textContent = '850+';
+          } else if (target === 500) {
+            el.textContent = '500+';
+          } else {
+            el.textContent = target;
+          }
+        }
+      }
+
+      requestAnimationFrame(update);
+    }
+
+    const statsObserver = new IntersectionObserver((entries, observer) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting && !hasCounted) {
+          hasCounted = true;
+          statNumbers.forEach(num => countUp(num));
+          observer.unobserve(entry.target);
+        }
+      });
+    }, {
+      threshold: 0.3
+    });
+
+    statsObserver.observe(statsContainer);
+  } else {
+    // Fallback se non supportato
+    statNumbers.forEach(el => {
+      const target = el.getAttribute('data-target');
+      el.textContent = (target === '850' || target === '500') ? target + '+' : target;
+    });
+  }
+
+  /* ─────────────────────────────────────────────
+     5. DYNAMIC NAVBAR SCROLL CLASS
+  ───────────────────────────────────────────── */
+  const navbar = document.getElementById('navbar');
+  if (navbar) {
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 50) {
+        navbar.classList.add('navbar--scrolled');
+      } else {
+        navbar.classList.remove('navbar--scrolled');
+      }
+    }, { passive: true });
+  }
+
+})();
