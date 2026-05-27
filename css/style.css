@@ -737,10 +737,11 @@ p {
 /* ─────────────────────────────────────────────────────
    SEZIONE 5 — CTA FINALE (CONTATTI) & FORM MULTI-STEP
 ───────────────────────────────────────────────────── */
+#contatti,
 .contact-section {
-  background: var(--color-primary);
-  padding: 140px 5vw 100px;
-  text-align: center;
+  background: #4A2B7F !important;
+  padding: 140px 5vw 100px !important;
+  text-align: center !important;
 }
 
 .contact-label {
@@ -754,44 +755,42 @@ p {
 }
 
 .contact-headline {
-  font-family: var(--font-display);
-  font-size: clamp(64px, 10vw, 120px);
-  font-weight: 300;
-  font-style: italic;
-  color: #FFFFFF;
-  line-height: 1;
-  margin-bottom: 28px;
+  font-family: 'Cormorant Garamond', serif !important;
+  font-size: clamp(64px, 10vw, 120px) !important;
+  font-weight: 300 !important;
+  font-style: italic !important;
+  color: #FFFFFF !important;
+  line-height: 1 !important;
+  margin-bottom: 28px !important;
 }
 
 .contact-sub {
-  font-size: 18px;
-  line-height: 1.7;
-  color: rgba(255,255,255,0.7);
-  max-width: 480px;
-  margin: 0 auto 48px;
+  font-size: 18px !important;
+  line-height: 1.7 !important;
+  color: rgba(255,255,255,0.7) !important;
+  max-width: 480px !important;
+  margin: 0 auto 48px !important;
 }
 
 .btn-prenota {
-  display: inline-flex;
-  align-items: center;
-  gap: 12px;
-  background: #FFFFFF;
-  color: var(--color-primary);
-  font-family: var(--font-body);
-  font-size: 15px;
-  font-weight: 600;
-  letter-spacing: 0.04em;
-  padding: 20px 44px;
-  border: none;
-  border-radius: 60px;
-  cursor: pointer;
-  transition: transform 0.25s, box-shadow 0.25s;
-  box-shadow: 0 4px 32px rgba(0,0,0,0.15);
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 12px !important;
+  background: #FFFFFF !important;
+  color: #4A2B7F !important;
+  font-size: 16px !important;
+  font-weight: 600 !important;
+  padding: 20px 44px !important;
+  border: none !important;
+  border-radius: 60px !important;
+  cursor: pointer !important;
+  box-shadow: 0 4px 32px rgba(0,0,0,0.2) !important;
+  transition: transform 0.25s, box-shadow 0.25s !important;
 }
 
 .btn-prenota:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 40px rgba(0,0,0,0.25);
+  transform: translateY(-2px) !important;
+  box-shadow: 0 8px 40px rgba(0,0,0,0.3) !important;
 }
 
 .btn-prenota .btn-arrow {
@@ -804,24 +803,24 @@ p {
 }
 
 .contact-details {
-  margin-top: 56px;
-  font-size: 14px;
-  color: rgba(255,255,255,0.45);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 16px;
-  flex-wrap: wrap;
+  margin-top: 56px !important;
+  font-size: 14px !important;
+  color: rgba(255,255,255,0.4) !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 16px !important;
+  flex-wrap: wrap !important;
 }
 
 .contact-details a {
-  color: rgba(255,255,255,0.45);
-  text-decoration: none;
+  color: rgba(255,255,255,0.4) !important;
+  text-decoration: none !important;
   transition: color 0.2s;
 }
 
 .contact-details a:hover {
-  color: rgba(255,255,255,0.9);
+  color: rgba(255,255,255,0.9) !important;
 }
 
 .contact-details .dot {
@@ -829,25 +828,23 @@ p {
 }
 
 /* Modale Overlay */
+#consultModal,
 .modal-overlay {
-  position: fixed;
-  inset: 0;
-  background: rgba(20, 10, 40, 0.75);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  z-index: 1000;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 20px;
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.3s;
+  display: none !important;
+  position: fixed !important;
+  inset: 0 !important;
+  background: rgba(20, 10, 40, 0.75) !important;
+  backdrop-filter: blur(8px) !important;
+  -webkit-backdrop-filter: blur(8px) !important;
+  z-index: 9999 !important;
+  align-items: center !important;
+  justify-content: center !important;
+  padding: 20px !important;
 }
 
+#consultModal.open,
 .modal-overlay.open {
-  opacity: 1;
-  pointer-events: all;
+  display: flex !important;
 }
 
 /* Card */
