@@ -6,17 +6,17 @@
 :root {
   /* Colori */
   --color-bg:          #FAFAF8;        /* Background principale — bianco caldo */
-  --color-bg-alt:      #F2EFE9;        /* Sezioni alternate — avorio */
+  --color-bg-alt:      #F4F1EA;        /* Sezioni alternate — avorio */
   --color-surface:     #FFFFFF;        /* Card e superfici */
-  --color-border:      rgba(74,44,107,0.12); /* Bordi viola trasparenti */
+  --color-border:      rgba(50,25,76,0.08);  /* Bordi viola ultra-sottili e discreti */
 
-  --color-text:        #1A1A1A;        /* Testo primario */
-  --color-text-m:      #5A5A5A;        /* Testo secondario */
-  --color-text-s:      #9A9A9A;        /* Caption / placeholder */
+  --color-text:        #121212;        /* Testo primario più profondo */
+  --color-text-m:      #4A4A4A;        /* Testo secondario */
+  --color-text-s:      #8E8E8E;        /* Caption / placeholder */
 
-  --color-violet:      #4A2C6B;        /* Accento principale — CTA, numeri, icone */
-  --color-violet-l:    #6B4A8F;        /* Hover / highlight */
-  --color-violet-bg:   rgba(74,44,107,0.06); /* Background tinto viola — usato con parsimonia */
+  --color-violet:      #32194C;        /* Accento principale — Melanzana profondo / Luxury */
+  --color-violet-l:    #4D2B70;        /* Hover / highlight */
+  --color-violet-bg:   rgba(50,25,76,0.04);  /* Background tinto viola leggerissimo */
 
   /* Alias per form multi-step */
   --color-primary:       var(--color-violet);
