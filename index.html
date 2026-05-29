@@ -18,6 +18,7 @@
   <!-- Styles -->
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="css/animations.css">
+  <link rel="stylesheet" href="css/timeline.css">
   <!-- Local overrides for Contact Section & Modal visibility -->
   <style>
     #contatti, .contact-section {
@@ -208,9 +209,9 @@
   <section class="section portfolio-section" id="portfolio">
     <div class="container">
       <div class="section-header reveal-up">
-        <span class="section-eyebrow">PROGETTI SELEZIONATI</span>
-        <h2 class="section-title">Spazi operativi ad alte prestazioni.</h2>
-        <p class="section-subtitle">Ingegneria dei layout e design d'interni per ristoranti, hotel e bar. Soluzioni concepite per ottimizzare ogni servizio.</p>
+        <span class="section-eyebrow">ECCELLENZA CONTRACT</span>
+        <h2 class="section-title">Opere sartoriali per l'alta ristorazione.</h2>
+        <p class="section-subtitle">Dalla fusione tra ergonomia operativa e design d'interni nascono spazi d'eccellenza per hotel, resort e ristoranti stellati. Ogni layout è concepito per ottimizzare il servizio e massimizzare le performance commerciali.</p>
       </div>
 
       <div class="portfolio-grid">
@@ -277,45 +278,133 @@
 
 
   <!-- =====================================================
-       SEZIONE 2 — CHI SIAMO (NUMERI + PADRE)
+       SEZIONE 2 — CHI SIAMO (TIMELINE ORIZZONTALE ANIMATA)
   ===================================================== -->
-  <section class="section about-section" id="chi-siamo">
-    <div class="container">
-      <div class="about-grid">
+  <section class="timeline-section" id="chi-siamo">
+    <!-- Horizontal Scroll Interceptor -->
+    <div class="timeline-scroll-container">
+      <div class="timeline-scroll-content"></div>
+    </div>
+
+    <div class="timeline-sticky">
+      <!-- Background Layers -->
+      <div class="timeline-bg timeline-bg--0" aria-hidden="true"></div>
+      <div class="timeline-bg timeline-bg--1" style="background-image: url('assets/images/timeline/krea-1999.jpg');" aria-hidden="true"></div>
+      <div class="timeline-bg timeline-bg--2" style="background-image: url('assets/images/timeline/krea-2006.jpg');" aria-hidden="true"></div>
+      <div class="timeline-bg timeline-bg--3" style="background-image: url('assets/images/timeline/krea-2015.jpg');" aria-hidden="true"></div>
+      <div class="timeline-bg timeline-bg--4" style="background-image: url('assets/images/timeline/krea-2026.jpg');" aria-hidden="true"></div>
+
+      <!-- Grain texture overlay -->
+      <div class="grain" aria-hidden="true"></div>
+
+      <!-- Content Track (contains the content panels for each state) -->
+      <div class="timeline-track">
         
-        <!-- Colonna sinistra: stats/numeri -->
-        <div class="about-stats-col reveal-up">
-          <span class="section-eyebrow">LA VISIONE</span>
-          <h2 class="section-title">Trent'anni di competenza sul campo.</h2>
+        <!-- STATE 0: Intro Panel -->
+        <div class="timeline-panel panel-intro" data-state="0">
+          <div class="panel-intro__left">
+            <h2 class="panel-intro__title">Trent’anni a fianco di chi apre.</h2>
+            <div class="panel-intro__stats">
+              <div class="intro-stat">
+                <span class="intro-stat__num">30+</span>
+                <span class="intro-stat__lbl">anni di attività</span>
+              </div>
+              <div class="intro-stat">
+                <span class="intro-stat__num">850+</span>
+                <span class="intro-stat__lbl">locali attrezzati</span>
+              </div>
+              <div class="intro-stat">
+                <span class="intro-stat__num">500+</span>
+                <span class="intro-stat__lbl">brand professionali</span>
+              </div>
+            </div>
+            <div class="scroll-hint">
+              <span class="scroll-hint__text">&rarr; Scorri la storia</span>
+            </div>
+          </div>
           
-          <div class="stats-list" id="statsContainer">
-            <div class="stat-item">
-              <span class="stat-number" data-target="30">0</span>
-              <span class="stat-label">anni di attività</span>
-            </div>
-            <div class="stat-item">
-              <span class="stat-number" data-target="850">0</span>
-              <span class="stat-label">locali attrezzati in Sicilia</span>
-            </div>
-            <div class="stat-item">
-              <span class="stat-number" data-target="500">0</span>
-              <span class="stat-label">brand professionali trattati</span>
+          <div class="panel-intro__right">
+            <div class="founder-card">
+              <img src="assets/images/founder.jpg" alt="Vincenzo Caruso" class="founder-card__img" />
             </div>
           </div>
         </div>
 
-        <!-- Colonna destra: il fondatore Vincenzo -->
-        <div class="about-founder-col reveal-up reveal-d2">
-          <div class="founder-img-wrapper">
-            <img data-src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&q=80&w=800" alt="Vincenzo Caruso — Fondatore di Krea" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 3 4'%3E%3Crect width='3' height='4' fill='%23E6E2DA'/%3E%3C/svg%3E">
+        <!-- STATE 1: 1999 Panel -->
+        <div class="timeline-panel panel-story panel-story--1" data-state="1">
+          <div class="story-content">
+            <div class="story-year">1999</div>
+            <h3 class="story-title">La prima pietra</h3>
+            <p class="story-body">Vincenzo Pietradura fonda Krea a Catania. Un solo showroom, mille ambizioni.</p>
           </div>
-          <div class="founder-quote-decor"></div>
-          <blockquote class="founder-quote">
-            "Progettiamo flussi di lavoro ottimali prima ancora di scegliere le attrezzature. La redditività di un locale nasce dal suo layout operativo."
-          </blockquote>
-          <span class="founder-name">Vincenzo Caruso &mdash; Fondatore di Krea</span>
         </div>
 
+        <!-- STATE 2: 2006 Panel -->
+        <div class="timeline-panel panel-story panel-story--2" data-state="2">
+          <div class="story-content">
+            <div class="story-year">2006</div>
+            <h3 class="story-title">Catania ci conosce</h3>
+            <p class="story-body">Krea inizia a rifornire le attività più iconiche di Catania. La reputazione che ci contraddistingue.</p>
+          </div>
+        </div>
+
+        <!-- STATE 3: 2015 Panel -->
+        <div class="timeline-panel panel-story panel-story--3" data-state="3">
+          <div class="story-content">
+            <div class="story-year">2015</div>
+            <h3 class="story-title">Tutta la Sicilia</h3>
+            <p class="story-body">Da Palermo a Messina. Krea diventa il punto di riferimento per l'intera isola.</p>
+          </div>
+        </div>
+
+        <!-- STATE 4: 2026 Panel -->
+        <div class="timeline-panel panel-story panel-story--4" data-state="4">
+          <div class="story-content">
+            <div class="story-year">2026</div>
+            <h3 class="story-title italic">L'era digitale</h3>
+            <p class="story-body">Prima azienda HoReCa in Sicilia a digitalizzare l'intera esperienza d'acquisto.</p>
+            <a href="#contatti" class="btn-timeline-cta">Inizia il tuo progetto &rarr;</a>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Right Edge Peeking Sliver -->
+      <div class="peek-sliver" id="peekSliver">
+        <div class="peek-text-container">
+          <span class="peek-text peek-text--1999 active">1999</span>
+          <span class="peek-text peek-text--2006">2006</span>
+          <span class="peek-text peek-text--2015">2015</span>
+          <span class="peek-text peek-text--2026">2026</span>
+        </div>
+      </div>
+
+      <!-- Timeline Navigation Bar (Always Visible at 2/3 Height) -->
+      <div class="timeline-nav-bar">
+        <div class="timeline-line-bg"></div>
+        <div class="timeline-line-progress" id="timelineProgressLine"></div>
+        
+        <!-- Active sliding dot -->
+        <div class="timeline-active-dot" id="timelineActiveDot"></div>
+
+        <div class="timeline-dots-wrapper">
+          <div class="timeline-dot-item" data-state="1" id="dotItem1999">
+            <div class="dot-node"></div>
+            <span class="dot-label">1999</span>
+          </div>
+          <div class="timeline-dot-item" data-state="2" id="dotItem2006">
+            <div class="dot-node"></div>
+            <span class="dot-label">2006</span>
+          </div>
+          <div class="timeline-dot-item" data-state="3" id="dotItem2015">
+            <div class="dot-node"></div>
+            <span class="dot-label">2015</span>
+          </div>
+          <div class="timeline-dot-item" data-state="4" id="dotItem2026">
+            <div class="dot-node"></div>
+            <span class="dot-label">2026</span>
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -327,9 +416,9 @@
   <section class="section services-section" id="servizi">
     <div class="container">
       <div class="section-header reveal-up">
-        <span class="section-eyebrow">COSA FACCIAMO</span>
-        <h2 class="section-title">Un approccio ingegneristico al servizio.</h2>
-        <p class="section-subtitle">Dallo studio dei percorsi operativi al collaudo finale. Un unico referente per evitare rallentamenti e imprevisti.</p>
+        <span class="section-eyebrow">IL METODO KREA</span>
+        <h2 class="section-title">Ingegneria dei flussi per l'ospitalità d'élite.</h2>
+        <p class="section-subtitle">Dallo studio ergonomico dei flussi di lavoro fino al collaudo finale certificato delle attrezzature. Un unico interlocutore per ottimizzare i tempi e azzerare gli imprevisti di cantiere.</p>
       </div>
     </div>
 
@@ -400,9 +489,9 @@
   <section class="section testimonials-section" id="testimonianze">
     <div class="container">
       <div class="section-header reveal-up">
-        <span class="section-eyebrow">TESTIMONIANZE</span>
-        <h2 class="section-title">Le voci dei professionisti.</h2>
-        <p class="section-subtitle">Cosa dicono i ristoratori e gli imprenditori dell'ospitalità che hanno ottimizzato la loro attività con Krea.</p>
+        <span class="section-eyebrow">REFERENZE DI PRESTIGIO</span>
+        <h2 class="section-title">L'opinione di chi ha scelto Krea.</h2>
+        <p class="section-subtitle">La testimonianza diretta di chef stellati, general manager e imprenditori HoReCa che hanno trasformato la loro efficienza operativa grazie alle nostre soluzioni.</p>
       </div>
 
       <div class="testimonials-carousel-wrapper reveal-up">
@@ -525,10 +614,10 @@
   <section class="contact-section" id="contatti">
     <div class="contact-inner reveal-up">
 
-      <p class="contact-label">CONTATTI</p>
-      <h2 class="contact-headline">Realizziamo il tuo spazio.</h2>
+      <p class="contact-label">COLLABORIAMO</p>
+      <h2 class="contact-headline">Diamo forma al tuo prossimo successo.</h2>
       <p class="contact-sub">
-        Dalla singola attrezzatura professionale al progetto d'arredo chiavi in mano. Avvia ora un'analisi preliminare con il nostro team.
+        Dalla consulenza strategica preliminare all'allestimento completo di grandi impianti. Condividi la tua visione con Vincenzo e ricevi uno studio di layout personalizzato.
       </p>
 
       <button type="button" class="btn-prenota" id="openConsultForm" aria-label="Richiedi uno studio preliminare">
@@ -625,10 +714,10 @@
        FORM MULTI-STEP — MODALE POPUP CLASSICO
   ===================================================== -->
   <div id="consultModal">
-    <button onclick="document.getElementById('consultModal').classList.remove('open'); document.body.style.overflow='';" style="position:fixed; top:28px; right:36px; background:rgba(255,255,255,0.15); border:none; color:#fff; width:40px; height:40px; border-radius:50%; font-size:18px; cursor:pointer; z-index:10;">✕</button>
+    <button onclick="chiudiModale()" style="position:fixed; top:32px; right:40px; width:44px; height:44px; border-radius:50%; background:rgba(255,255,255,0.12); border:1px solid rgba(255,255,255,0.2); color:#ffffff; font-size:18px; cursor:pointer; display:flex; align-items:center; justify-content:center; z-index:10000;">✕</button>
 
-    <div style="min-height:100vh; display:flex; align-items:center; justify-content:center; padding:80px 20px;">
-      <div style="width:100%; max-width:580px;">
+    <div class="modal-flex-container">
+      <div class="modal-form-card">
 
         <!-- Step 1 -->
         <div id="ks1" style="display:block;">
@@ -728,105 +817,13 @@
           </div>
           <h3 style="font-family:'Cormorant Garamond',serif; font-size:56px; font-weight:300; font-style:italic; color:#fff; margin:0 0 16px;">Analisi avviata.</h3>
           <p style="color:rgba(255,255,255,0.7); font-size:18px; line-height:1.7; max-width:400px; margin:0 auto 40px;">Il nostro ufficio tecnico ha ricevuto le specifiche del tuo progetto ed elaborerà una proposta preliminare di layout entro 24 ore.</p>
-          <button onclick="document.getElementById('consultModal').classList.remove('open'); document.body.style.overflow='';" style="background:#fff; color:#32194C; border:none; padding:16px 40px; border-radius:60px; font-size:15px; font-weight:700; cursor:pointer; font-family:inherit;">Torna al sito →</button>
+          <button onclick="chiudiModale()" style="background:#fff; color:#32194C; border:none; padding:16px 40px; border-radius:60px; font-size:15px; font-weight:700; cursor:pointer; font-family:inherit;">Torna al sito →</button>
         </div>
       </div>
     </div>
   </div>
 
-  <style>
-  .kpill {
-    padding: 11px 22px;
-    border: 1.5px solid rgba(255,255,255,0.3);
-    border-radius: 60px;
-    background: rgba(255,255,255,0.08);
-    font-size: 14px;
-    font-weight: 500;
-    color: rgba(255,255,255,0.85);
-    cursor: pointer;
-    font-family: inherit;
-    transition: all 0.18s;
-  }
-  .kpill:hover {
-    border-color: rgba(255,255,255,0.7);
-    background: rgba(255,255,255,0.15);
-    color: #fff;
-  }
-  .kpill.on {
-    background: #fff;
-    border-color: #fff;
-    color: #32194C;
-    font-weight: 600;
-  }
-  </style>
-
-  <script>
-  var kreaFormData = {};
-
-  var kreaGoDir = 'next';
-  function kreaGo(n, dir) {
-    kreaGoDir = dir || 'next';
-    for (var i = 1; i <= 5; i++) {
-      var el = document.getElementById('ks' + i);
-      if (el) el.style.display = 'none';
-    }
-    var target = document.getElementById('ks' + n);
-    if (target) {
-      target.style.display = 'block';
-      target.classList.remove('krea-step-wrap', 'going-back');
-      void target.offsetWidth; // force reflow
-      target.classList.add('krea-step-wrap');
-      if (kreaGoDir === 'back') target.classList.add('going-back');
-    }
-    var modal = document.getElementById('consultModal');
-    if (modal) modal.scrollTop = 0;
-  }
-
-  function kreaValidateStep1() {
-    var nome  = document.getElementById('k-nome').value.trim();
-    var email = document.getElementById('k-email').value.trim();
-    var tel   = document.getElementById('k-tel').value.trim();
-    if (!nome || !email || !tel) {
-      if (!nome)  document.getElementById('k-nome').style.borderColor  = 'rgba(255,120,120,0.8)';
-      if (!email) document.getElementById('k-email').style.borderColor = 'rgba(255,120,120,0.8)';
-      if (!tel)   document.getElementById('k-tel').style.borderColor   = 'rgba(255,120,120,0.8)';
-      setTimeout(function() {
-        ['k-nome','k-email','k-tel'].forEach(function(id) {
-          document.getElementById(id).style.borderColor = '';
-        });
-      }, 2500);
-      return;
-    }
-    kreaFormData.nome     = nome;
-    kreaFormData.email    = email;
-    kreaFormData.telefono = tel;
-    kreaGoAnimated(2, 'next');
-  }
-
-  function kreaSelectPill(btn, group) {
-    var container = btn.parentElement;
-    container.querySelectorAll('.kpill').forEach(function(p) { p.classList.remove('on'); });
-    btn.classList.add('on');
-    kreaFormData[group] = btn.dataset.value;
-  }
-
-  function kreaTogglePill(btn) {
-    btn.classList.toggle('on');
-    var group = btn.dataset.group;
-    var selected = Array.from(btn.parentElement.querySelectorAll('.kpill.on')).map(function(p) { return p.dataset.value; });
-    kreaFormData[group] = selected;
-  }
-
-  function kreaSubmitForm() {
-    kreaFormData.note    = document.getElementById('k-note').value.trim();
-    kreaFormData.data    = new Date().toLocaleString('it-IT');
-    console.log('Krea lead:', kreaFormData);
-    // TODO: fetch Formspree/EmailJS qui
-    kreaGoAnimated(5, 'next');
-  }
-
-
-  </script>
+  <!-- Inline styles and scripts consolidated to style.css and main.js -->
 
 
   <!-- =====================================================
@@ -839,7 +836,8 @@
   <!-- Local Engines -->
   <script src="js/gsap-scroll.js"></script>
   <script src="js/carousel.js"></script>
-  <script src="js/main.js"></script>
+  <script src="js/timeline.js"></script>
+  <script type="module" src="js/main.js"></script>
 
 </body>
 </html>

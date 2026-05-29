@@ -1,7 +1,10 @@
 /* =====================================================
    KREA GLOBAL CONTRACT — Shop Controller
    Filters · Lazy Loading · Reveal Animations · Dialog
+   Powered by Motion (Local ESM)
 ===================================================== */
+
+import { animate, inView } from "./motion.js";
 
 (function () {
   'use strict';
@@ -26,22 +29,27 @@
           const cardCat = card.getAttribute('data-category');
 
           if (filterVal === 'tutti' || cardCat === filterVal) {
-            // Rende visibile la card prima del fade-in
+            // Rende visibile la card e la anima in entrata con Motion
             card.classList.remove('hidden');
-            // Ritardo millimetrico per avviare la transizione CSS
-            setTimeout(() => {
-              card.style.opacity = '1';
-              card.style.transform = 'translateY(0)';
-            }, 50);
+            animate(card, { 
+              opacity: [0, 1], 
+              scale: [0.96, 1], 
+              y: [15, 0] 
+            }, { 
+              duration: 0.4, 
+              easing: [0.16, 1, 0.3, 1] 
+            });
           } else {
-            // Effetto fade-out prima di nascondere
-            card.style.opacity = '0';
-            card.style.transform = 'translateY(20px)';
-            card.addEventListener('transitionend', function handler(e) {
-              if (e.propertyName === 'opacity' && card.style.opacity === '0') {
-                card.classList.add('hidden');
-                card.removeEventListener('transitionend', handler);
-              }
+            // Effetto fade-out e scale-down prima di nascondere con Motion
+            animate(card, { 
+              opacity: 0, 
+              scale: 0.96, 
+              y: 15 
+            }, { 
+              duration: 0.25, 
+              easing: [0.16, 1, 0.3, 1] 
+            }).then(() => {
+              card.classList.add('hidden');
             });
           }
         });
@@ -55,29 +63,26 @@
   }
 
   /* ─────────────────────────────────────────────
-     2. REVEAL ANIMATIONS (INTERSECTION OBSERVER)
+     2. REVEAL ANIMATIONS (NATIVE INTERSECTION OBSERVER)
   ───────────────────────────────────────────── */
-  if ('IntersectionObserver' in window && productCards.length > 0) {
-    const shopObserver = new IntersectionObserver((entries) => {
-      entries.forEach((entry, idx) => {
-        if (entry.isIntersecting) {
-          // Staggering delle card
-          setTimeout(() => {
+  if (productCards.length > 0) {
+    if ('IntersectionObserver' in window) {
+      const revealObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
             entry.target.classList.add('visible');
-          }, idx * 60);
-          shopObserver.unobserve(entry.target);
-        }
+            observer.unobserve(entry.target);
+          }
+        });
+      }, {
+        root: null,
+        rootMargin: '0px 0px -50px 0px',
+        threshold: 0.1
       });
-    }, {
-      root: null,
-      rootMargin: '0px 0px -50px 0px',
-      threshold: 0.15
-    });
-
-    productCards.forEach(card => shopObserver.observe(card));
-  } else {
-    // Fallback
-    productCards.forEach(card => card.classList.add('visible'));
+      productCards.forEach(card => revealObserver.observe(card));
+    } else {
+      productCards.forEach(card => card.classList.add('visible'));
+    }
   }
 
   /* ─────────────────────────────────────────────
@@ -103,13 +108,18 @@
         // Apri dialog
         dialog.showModal();
         document.body.style.overflow = 'hidden';
+
+        // Animazione fade del dialog tramite Motion
+        animate(dialog, { opacity: [0, 1] }, { duration: 0.3, easing: "ease-out" });
       });
     });
 
-    // Chiudi dialog
+    // Chiudi dialog con animazione
     function closeDialog() {
-      dialog.close();
       document.body.style.overflow = '';
+      animate(dialog, { opacity: 0 }, { duration: 0.25, easing: "ease-in" }).then(() => {
+        dialog.close();
+      });
     }
 
     if (dialogClose) {

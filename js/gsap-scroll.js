@@ -319,17 +319,26 @@
     /* ── Beat Timelines (identici alla Hero, trigger su #servicesSeq) ── */
     function svcBeatTimeline(el, startPct, endPct) {
       if (!el) return;
-      const fw = 0.08;
-      gsap.fromTo(el,
-        { opacity: 0, y: 30 },
-        { opacity: 1, y: 0, ease: 'power2.out',
-          scrollTrigger: { trigger: '#servicesSeq', start: `${startPct}% top`, end: `${startPct + fw * 100}% top`, scrub: 1 }
+      const duration = endPct - startPct;
+      const fw = 8; // fade window duration (matches original 8%)
+      
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: '#servicesSeq',
+          start: `${startPct}% top`,
+          end: `${endPct}% top`,
+          scrub: 1
         }
-      );
-      gsap.to(el, {
-        opacity: 0, y: -30, ease: 'power2.in',
-        scrollTrigger: { trigger: '#servicesSeq', start: `${endPct - fw * 100}% top`, end: `${endPct}% top`, scrub: 1 }
       });
+      
+      tl.fromTo(el, 
+        { opacity: 0, y: 30 }, 
+        { opacity: 1, y: 0, ease: 'power2.out', duration: fw }
+      )
+      .to(el, 
+        { opacity: 0, y: -30, ease: 'power2.in', duration: fw }, 
+        `+=${duration - 2 * fw}`
+      );
     }
 
     svcBeatTimeline(document.getElementById('svcBeatA'),  0, 22);
